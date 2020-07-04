@@ -15,4 +15,8 @@ One notable difference between EduTorch and PyTorch is that EduTorch _does NOT p
 Also, there is no CUDA or GPU support.
 
 TODO:
-Dataclasses for all modules?
+- Focus on testing - import utils.
+Need to copy over tests for all provded layers
+that DOn'T involve downloading the data or training for a long time. Hardcoded results work great.
+- Keep code as concise as possible (add short functions to conftest)
+- Dataclasses for all modules ONCE I get them tested. post_init is alright i guess.

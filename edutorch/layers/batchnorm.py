@@ -16,7 +16,7 @@ class BatchNorm(Module):
 
         self.running_mean = np.zeros(num_features)
         self.running_var = np.ones(num_features)
-        self.gamma = np.zeros(num_features)
+        self.gamma = np.ones(num_features)
         self.beta = np.zeros(num_features)
         self.set_parameters("running_mean", "running_var", "gamma", "beta")
 
