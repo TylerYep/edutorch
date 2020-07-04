@@ -1,33 +1,18 @@
 # edutorch
-Rewritten PyTorch framework designed to help you learn AI/ML
+Rewritten PyTorch framework designed to help you learn AI/ML!
 
+[![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/release/python-370/)
+[![Build Status](https://travis-ci.com/TylerYep/edutorch.svg?branch=master)](https://travis-ci.com/TylerYep/edutorch)
+[![GitHub license](https://img.shields.io/github/license/TylerYep/edutorch)](https://github.com/TylerYep/edutorch/blob/master/LICENSE)
 
+PyTorch is one of the most amazing frameworks for building and training deep neural networks. One of its biggest strengths is providing an intuitive and extendable interface for building and training these models.
 
-# Dynamic Shape-Checking / Type-Checking (Typorch)
-I'm interested in shape-checking for tensors. It doesnt need to be static type checking,
-having fancy asserts would be good enough.
+In this project, I provide my own version of the PyTorch framework, designed to help you understand the key concepts. The goal is to provide explicit implementations of popular layers, models, and optimizers. Above all else, this code is designed to be readable and clear. Many of these examples are modified from Stanford's CS 230 / 231N course materials available online.
 
-> (B, C, H, W)
+## EduTorch vs PyTorch
+One notable difference between EduTorch and PyTorch is that EduTorch _does NOT provide autograd_. There are many educational benefits to deriving/implementing the backprop step yourself, and if you want automatic gradient calculations, you are better off using the real framework. Additionally, if you wanted to learn how the autograd system is implemented, you can check out Andrej Karpathy's [micrograd project](https://github.com/karpathy/micrograd)
 
-> (B, 1, H, W)
-
-> (B, H, W)
-
-If you run a program with the shape-checker, it automatically inserts assert statements that the left side of the variable assignment must have that shape. Letters are tracked throughout (e.g. a new letter introduces a new variable), and a number asserts that that dimension must match exactly.
-
-Tuple shapes maybe, to distinguish a shape comment from a regular comment.
-
-Using this mode, the code is compiled uniquely and increases runtime.
-
-Once you are confident with your shapes, you can simply run your program normally.
-
-# Goals
-1. Readability. Everything should make it immediately obvious how the layer or mmodel works on its own.
-2.
-
-
-No autograd - if you want a simple autograd implementation, check out Karpathy's micrograd repo.
+Also, there is no CUDA or GPU support.
 
 TODO:
-
-- Convert to dataclasses?
+Dataclasses for all modules?
