@@ -30,7 +30,6 @@ class Example(Module):
 
 
 def test_torch(fashion_mnist):
-    np.random.seed(0)
     X_train, y_train, _, _ = fashion_mnist
 
     model = Example()
@@ -41,4 +40,4 @@ def test_torch(fashion_mnist):
         loss, dx = softmax_loss(out, y_train)
         grads = model.backward(dx)
         optimizer.step(model, grads)
-        print(loss)
+        # print(loss)

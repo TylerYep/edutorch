@@ -1,7 +1,7 @@
 import numpy as np
 
 from edutorch.layers import BatchNorm
-from gradient_check import eval_numerical_gradient_array, rel_error
+from gradient_check import estimate_gradients, eval_numerical_gradient_array
 
 
 def test_batchnorm_forward():
@@ -34,27 +34,21 @@ def test_batchnorm_forward_preset_gamma_beta():
     ), f"After batch norm (gamma={model.gamma}, beta={model.beta}), std should be close to gamma."
 
 
-# def test_batchnorm_backward():
-#     # Gradient check batchnorm backward pass
-#     np.random.seed(231)
-#     N, D = 4, 5
-#     x = 5 * np.random.randn(N, D) + 12
-#     gamma = np.random.randn(D)
-#     beta = np.random.randn(D)
-#     dout = np.random.randn(N, D)
+def test_batchnorm_backward():
+    N, D = 4, 5
+    x = 5 * np.random.randn(N, D) + 12
+    gamma = np.random.randn(D)
+    beta = np.random.randn(D)
+    dout = np.random.randn(N, D)
 
-#     model = BatchNorm(D)
-#     fx = lambda x: model(x, gamma, beta)
-#     fg = lambda a: model(x, a, beta)
-#     fb = lambda b: model(x, gamma, b)
+    model = BatchNorm(D)
 
-#     dx_num = eval_numerical_gradient_array(fx, x, dout)
-#     da_num = eval_numerical_gradient_array(fg, gamma.copy(), dout)
-#     db_num = eval_numerical_gradient_array(fb, beta.copy(), dout)
+    params = {"gamma": gamma, "beta": beta}
+    dx_num, dgamma_num, dbeta_num = estimate_gradients(model, dout, x, params)
 
-#     _ = model(x, gamma, beta)
-#     dx, dgamma, dbeta = model.backward(dout)
-#     # You should expect to see relative errors between 1e-13 and 1e-8
-#     print('dx error: ', rel_error(dx_num, dx))
-#     print('dgamma error: ', rel_error(da_num, dgamma))
-#     print('dbeta error: ', rel_error(db_num, dbeta))
+    _ = model(x)
+    dx, dgamma, dbeta = model.backward(dout)
+
+    assert np.allclose(dx_num, dx)
+    assert np.allclose(dgamma_num, dgamma)
+    assert np.allclose(dbeta_num, dbeta)

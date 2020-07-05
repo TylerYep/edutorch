@@ -1,16 +1,50 @@
 import random
+from typing import Dict, List
 
 import numpy as np
 
+from edutorch.layers import Module
+
 
 def rel_error(x, y):
-    """ returns relative error """
+    """ Returns relative error """
     return np.max(np.abs(x - y) / (np.maximum(1e-8, np.abs(x) + np.abs(y))))
+
+
+def estimate_gradients(
+    model: Module, dout: np.ndarray, x: np.ndarray, kwparams: Dict[str, np.ndarray]
+) -> List[np.ndarray]:
+    """ Gets the gradient estimate for all parameters of the model. """
+
+    def grad_fn(model, x, **kwargs):
+        """
+        Returns a grad function that takes in an input z and sets all attributes
+        of the model to the kwargs, except for the target value z.
+        """
+
+        def dx_or_other_fn(z):
+            """ Function used as input to eval_numerical_gradient. """
+            for key, val in kwargs.items():
+                setattr(model, key, z if val is None else val)
+            return model(z if x is None else x)
+
+        return dx_or_other_fn
+
+    # Add x as a special case
+    approx_derivatives = [eval_numerical_gradient_array(grad_fn(model, None, **kwparams), x, dout)]
+    for name, param in kwparams.items():
+        # Shallow copy works here because we replace the target element with None.
+        new_kwargs = dict(kwparams)
+        new_kwargs[name] = None
+        approx_derivatives.append(
+            eval_numerical_gradient_array(grad_fn(model, x, **new_kwargs), param.copy(), dout)
+        )
+    return approx_derivatives
 
 
 def eval_numerical_gradient(f, x, verbose=True, h=0.00001):
     """
-    a naive implementation of numerical gradient of f at x
+    A naive implementation of numerical gradient of f at x
     - f should be a function that takes a single argument
     - x is the point (numpy array) to evaluate the gradient at
     """

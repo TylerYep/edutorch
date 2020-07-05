@@ -29,9 +29,8 @@ class Linear(Module):
         - out: output, of shape (N, M)
         - cache: (x, w, b)
         """
-        out = x.reshape(x.shape[0], -1).dot(self.w) + self.b
         self.cache = (x,)
-        return out
+        return x.reshape(x.shape[0], -1).dot(self.w) + self.b
 
     def backward(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:
         """

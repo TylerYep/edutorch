@@ -11,6 +11,9 @@ class Module:
     def forward(self, x: np.ndarray) -> np.ndarray:
         raise NotImplementedError
 
+    def backward(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:
+        raise NotImplementedError
+
     def __call__(self, x: np.ndarray) -> np.ndarray:
         return self.forward(x)
 

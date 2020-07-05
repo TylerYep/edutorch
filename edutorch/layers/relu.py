@@ -15,9 +15,8 @@ class ReLU(Module):
         - out: Output, of the same shape as x
         - cache: x
         """
-        out = np.maximum(0, x)
         self.cache = (x,)
-        return out
+        return np.maximum(0, x)
 
     def backward(self, dout: np.ndarray) -> np.ndarray:
         """

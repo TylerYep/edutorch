@@ -30,7 +30,6 @@ class Example(Module):
 
 
 def test_relu(fashion_mnist):
-    np.random.seed(0)
     X_train, y_train, _, _ = fashion_mnist
 
     model = Example()
@@ -44,7 +43,7 @@ def test_relu(fashion_mnist):
         loss, dx = softmax_loss(out, y_train)
         grads = model.backward(dx)
         optimizer.step(model, grads)
-        print(loss)
+        # print(loss)
 
     assert not (model.fc1.w == save1).all()
     assert not (model.fc2.w == save2).all()
