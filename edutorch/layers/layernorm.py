@@ -9,7 +9,7 @@ class LayerNorm(Module):
     def __init__(self, num_features: int, eps: float = 1e-5):
         super().__init__()
         self.eps = eps
-        self.gamma = np.zeros(num_features)
+        self.gamma = np.ones(num_features)
         self.beta = np.zeros(num_features)
         self.set_parameters("gamma", "beta")
 

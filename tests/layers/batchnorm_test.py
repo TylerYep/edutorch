@@ -1,7 +1,7 @@
 import numpy as np
 
 from edutorch.layers import BatchNorm
-from gradient_check import estimate_gradients, eval_numerical_gradient_array
+from gradient_check import estimate_gradients
 
 
 def test_batchnorm_forward():

@@ -94,7 +94,34 @@ class BatchNorm(Module):
 
         return out
 
-    def backward(self, dout: np.ndarray) -> np.ndarray:
+    def backward(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:
+        """
+        Alternative backward pass for batch normalization.
+
+        For this implementation you should work out the derivatives for the batch
+        normalizaton backward pass on paper and simplify as much as possible. You
+        should be able to derive a simple expression for the backward pass.
+        See the jupyter notebook for more hints.
+
+        Note: This implementation should expect to receive the same cache variable
+        as batchnorm_backward, but might not use all of the values in the cache.
+
+        If you get stuck, check out a worked-out solution:
+        https://kevinzakka.github.io/2016/09/14/batch_normalization/
+
+        Inputs / outputs: Same as batchnorm_backward
+        """
+        xn, std = self.cache
+
+        dx_hat = dout * self.gamma
+        dx = (dx_hat - np.mean(dx_hat, axis=0) - xn * np.mean(dx_hat * xn, axis=0)) / std
+
+        dgamma = np.sum(dout * xn, axis=0)
+        dbeta = np.sum(dout, axis=0)
+
+        return dx, dgamma, dbeta
+
+    def backward_naive(self, dout: np.ndarray) -> np.ndarray:
         """
         Backward pass for batch normalization.
 
@@ -130,29 +157,5 @@ class BatchNorm(Module):
             dgamma = np.sum(xn * dout, axis=0)
             dxn = self.gamma * dout
             dx = dxn / std
-
-        return dx, dgamma, dbeta
-
-    def backward_alt(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:
-        """
-        Alternative backward pass for batch normalization.
-
-        For this implementation you should work out the derivatives for the batch
-        normalizaton backward pass on paper and simplify as much as possible. You
-        should be able to derive a simple expression for the backward pass.
-        See the jupyter notebook for more hints.
-
-        Note: This implementation should expect to receive the same cache variable
-        as batchnorm_backward, but might not use all of the values in the cache.
-
-        Inputs / outputs: Same as batchnorm_backward
-        """
-        xn, std = self.cache
-
-        dx_hat = dout * self.gamma
-        dx = (dx_hat - np.mean(dx_hat, axis=0) - xn * np.mean(dx_hat * xn, axis=0)) / std
-
-        dgamma = np.sum(dout * xn, axis=0)
-        dbeta = np.sum(dout, axis=0)
 
         return dx, dgamma, dbeta
