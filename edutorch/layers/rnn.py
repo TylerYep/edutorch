@@ -6,16 +6,19 @@ from .module import Module
 from .rnn_cell import RNNCell
 
 
+# TODO The problem is the RNN cell cache is being overwritten at every timestep.
+
+
 class RNN(Module):
     def __init__(self, input_size: int, hidden_size: int) -> None:
         super().__init__()
         self.hidden_size = hidden_size
         self.h0 = None
-        self.Wx = np.random.normal(scale=1e-3, size=(input_size, hidden_size))
-        self.Wh = np.random.normal(scale=1e-3, size=(hidden_size, hidden_size))
-        self.b = np.random.normal(scale=1e-3, size=hidden_size)
+        self.Wx = None
+        self.Wh = None # np.random.normal(scale=1e-3, size=(hidden_size, hidden_size))
+        self.b = None # np.random.normal(scale=1e-3, size=hidden_size)
 
-        self.cell = RNNCell(self.h0, self.Wx, self.Wh, self.b)
+        self.cell = None
         self.set_parameters("h0", "Wx", "Wh", "b")
 
     def forward(self, x: np.ndarray) -> np.ndarray:
@@ -36,15 +39,19 @@ class RNN(Module):
         - h: Hidden states for the entire timeseries, of shape (N, T, H).
         - cache: Values needed in the backward pass
         """
-        N, T, _ = x.shape
+        N, T, D = x.shape
         H = self.hidden_size
         if self.h0 is None:
             self.h0 = np.random.normal(scale=1e-3, size=(N, H))
+            self.Wx = np.random.normal(scale=1e-3, size=(D, H))
+
+        self.cell = RNNCell(self.h0, self.Wx, self.Wh, self.b)
 
         h = np.zeros((N, T, H))
         for i in range(T):
             h[:, i, :] = self.cell(x[:, i, :])
             self.cache += self.cell.cache
+            self.cell.prev_h = self.cell.next_h
         return h
 
     def backward(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:
@@ -67,7 +74,7 @@ class RNN(Module):
         - db: Gradient of biases, of shape (H,)
         """
         N, T, H = dout.shape
-        (x,) = self.cache[0]
+        x = self.cache[-1]
         D = x.shape[1]
 
         dx = np.zeros((N, T, D))

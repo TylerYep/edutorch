@@ -10,7 +10,7 @@ def test_layernorm_forward():
     W1 = np.random.randn(D1, D2)
     W2 = np.random.randn(D2, D3)
     a = np.maximum(0, X.dot(W1)).dot(W2)
-    model = LayerNorm(3)
+    model = LayerNorm(D3)
 
     a_norm = model(a)
 
@@ -28,7 +28,7 @@ def test_layernorm_forward_preset_gamma_beta():
     W1 = np.random.randn(D1, D2)
     W2 = np.random.randn(D2, D3)
     a = np.maximum(0, X.dot(W1)).dot(W2)
-    model = LayerNorm(3)
+    model = LayerNorm(D3)
     model.gamma = np.asarray([3.0] * 3)
     model.beta = np.asarray([5.0] * 3)
     gamma = np.asarray([3.0] * 4)

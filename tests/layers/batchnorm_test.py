@@ -5,8 +5,9 @@ from gradient_check import estimate_gradients
 
 
 def test_batchnorm_forward():
-    a = np.random.randn(200, 3)
-    model = BatchNorm(3)
+    D = 3
+    a = np.random.randn(200, D)
+    model = BatchNorm(D)
 
     a_norm = model(a)
 
@@ -19,8 +20,9 @@ def test_batchnorm_forward():
 
 
 def test_batchnorm_forward_preset_gamma_beta():
-    a = np.random.randn(200, 3)
-    model = BatchNorm(3)
+    D = 3
+    a = np.random.randn(200, D)
+    model = BatchNorm(D)
     model.gamma = np.asarray([1.0, 2.0, 3.0])
     model.beta = np.asarray([11.0, 12.0, 13.0])
 
