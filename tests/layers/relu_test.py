@@ -1,49 +1,33 @@
 import numpy as np
 
-from edutorch.layers import Linear, Module, ReLU
-from edutorch.losses import softmax_loss
-from edutorch.optimizers import Adam
+from edutorch.layers import ReLU
+from gradient_check import estimate_gradients
 
 
-class Example(Module):
-    def __init__(self):
-        super().__init__()
-        self.fc1 = Linear(784, 30)
-        self.relu = ReLU()
-        self.fc2 = Linear(30, 10)
-        self.set_parameters("fc1", "fc2")
+def test_relu_forward():
+    x = np.linspace(-0.5, 0.5, num=12).reshape(3, 4)
 
-    def forward(self, x):
-        x = self.fc1(x)
-        x = self.relu(x)
-        x = self.fc2(x)
-        return x
+    model = ReLU()
+    out = model(x)
+    correct_out = np.array(
+        [
+            [0.0, 0.0, 0.0, 0.0],
+            [0.0, 0.0, 0.04545455, 0.13636364],
+            [0.22727273, 0.31818182, 0.40909091, 0.5],
+        ]
+    )
 
-    def backward(self, dout):
-        grads = {}
-        dx2, dw2, db2 = self.fc2.backward(dout)
-        grads["fc2"] = {"w": dw2, "b": db2}
-        dx3 = self.relu.backward(dx2)
-        _, dw1, db1 = self.fc1.backward(dx3)
-        grads["fc1"] = {"w": dw1, "b": db1}
-        return grads
+    assert np.allclose(out, correct_out)
 
 
-def test_relu(fashion_mnist):
-    X_train, y_train, _, _ = fashion_mnist
+def test_relu_backward():
+    x = np.random.randn(10, 10)
+    dout = np.random.randn(*x.shape)
 
-    model = Example()
+    model = ReLU()
+    dx_num = estimate_gradients(model, dout, x, {})
 
-    save1 = np.array(model.fc1.w)
-    save2 = np.array(model.fc2.w)
-    optimizer = Adam(model)
+    _ = model(x)
+    dx = model.backward(dout)
 
-    for _ in range(100):
-        out = model(X_train)
-        loss, dx = softmax_loss(out, y_train)
-        grads = model.backward(dx)
-        optimizer.step(model, grads)
-        # print(loss)
-
-    assert not (model.fc1.w == save1).all()
-    assert not (model.fc2.w == save2).all()
+    assert np.allclose(dx_num, dx)

@@ -1,3 +1,5 @@
+import numpy as np
+
 from edutorch.layers import Linear, Module, ReLU
 from edutorch.losses import softmax_loss
 from edutorch.optimizers import Adam
@@ -27,10 +29,13 @@ class Example(Module):
         return grads
 
 
-def test_torch(fashion_mnist):
+def test_training(fashion_mnist):
     X_train, y_train, _, _ = fashion_mnist
 
     model = Example()
+
+    save1 = np.array(model.fc1.w)
+    save2 = np.array(model.fc2.w)
     optimizer = Adam(model)
 
     for _ in range(100):
@@ -39,3 +44,6 @@ def test_torch(fashion_mnist):
         grads = model.backward(dx)
         optimizer.step(model, grads)
         # print(loss)
+
+    assert not (model.fc1.w == save1).all()
+    assert not (model.fc2.w == save2).all()

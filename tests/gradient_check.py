@@ -42,7 +42,7 @@ def estimate_gradients(
     return approx_derivatives
 
 
-def eval_numerical_gradient(f, x, verbose=True, h=0.00001):
+def eval_numerical_gradient(f, x, verbose=False, h=0.00001):
     """
     A naive implementation of numerical gradient of f at x
     - f should be a function that takes a single argument

@@ -12,6 +12,7 @@ from .rnn_cell import RNNCell
 class RNN(Module):
     def __init__(self, input_size: int, hidden_size: int) -> None:
         super().__init__()
+        self.input_size = input_size  # TODO why do i need this
         self.hidden_size = hidden_size
         self.h0 = None
         self.Wx = None
@@ -73,7 +74,7 @@ class RNN(Module):
         - dWh: Gradient of hidden-to-hidden weights, of shape (H, H)
         - db: Gradient of biases, of shape (H,)
         """
-        N, T, H = dout.shape
+        N, T, _ = dout.shape
         x = self.cache[-1]
         D = x.shape[1]
 

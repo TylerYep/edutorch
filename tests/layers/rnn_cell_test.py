@@ -1,7 +1,7 @@
 import numpy as np
 
 from edutorch.layers import RNNCell
-from gradient_check import estimate_gradients, eval_numerical_gradient_array
+from gradient_check import estimate_gradients
 
 
 def test_rnn_cell_forward():
