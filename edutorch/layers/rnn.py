@@ -1,10 +1,10 @@
+# type: ignore
 from typing import Tuple
 
 import numpy as np
 
 from .module import Module
 from .rnn_cell import RNNCell
-
 
 # TODO The problem is the RNN cell cache is being overwritten at every timestep.
 
@@ -15,8 +15,8 @@ class RNN(Module):
         self.hidden_size = hidden_size
         self.h0 = None
         self.Wx = None
-        self.Wh = None # np.random.normal(scale=1e-3, size=(hidden_size, hidden_size))
-        self.b = None # np.random.normal(scale=1e-3, size=hidden_size)
+        self.Wh = None  # np.random.normal(scale=1e-3, size=(hidden_size, hidden_size))
+        self.b = None  # np.random.normal(scale=1e-3, size=hidden_size)
 
         self.cell = None
         self.set_parameters("h0", "Wx", "Wh", "b")

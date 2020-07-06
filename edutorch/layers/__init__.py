@@ -7,7 +7,7 @@ from .linear import Linear
 from .maxpool2d import MaxPool2d
 from .module import Module
 from .relu import ReLU
-from .rnn import RNN
+from .rnn import RNN  # type: ignore
 from .rnn_cell import RNNCell
 from .spatial_batchnorm import SpatialBatchNorm
 from .spatial_groupnorm import SpatialGroupNorm

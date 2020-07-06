@@ -7,13 +7,12 @@ from gradient_check import estimate_gradients
 def test_spatial_groupnorm_forward():
     N, C, H, W, G = 2, 6, 4, 5, 2
     x = 4 * np.random.randn(N, C, H, W) + 10
-    x_g = x.reshape((N*G,-1))
     model = SpatialGroupNorm(C, G)
-    model.gamma = np.ones((1,C,1,1))
-    model.beta = np.zeros((1,C,1,1))
+    model.gamma = np.ones((1, C, 1, 1))
+    model.beta = np.zeros((1, C, 1, 1))
 
     out = model(x)
-    out_g = out.reshape((N*G,-1))
+    out_g = out.reshape((N * G, -1))
 
     assert np.allclose(
         out_g.mean(axis=1), np.zeros(4)
@@ -26,8 +25,8 @@ def test_spatial_groupnorm_forward():
 def test_spatial_groupnorm_backward():
     N, C, H, W, G = 2, 6, 4, 5, 2
     x = 5 * np.random.randn(N, C, H, W) + 12
-    gamma = np.random.randn(1,C,1,1)
-    beta = np.random.randn(1,C,1,1)
+    gamma = np.random.randn(1, C, 1, 1)
+    beta = np.random.randn(1, C, 1, 1)
     dout = np.random.randn(N, C, H, W)
 
     model = SpatialGroupNorm(C, G)
