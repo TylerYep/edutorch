@@ -3,7 +3,7 @@ from typing import Dict, List
 
 import numpy as np
 
-from edutorch.layers import Module
+from edutorch.nn import Module
 
 
 def rel_error(x, y):

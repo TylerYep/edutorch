@@ -1,6 +1,6 @@
 import numpy as np
 
-from edutorch.layers import RNNCell
+from edutorch.nn import RNNCell
 from gradient_check import estimate_gradients
 
 

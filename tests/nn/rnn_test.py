@@ -1,6 +1,6 @@
 import numpy as np
 
-from edutorch.layers import RNN
+from edutorch.nn import RNN
 
 # from gradient_check import estimate_gradients, rel_error
 

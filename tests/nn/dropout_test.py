@@ -1,6 +1,6 @@
 import numpy as np
 
-from edutorch.layers import Dropout
+from edutorch.nn import Dropout
 from gradient_check import estimate_gradients
 
 

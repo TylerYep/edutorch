@@ -3,7 +3,7 @@ from typing import Any, Dict, Tuple
 
 import numpy as np
 
-from ..layers.module import Module
+from ..nn.module import Module
 
 
 @dataclass
@@ -11,19 +11,18 @@ class Optimizer:
     model: Module
 
     def __post_init__(self) -> None:
-        self.context = self.model.parameters()
-        self.set_context(self.context)
+        self.context = self.set_context(self.model.parameters())
 
-    def set_context(self, context: Any) -> None:
+    def set_context(self, context: Any) -> Any:
         """
         Traverses down the model.parameters() tree and initializes all leaf
         nodes using the overridden init_context function.
         """
         for param_name, param in context.items():
-            if isinstance(param, dict):
-                self.set_context(param)
-            else:
-                context[param_name] = self.init_context(param)
+            context[param_name] = (
+                self.set_context(param) if isinstance(param, dict) else self.init_context(param)
+            )
+        return context
 
     def init_context(self, w: np.ndarray) -> Tuple[Any, ...]:
         """ This function initializes any context variables, running averages, etc. """
@@ -45,16 +44,15 @@ class Optimizer:
         def _step(model: Module, gradients: Dict[str, np.ndarray], context: Any) -> None:
             for param_name, param in model.parameters().items():
                 step_context = context[param_name]
-                submodel = getattr(model, param_name)
-                grad = gradients[param_name]
 
                 # On a branch, recurse on that branch
                 if isinstance(param, dict):
-                    _step(submodel, grad, step_context)
+                    submodel, grad_dict = getattr(model, param_name), gradients[param_name]
+                    _step(submodel, grad_dict, step_context)
 
                 # On a leaf, update the weight in that leaf
                 elif hasattr(model, param_name):
-                    w, dw = submodel, grad
+                    w, dw = getattr(model, param_name), gradients[param_name]
                     if w.shape != dw.shape:
                         raise ValueError(f"Shapes of w and dw do not match: {w.shape} {dw.shape}")
                     new_w, new_context = self.update(step_context, w, dw)

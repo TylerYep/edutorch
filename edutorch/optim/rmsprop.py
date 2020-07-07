@@ -3,7 +3,7 @@ from typing import Any, Tuple
 
 import numpy as np
 
-from ..layers.module import Module
+from ..nn.module import Module
 from .optimizer import Optimizer
 
 

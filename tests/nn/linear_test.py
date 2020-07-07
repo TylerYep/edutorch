@@ -1,6 +1,6 @@
 import numpy as np
 
-from edutorch.layers import Linear
+from edutorch.nn import Linear
 from gradient_check import estimate_gradients
 
 

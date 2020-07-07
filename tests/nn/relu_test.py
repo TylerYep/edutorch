@@ -1,6 +1,6 @@
 import numpy as np
 
-from edutorch.layers import ReLU
+from edutorch.nn import ReLU
 from gradient_check import estimate_gradients
 
 

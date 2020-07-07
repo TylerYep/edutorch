@@ -1,6 +1,6 @@
 import numpy as np
 
-from edutorch.layers import TemporalLinear
+from edutorch.nn import TemporalLinear
 from gradient_check import estimate_gradients
 
 

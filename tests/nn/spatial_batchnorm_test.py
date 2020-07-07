@@ -1,6 +1,6 @@
 import numpy as np
 
-from edutorch.layers import SpatialBatchNorm
+from edutorch.nn import SpatialBatchNorm
 from gradient_check import estimate_gradients
 
 

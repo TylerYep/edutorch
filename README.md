@@ -20,3 +20,8 @@ Need to copy over tests for all provded layers
 that DOn'T involve downloading the data or training for a long time. Hardcoded results work great.
 - Keep code as concise as possible (add short functions to conftest)
 - Dataclasses for all modules ONCE I get them tested. post_init is alright i guess.
+
+
+Rename:
+- layers -> nn
+- optimizers -> optim

@@ -1,6 +1,6 @@
 import numpy as np
 
-from edutorch.layers import LayerNorm
+from edutorch.nn import LayerNorm
 from gradient_check import estimate_gradients
 
 

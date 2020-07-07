@@ -1,8 +1,8 @@
 import numpy as np
 
-from edutorch.layers import Linear, Module, ReLU
 from edutorch.losses import softmax_loss
-from edutorch.optimizers import Adam
+from edutorch.nn import Linear, Module, ReLU
+from edutorch.optim import Adam
 
 
 class Example(Module):

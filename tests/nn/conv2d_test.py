@@ -1,6 +1,6 @@
 import numpy as np
 
-from edutorch.layers import Conv2d
+from edutorch.nn import Conv2d
 from gradient_check import estimate_gradients
 
 

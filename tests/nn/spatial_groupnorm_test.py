@@ -1,6 +1,6 @@
 import numpy as np
 
-from edutorch.layers import SpatialGroupNorm
+from edutorch.nn import SpatialGroupNorm
 from gradient_check import estimate_gradients
 
 

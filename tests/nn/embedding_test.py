@@ -1,6 +1,6 @@
 import numpy as np
 
-from edutorch.layers import Embedding
+from edutorch.nn import Embedding
 from gradient_check import estimate_gradients
 
 
