@@ -11,13 +11,12 @@ class RNN(Module):
         super().__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size
-        self.batch_size = batch_size
 
-        N, D, H = self.batch_size, self.input_size, self.hidden_size
+        N, D, H = batch_size, input_size, hidden_size
         self.h0 = np.random.normal(scale=1e-3, size=(N, H))
         self.Wx = np.random.normal(scale=1e-3, size=(D, H))
-        self.Wh = np.random.normal(scale=1e-3, size=(hidden_size, hidden_size))
-        self.b = np.random.normal(scale=1e-3, size=hidden_size)
+        self.Wh = np.random.normal(scale=1e-3, size=(H, H))
+        self.b = np.random.normal(scale=1e-3, size=H)
 
         self.set_parameters("h0", "Wx", "Wh", "b")
 
@@ -39,9 +38,11 @@ class RNN(Module):
         - h: Hidden states for the entire timeseries, of shape (N, T, H).
         - cache: Values needed in the backward pass
         """
-        _, T, _ = x.shape
-        N, _, H = self.batch_size, self.input_size, self.hidden_size
+        # Manually reset cache in order to correctly append to it
         self.cache = ()
+
+        N, T, _ = x.shape
+        H = self.hidden_size
         prev_h = self.h0
 
         h = np.zeros((N, T, H))
@@ -72,9 +73,7 @@ class RNN(Module):
         - db: Gradient of biases, of shape (H,)
         """
         N, T, _ = dout.shape
-        cell = self.cache[-1]
-        (x,) = cell.cache
-        D = x.shape[1]
+        D = self.input_size
 
         dx = np.zeros((N, T, D))
         dprev_h = np.zeros_like(self.h0)

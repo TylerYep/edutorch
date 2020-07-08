@@ -29,7 +29,7 @@ def test_rnn_forward():
             ],
         ]
     )
-    print("forward error: ", rel_error(expected_h, h))
+
     assert np.allclose(expected_h, h)
 
 
@@ -37,18 +37,24 @@ def test_rnn_backward():
     N, D, T, H = 2, 3, 10, 5
 
     x = np.random.randn(N, T, D)
-    model = RNN(D, H, N)
     h0 = np.random.randn(N, H)
     Wx = np.random.randn(D, H)
     Wh = np.random.randn(H, H)
     b = np.random.randn(H)
-    dout = np.random.randn(N, T, H)
+
+    model = RNN(D, H, N)
+
+    model.h0 = h0
+    model.Wx = Wx
+    model.Wh = Wh
+    model.b = b
+
+    out = model(x)
+    dout = np.random.randn(*out.shape)
+    dx, dh0, dWx, dWh, db = model.backward(dout)
 
     params = {"h0": h0, "Wx": Wx, "Wh": Wh, "b": b}
     dx_num, dh0_num, dWx_num, dWh_num, db_num = estimate_gradients(model, dout, x, params)
-
-    _ = model(x)
-    dx, dh0, dWx, dWh, db = model.backward(dout)
 
     print("dx error: ", rel_error(dx_num, dx))
     print("dh0 error: ", rel_error(dh0_num, dh0))
