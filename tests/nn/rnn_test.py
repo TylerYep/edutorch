@@ -1,14 +1,13 @@
 import numpy as np
 
 from edutorch.nn import RNN
-
-# from gradient_check import estimate_gradients, rel_error
+from gradient_check import estimate_gradients, rel_error
 
 
 def test_rnn_forward():
     N, T, D, H = 2, 3, 4, 5
     x = np.linspace(-0.1, 0.3, num=N * T * D).reshape(N, T, D)
-    model = RNN(N, H)
+    model = RNN(D, H, N)
     model.h0 = np.linspace(-0.3, 0.1, num=N * H).reshape(N, H)
     model.Wx = np.linspace(-0.2, 0.4, num=D * H).reshape(D, H)
     model.Wh = np.linspace(-0.4, 0.1, num=H * H).reshape(H, H)
@@ -30,31 +29,35 @@ def test_rnn_forward():
             ],
         ]
     )
-
+    print("forward error: ", rel_error(expected_h, h))
     assert np.allclose(expected_h, h)
 
 
-# def test_rnn_backward():
-#     N, D, T, H = 2, 3, 10, 5
+def test_rnn_backward():
+    N, D, T, H = 2, 3, 10, 5
 
-#     x = np.random.randn(N, T, D)
-#     model = RNN(N, H)
-#     model.h0 = np.random.randn(N, H)
-#     model.Wx = np.random.randn(D, H)
-#     model.Wh = np.random.randn(H, H)
-#     model.b = np.random.randn(H)
+    x = np.random.randn(N, T, D)
+    model = RNN(D, H, N)
+    h0 = np.random.randn(N, H)
+    Wx = np.random.randn(D, H)
+    Wh = np.random.randn(H, H)
+    b = np.random.randn(H)
+    dout = np.random.randn(N, T, H)
 
-#     out = model(x)
+    params = {"h0": h0, "Wx": Wx, "Wh": Wh, "b": b}
+    dx_num, dh0_num, dWx_num, dWh_num, db_num = estimate_gradients(model, dout, x, params)
 
-#     dout = np.random.randn(*out.shape)
+    _ = model(x)
+    dx, dh0, dWx, dWh, db = model.backward(dout)
 
-#     dx, dh0, dWx, dWh, db = model.backward(dout)
+    print("dx error: ", rel_error(dx_num, dx))
+    print("dh0 error: ", rel_error(dh0_num, dh0))
+    print("dWx error: ", rel_error(dWx_num, dWx))
+    print("dWh error: ", rel_error(dWh_num, dWh))
+    print("db error: ", rel_error(db_num, db))
 
-#     params = {"dx": dx, "dh0": dh0, "dWx": dWx, "dWh": dWh, "db": db}
-#     dx_num, dh0_num, dWx_num, dWh_num, db_num = estimate_gradients(model, dout, x, params)
-
-#     print('dx error: ', rel_error(dx_num, dx))
-#     print('dh0 error: ', rel_error(dh0_num, dh0))
-#     print('dWx error: ', rel_error(dWx_num, dWx))
-#     print('dWh error: ', rel_error(dWh_num, dWh))
-#     print('db error: ', rel_error(db_num, db))
+    assert np.allclose(dx_num, dx)
+    assert np.allclose(dh0_num, dh0)
+    assert np.allclose(dWx_num, dWx)
+    assert np.allclose(dWh_num, dWh)
+    assert np.allclose(db_num, db)

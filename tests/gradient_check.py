@@ -14,7 +14,10 @@ def rel_error(x, y):
 def estimate_gradients(
     model: Module, dout: np.ndarray, x: np.ndarray, kwparams: Dict[str, np.ndarray]
 ) -> List[np.ndarray]:
-    """ Gets the gradient estimate for all parameters of the model. """
+    """
+    Gets the gradient estimate for all parameters of the model. Overrides each
+    parameter of the model using the values in kwparams.
+    """
 
     def grad_fn(model, x, **kwargs):
         """

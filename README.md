@@ -13,15 +13,3 @@ In this project, I provide my own version of the PyTorch framework, designed to 
 One notable difference between EduTorch and PyTorch is that EduTorch _does NOT provide autograd_. There are many educational benefits to deriving/implementing the backprop step yourself, and if you want automatic gradient calculations, you are better off using the real framework. Additionally, if you wanted to learn how the autograd system is implemented, you can check out Andrej Karpathy's [micrograd project](https://github.com/karpathy/micrograd)
 
 Also, there is no CUDA or GPU support.
-
-TODO:
-- Focus on testing - import utils.
-Need to copy over tests for all provded layers
-that DOn'T involve downloading the data or training for a long time. Hardcoded results work great.
-- Keep code as concise as possible (add short functions to conftest)
-- Dataclasses for all modules ONCE I get them tested. post_init is alright i guess.
-
-
-Rename:
-- layers -> nn
-- optimizers -> optim

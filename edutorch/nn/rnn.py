@@ -1,4 +1,3 @@
-# type: ignore
 from typing import Tuple
 
 import numpy as np
@@ -6,20 +5,20 @@ import numpy as np
 from .module import Module
 from .rnn_cell import RNNCell
 
-# TODO The problem is the RNN cell cache is being overwritten at every timestep.
-
 
 class RNN(Module):
-    def __init__(self, input_size: int, hidden_size: int) -> None:
+    def __init__(self, input_size: int, hidden_size: int, batch_size: int) -> None:
         super().__init__()
-        self.input_size = input_size  # TODO why do i need this
+        self.input_size = input_size
         self.hidden_size = hidden_size
-        self.h0 = None
-        self.Wx = None
-        self.Wh = None  # np.random.normal(scale=1e-3, size=(hidden_size, hidden_size))
-        self.b = None  # np.random.normal(scale=1e-3, size=hidden_size)
+        self.batch_size = batch_size
 
-        self.cell = None
+        N, D, H = self.batch_size, self.input_size, self.hidden_size
+        self.h0 = np.random.normal(scale=1e-3, size=(N, H))
+        self.Wx = np.random.normal(scale=1e-3, size=(D, H))
+        self.Wh = np.random.normal(scale=1e-3, size=(hidden_size, hidden_size))
+        self.b = np.random.normal(scale=1e-3, size=hidden_size)
+
         self.set_parameters("h0", "Wx", "Wh", "b")
 
     def forward(self, x: np.ndarray) -> np.ndarray:
@@ -40,19 +39,17 @@ class RNN(Module):
         - h: Hidden states for the entire timeseries, of shape (N, T, H).
         - cache: Values needed in the backward pass
         """
-        N, T, D = x.shape
-        H = self.hidden_size
-        if self.h0 is None:
-            self.h0 = np.random.normal(scale=1e-3, size=(N, H))
-            self.Wx = np.random.normal(scale=1e-3, size=(D, H))
-
-        self.cell = RNNCell(self.h0, self.Wx, self.Wh, self.b)
+        _, T, _ = x.shape
+        N, _, H = self.batch_size, self.input_size, self.hidden_size
+        self.cache = ()
+        prev_h = self.h0
 
         h = np.zeros((N, T, H))
         for i in range(T):
-            h[:, i, :] = self.cell(x[:, i, :])
-            self.cache += self.cell.cache
-            self.cell.prev_h = self.cell.next_h
+            cell = RNNCell(prev_h, self.Wx, self.Wh, self.b)
+            h[:, i, :] = cell(x[:, i, :])
+            prev_h = h[:, i, :]
+            self.cache += (cell,)
         return h
 
     def backward(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:
@@ -75,7 +72,8 @@ class RNN(Module):
         - db: Gradient of biases, of shape (H,)
         """
         N, T, _ = dout.shape
-        x = self.cache[-1]
+        cell = self.cache[-1]
+        (x,) = cell.cache
         D = x.shape[1]
 
         dx = np.zeros((N, T, D))
@@ -85,8 +83,8 @@ class RNN(Module):
         db = np.zeros_like(self.b)
 
         for i in reversed(range(T)):
-            self.cell.cache = self.cache[i]
-            dx[:, i, :], dh_i, dWx_i, dWh_i, db_i = self.cell.backward(dout[:, i, :] + dprev_h)
+            cell = self.cache[i]
+            dx[:, i, :], dh_i, dWx_i, dWh_i, db_i = cell.backward(dout[:, i, :] + dprev_h)
             dWx += dWx_i
             dWh += dWh_i
             db += db_i

@@ -34,10 +34,9 @@ def test_rnn_cell_backward():
     Wx = np.random.randn(D, H)
     Wh = np.random.randn(H, H)
     b = np.random.randn(H)
+    dnext_h = np.random.randn(*prev_h.shape)
 
     model = RNNCell(prev_h=prev_h, Wx=Wx, Wh=Wh, b=b)
-
-    dnext_h = np.random.randn(*prev_h.shape)
 
     params = {"prev_h": prev_h, "Wx": Wx, "Wh": Wh, "b": b}
     dx_num, dprev_h_num, dWx_num, dWh_num, db_num = estimate_gradients(model, dnext_h, x, params)

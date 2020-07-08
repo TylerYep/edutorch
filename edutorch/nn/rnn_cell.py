@@ -52,8 +52,6 @@ class RNNCell(Module):
         - dWh: Gradients of hidden-to-hidden weights, of shape (H, H)
         - db: Gradients of bias vector, of shape (H,)
         """
-        # print(self.cache)
-        # print(len(self.cache))
         (x,) = self.cache
         dh = dout * (1 - self.next_h ** 2)
         dx = dh @ self.Wx.T
