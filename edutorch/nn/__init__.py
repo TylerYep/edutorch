@@ -4,6 +4,8 @@ from .dropout import Dropout
 from .embedding import Embedding
 from .layernorm import LayerNorm
 from .linear import Linear
+from .lstm import LSTM
+from .lstm_cell import LSTMCell
 from .maxpool2d import MaxPool2d
 from .module import Module
 from .relu import ReLU

@@ -34,14 +34,16 @@ def estimate_gradients(
         return dx_or_other_fn
 
     # Add x as a special case
-    approx_derivatives = [eval_numerical_gradient_array(grad_fn(model, None, **kwparams), x, dout)]
+    fx = grad_fn(model, None, **kwparams)
+    approx_derivatives = [eval_numerical_gradient_array(fx, x, dout)]
     for name, param in kwparams.items():
         # Shallow copy works here because we replace the target element with None.
         new_kwargs = dict(kwparams)
         new_kwargs[name] = None
-        approx_derivatives.append(
-            eval_numerical_gradient_array(grad_fn(model, x, **new_kwargs), param.copy(), dout)
-        )
+
+        # the numerical gradient function with respect to variable _name_
+        f_name = grad_fn(model, x, **new_kwargs)
+        approx_derivatives.append(eval_numerical_gradient_array(f_name, param.copy(), dout))
     return approx_derivatives
 
 

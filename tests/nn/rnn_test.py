@@ -56,14 +56,8 @@ def test_rnn_backward():
     params = {"h0": h0, "Wx": Wx, "Wh": Wh, "b": b}
     dx_num, dh0_num, dWx_num, dWh_num, db_num = estimate_gradients(model, dout, x, params)
 
-    print("dx error: ", rel_error(dx_num, dx))
-    print("dh0 error: ", rel_error(dh0_num, dh0))
-    print("dWx error: ", rel_error(dWx_num, dWx))
-    print("dWh error: ", rel_error(dWh_num, dWh))
-    print("db error: ", rel_error(db_num, db))
-
-    assert np.allclose(dx_num, dx)
-    assert np.allclose(dh0_num, dh0)
-    assert np.allclose(dWx_num, dWx)
-    assert np.allclose(dWh_num, dWh)
-    assert np.allclose(db_num, db)
+    assert np.allclose(dx_num, dx), f"dx error: {rel_error(dx_num, dx)}"
+    assert np.allclose(dh0_num, dh0), f"dh0 error: {rel_error(dh0_num, dh0)}"
+    assert np.allclose(dWx_num, dWx), f"dWx error: {rel_error(dWx_num, dWx)}"
+    assert np.allclose(dWh_num, dWh), f"dWh error: {rel_error(dWh_num, dWh)}"
+    assert np.allclose(db_num, db), f"db error: {rel_error(db_num, db)}"
