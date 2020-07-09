@@ -54,3 +54,23 @@ def test_batchnorm_backward():
     assert np.allclose(dx_num, dx)
     assert np.allclose(dgamma_num, dgamma)
     assert np.allclose(dbeta_num, dbeta)
+
+
+def test_batchnorm_backward_naive():
+    N, D = 4, 5
+    x = 5 * np.random.randn(N, D) + 12
+    gamma = np.random.randn(D)
+    beta = np.random.randn(D)
+    dout = np.random.randn(N, D)
+
+    model = BatchNorm(D)
+
+    params = {"gamma": gamma, "beta": beta}
+    dx_num, dgamma_num, dbeta_num = estimate_gradients(model, dout, x, params)
+
+    _ = model(x)
+    dx, dgamma, dbeta = model.backward_naive(dout)
+
+    assert np.allclose(dx_num, dx)
+    assert np.allclose(dgamma_num, dgamma)
+    assert np.allclose(dbeta_num, dbeta)

@@ -20,4 +20,4 @@ flake8 .
 find . -iname "*.py" | xargs pylint
 
 # Testing
-pytest
+pytest --cov=edutorch --cov-report=html

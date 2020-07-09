@@ -32,6 +32,4 @@ class Module:
                     submodel.parameters() if isinstance(submodel, Module) else submodel
                 )
             else:
-                raise ValueError(
-                    f"Not a valid attribute of {self.__class__.__name__}: {layer_name} "
-                )
+                raise ValueError(f"Not valid attribute of {self.__class__.__name__}: {layer_name}")
