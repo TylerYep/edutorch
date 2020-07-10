@@ -44,6 +44,11 @@ class Optimizer:
         def _step(model: Module, gradients: Dict[str, np.ndarray], context: Any) -> None:
             for param_name, param in model.parameters().items():
                 step_context = context[param_name]
+                if param_name not in gradients:
+                    raise ValueError(
+                        f"{model.__class__.__name__} has no gradient for {param_name}. Please "
+                        f"ensure {param_name} was assigned a gradient in model.backward()."
+                    )
 
                 # On a branch, recurse on that branch
                 if isinstance(param, dict):
@@ -51,15 +56,12 @@ class Optimizer:
                     _step(submodel, grad_dict, step_context)
 
                 # On a leaf, update the weight in that leaf
-                elif hasattr(model, param_name):
+                else:
                     w, dw = getattr(model, param_name), gradients[param_name]
                     if w.shape != dw.shape:
                         raise ValueError(f"Shapes of w and dw do not match: {w.shape} {dw.shape}")
                     new_w, new_context = self.update(step_context, w, dw)
                     setattr(model, param_name, new_w)
                     context[param_name] = new_context
-
-                else:
-                    raise ValueError(f"{model.__class__.__name__} has no attribute: {param_name}")
 
         _step(model, gradients, self.context)

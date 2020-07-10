@@ -27,8 +27,3 @@ def sigmoid(x: np.ndarray) -> np.ndarray:
     top = np.ones_like(x)
     top[neg_mask] = z[neg_mask]
     return top / (1 + z)
-
-
-def relu(x: np.ndarray) -> np.ndarray:
-    """ Basic implementation of ReLU function. """
-    return np.maximum(0, x)

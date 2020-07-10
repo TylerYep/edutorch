@@ -9,10 +9,10 @@ class Module:
         self.params: Dict[str, Dict[str, Any]] = {}
 
     def forward(self, x: np.ndarray) -> np.ndarray:
-        raise NotImplementedError
+        raise NotImplementedError("Modules must implement the forward pass.")
 
     def backward(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:
-        raise NotImplementedError
+        raise NotImplementedError("Modules execute local backprop to return parameter gradients.")
 
     def __call__(self, x: np.ndarray) -> np.ndarray:
         return self.forward(x)
