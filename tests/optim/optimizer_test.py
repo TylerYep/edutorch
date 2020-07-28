@@ -1,3 +1,5 @@
+from typing import Tuple
+
 import numpy as np
 import pytest
 
@@ -7,35 +9,35 @@ from edutorch.optim import Adam
 
 
 class MissingGradients(Module):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.fc1 = Linear(784, 30)
         self.fc2 = Linear(30, 10)
         self.set_parameters("fc1", "fc2")
 
-    def forward(self, x):
+    def forward(self, x: np.ndarray) -> np.ndarray:
         x = self.fc1(x)
         x = self.fc2(x)
         return x
 
-    def backward(self, dout):
+    def backward(self, dout: np.ndarray) -> np.ndarray:
         dx2, _, _ = self.fc2.backward(dout)
         _, _, _ = self.fc1.backward(dx2)
         return {}
 
 
 class MissingParameters(Module):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.fc1 = Linear(784, 30)
         self.fc2 = Linear(30, 10)
 
-    def forward(self, x):
+    def forward(self, x: np.ndarray) -> np.ndarray:
         x = self.fc1(x)
         x = self.fc2(x)
         return x
 
-    def backward(self, dout):
+    def backward(self, dout: np.ndarray) -> np.ndarray:
         grads = {}
         dx2, dw2, db2 = self.fc2.backward(dout)
         grads["fc2"] = {"w": dw2, "b": db2}
@@ -44,7 +46,7 @@ class MissingParameters(Module):
         return grads
 
 
-def test_missing_params(fashion_mnist):
+def test_missing_params(fashion_mnist: Tuple[np.ndarray, ...]) -> None:
     X_train, y_train, _, _ = fashion_mnist
 
     model = MissingParameters()
@@ -62,7 +64,7 @@ def test_missing_params(fashion_mnist):
     assert (model.fc2.w == save2).all()
 
 
-def test_missing_gradients(fashion_mnist):
+def test_missing_gradients(fashion_mnist: Tuple[np.ndarray, ...]) -> None:
     X_train, y_train, _, _ = fashion_mnist
 
     model = MissingGradients()

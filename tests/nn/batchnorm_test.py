@@ -1,10 +1,10 @@
 import numpy as np
 
 from edutorch.nn import BatchNorm
-from gradient_check import estimate_gradients
+from tests.gradient_check import estimate_gradients
 
 
-def test_batchnorm_forward():
+def test_batchnorm_forward() -> None:
     D = 3
     a = np.random.randn(200, D)
     model = BatchNorm(D)
@@ -19,7 +19,7 @@ def test_batchnorm_forward():
     ), "After batch norm (gamma=1, beta=0), stds should be close to 1."
 
 
-def test_batchnorm_forward_preset_gamma_beta():
+def test_batchnorm_forward_preset_gamma_beta() -> None:
     D = 3
     a = np.random.randn(200, D)
     model = BatchNorm(D)
@@ -36,7 +36,7 @@ def test_batchnorm_forward_preset_gamma_beta():
     ), f"After batch norm (gamma={model.gamma}, beta={model.beta}), std should be close to gamma."
 
 
-def test_batchnorm_backward():
+def test_batchnorm_backward() -> None:
     N, D = 4, 5
     x = 5 * np.random.randn(N, D) + 12
     gamma = np.random.randn(D)
@@ -56,7 +56,7 @@ def test_batchnorm_backward():
     assert np.allclose(dbeta_num, dbeta)
 
 
-def test_batchnorm_backward_naive():
+def test_batchnorm_backward_naive() -> None:
     N, D = 4, 5
     x = 5 * np.random.randn(N, D) + 12
     gamma = np.random.randn(D)

@@ -1,14 +1,14 @@
 import numpy as np
 
 from edutorch.nn import TemporalLinear
-from gradient_check import estimate_gradients
+from tests.gradient_check import estimate_gradients
 
 
-def test_temporal_linear_forward():
+def test_temporal_linear_forward() -> None:
     pass
 
 
-def test_temporal_linear_backward():
+def test_temporal_linear_backward() -> None:
     N, T, D, M = 2, 3, 4, 5
     x = np.random.randn(N, T, D)
     w = np.random.randn(D, M)

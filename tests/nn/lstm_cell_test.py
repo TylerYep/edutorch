@@ -1,12 +1,12 @@
-from typing import Dict, List
+from typing import Callable, Dict, List
 
 import numpy as np
 
 from edutorch.nn import LSTMCell, Module
-from gradient_check import eval_numerical_gradient_array, rel_error
+from tests.gradient_check import eval_numerical_gradient_array, rel_error
 
 
-def test_lstm_cell_forward():
+def test_lstm_cell_forward() -> None:
     N, D, H = 3, 4, 5
     x = np.linspace(-0.4, 1.2, num=N * D).reshape(N, D)
 
@@ -50,13 +50,15 @@ def estimate_gradients(
     parameter of the model using the values in kwparams.
     """
 
-    def grad_fn(model, x, h_or_c, **kwargs):
+    def grad_fn(
+        model: Module, x: np.ndarray, h_or_c: str, **kwargs: Dict[str, np.ndarray]
+    ) -> Callable[[np.ndarray], np.ndarray]:
         """
         Returns a grad function that takes in an input z and sets all attributes
         of the model to the kwargs, except for the target value z.
         """
 
-        def dx_or_other_fn(z):
+        def dx_or_other_fn(z: np.ndarray) -> np.ndarray:
             """ Function used as input to eval_numerical_gradient. """
             for key, val in kwargs.items():
                 setattr(model, key, z if val is None else val)
@@ -84,7 +86,7 @@ def estimate_gradients(
     return approx_derivatives
 
 
-def test_lstm_cell_backward():
+def test_lstm_cell_backward() -> None:
     N, D, H = 4, 5, 6
     x = np.random.randn(N, D)
     prev_h = np.random.randn(N, H)

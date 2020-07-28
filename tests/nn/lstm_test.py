@@ -1,10 +1,10 @@
 import numpy as np
 
 from edutorch.nn import LSTM
-from gradient_check import estimate_gradients, rel_error
+from tests.gradient_check import estimate_gradients, rel_error
 
 
-def test_lstm_forward():
+def test_lstm_forward() -> None:
     N, D, H, T = 2, 5, 4, 3
     x = np.linspace(-0.4, 0.6, num=N * T * D).reshape(N, T, D)
     model = LSTM(D, H, N)
@@ -33,7 +33,7 @@ def test_lstm_forward():
     assert np.allclose(expected_h, h)
 
 
-def test_lstm_backward():
+def test_lstm_backward() -> None:
     N, D, T, H = 2, 3, 10, 6
 
     x = np.random.randn(N, T, D)

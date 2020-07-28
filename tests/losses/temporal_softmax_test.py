@@ -1,11 +1,11 @@
 import numpy as np
 
 from edutorch.losses import temporal_softmax_loss
-from gradient_check import eval_numerical_gradient
+from tests.gradient_check import eval_numerical_gradient
 
 
-def test_temporal_softmax_output():
-    def check_loss(N, T, V, p):
+def test_temporal_softmax_output() -> None:
+    def check_loss(N: int, T: int, V: int, p: float) -> float:
         x = 0.001 * np.random.randn(N, T, V)
         y = np.random.randint(V, size=(N, T))
         mask = np.random.rand(N, T) <= p
@@ -16,7 +16,7 @@ def test_temporal_softmax_output():
     assert abs(check_loss(5000, 10, 10, 0.1) - 2.3) < 5e-2
 
 
-def test_temporal_softmax_gradient():
+def test_temporal_softmax_gradient() -> None:
     N, T, V = 7, 8, 9
     x = np.random.randn(N, T, V)
     y = np.random.randint(V, size=(N, T))

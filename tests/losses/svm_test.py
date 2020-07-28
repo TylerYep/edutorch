@@ -1,10 +1,10 @@
 import numpy as np
 
 from edutorch.losses import svm_loss
-from gradient_check import eval_numerical_gradient
+from tests.gradient_check import eval_numerical_gradient
 
 
-def test_softmax():
+def test_softmax() -> None:
     num_classes, num_inputs = 10, 50
     x = 0.001 * np.random.randn(num_inputs, num_classes)
     y = np.random.randint(num_classes, size=num_inputs)

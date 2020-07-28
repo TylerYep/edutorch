@@ -1,10 +1,10 @@
 import numpy as np
 
 from edutorch.nn import Linear
-from gradient_check import estimate_gradients
+from tests.gradient_check import estimate_gradients
 
 
-def test_linear_forward():
+def test_linear_forward() -> None:
     input_dim = 2
     input_shape = (4, 5, 6)
     output_dim = 3
@@ -24,7 +24,7 @@ def test_linear_forward():
     assert np.allclose(out, correct_out)
 
 
-def test_linear_backward():
+def test_linear_backward() -> None:
     x = np.random.randn(10, 2, 3)
     w = np.random.randn(6, 5)
     b = np.random.randn(5)

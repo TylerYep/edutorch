@@ -1,10 +1,10 @@
 import numpy as np
 
 from edutorch.nn import Embedding
-from gradient_check import estimate_gradients
+from tests.gradient_check import estimate_gradients
 
 
-def test_embedding_forward():
+def test_embedding_forward() -> None:
     V, D = 5, 3
 
     x = np.asarray([[0, 3, 1, 2], [2, 1, 0, 3]])
@@ -33,7 +33,7 @@ def test_embedding_forward():
     assert np.allclose(expected_out, out)
 
 
-def test_embedding_backward():
+def test_embedding_backward() -> None:
     N, T, V, D = 50, 3, 5, 6
     x = np.random.randint(V, size=(N, T))
     W = np.random.randn(V, D)

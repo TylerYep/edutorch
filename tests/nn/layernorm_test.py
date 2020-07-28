@@ -1,10 +1,10 @@
 import numpy as np
 
 from edutorch.nn import LayerNorm
-from gradient_check import estimate_gradients
+from tests.gradient_check import estimate_gradients
 
 
-def test_layernorm_forward():
+def test_layernorm_forward() -> None:
     N, D1, D2, D3 = 4, 50, 60, 3
     X = np.random.randn(N, D1)
     W1 = np.random.randn(D1, D2)
@@ -22,7 +22,7 @@ def test_layernorm_forward():
     ), "After layer norm (gamma=1, beta=0), stds should be close to 1."
 
 
-def test_layernorm_forward_preset_gamma_beta():
+def test_layernorm_forward_preset_gamma_beta() -> None:
     N, D1, D2, D3 = 4, 50, 60, 3
     X = np.random.randn(N, D1)
     W1 = np.random.randn(D1, D2)
@@ -44,7 +44,7 @@ def test_layernorm_forward_preset_gamma_beta():
     ), f"After layer norm (gamma={model.gamma}, beta={model.beta}), std should be close to gamma."
 
 
-def test_layernorm_backward():
+def test_layernorm_backward() -> None:
     N, D = 4, 5
     x = 5 * np.random.randn(N, D) + 12
     gamma = np.random.randn(D)

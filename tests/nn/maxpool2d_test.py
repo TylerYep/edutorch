@@ -1,10 +1,10 @@
 import numpy as np
 
 from edutorch.nn import MaxPool2d
-from gradient_check import estimate_gradients
+from tests.gradient_check import estimate_gradients
 
 
-def test_maxpool2d_forward():
+def test_maxpool2d_forward() -> None:
     x_shape = (2, 3, 4, 4)
     x = np.linspace(-0.3, 0.4, num=np.prod(x_shape)).reshape(x_shape)
     model = MaxPool2d(kernel_size=(2, 2), stride=2)
@@ -27,7 +27,7 @@ def test_maxpool2d_forward():
     assert np.allclose(out, correct_out)
 
 
-def test_maxpool2d_backward():
+def test_maxpool2d_backward() -> None:
     x = np.random.randn(3, 2, 4, 4)
     dout = np.random.randn(3, 2, 2, 2)
 

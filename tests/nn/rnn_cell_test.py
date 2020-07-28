@@ -1,10 +1,10 @@
 import numpy as np
 
 from edutorch.nn import RNNCell
-from gradient_check import estimate_gradients
+from tests.gradient_check import estimate_gradients
 
 
-def test_rnn_cell_forward():
+def test_rnn_cell_forward() -> None:
     N, D, H = 3, 10, 4
     x = np.linspace(-0.4, 0.7, num=N * D).reshape(N, D)
 
@@ -27,7 +27,7 @@ def test_rnn_cell_forward():
     assert np.allclose(expected_next_h, next_h)
 
 
-def test_rnn_cell_backward():
+def test_rnn_cell_backward() -> None:
     N, D, H = 4, 5, 6
     x = np.random.randn(N, D)
     prev_h = np.random.randn(N, H)

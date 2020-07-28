@@ -1,10 +1,10 @@
 import numpy as np
 
 from edutorch.nn import ReLU
-from gradient_check import estimate_gradients
+from tests.gradient_check import estimate_gradients
 
 
-def test_relu_forward():
+def test_relu_forward() -> None:
     x = np.linspace(-0.5, 0.5, num=12).reshape(3, 4)
 
     model = ReLU()
@@ -20,7 +20,7 @@ def test_relu_forward():
     assert np.allclose(out, correct_out)
 
 
-def test_relu_backward():
+def test_relu_backward() -> None:
     x = np.random.randn(10, 10)
     dout = np.random.randn(*x.shape)
 

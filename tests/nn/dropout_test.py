@@ -1,10 +1,10 @@
 import numpy as np
 
 from edutorch.nn import Dropout
-from gradient_check import estimate_gradients
+from tests.gradient_check import estimate_gradients
 
 
-def test_dropout_forward():
+def test_dropout_forward() -> None:
     x = np.random.randn(500, 500) + 10
 
     for p in [0.25, 0.4, 0.7]:
@@ -20,7 +20,7 @@ def test_dropout_forward():
         assert np.allclose((out_test == 0).mean(), 0, rtol=1e-2), "Test-time frac set to 0"
 
 
-def test_dropout_backward():
+def test_dropout_backward() -> None:
     np.random.seed(231)
     x = np.random.randn(10, 10) + 10
     dout = np.random.randn(*x.shape)

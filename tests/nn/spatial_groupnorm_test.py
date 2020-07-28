@@ -1,10 +1,10 @@
 import numpy as np
 
 from edutorch.nn import SpatialGroupNorm
-from gradient_check import estimate_gradients
+from tests.gradient_check import estimate_gradients
 
 
-def test_spatial_groupnorm_forward():
+def test_spatial_groupnorm_forward() -> None:
     N, C, H, W, G = 2, 6, 4, 5, 2
     x = 4 * np.random.randn(N, C, H, W) + 10
     model = SpatialGroupNorm(C, G)
@@ -22,7 +22,7 @@ def test_spatial_groupnorm_forward():
     ), "After batch norm (gamma=1, beta=0), stds should be close to 1."
 
 
-def test_spatial_groupnorm_backward():
+def test_spatial_groupnorm_backward() -> None:
     N, C, H, W, G = 2, 6, 4, 5, 2
     x = 5 * np.random.randn(N, C, H, W) + 12
     gamma = np.random.randn(1, C, 1, 1)

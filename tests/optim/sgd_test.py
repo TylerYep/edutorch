@@ -4,7 +4,7 @@ from edutorch.nn import Linear
 from edutorch.optim import SGD
 
 
-def test_sgd():
+def test_sgd() -> None:
     N, D = 4, 5
     w = np.linspace(-0.4, 0.6, num=N * D).reshape(N, D)
     dw = np.linspace(-0.6, 0.4, num=N * D).reshape(N, D)

@@ -1,10 +1,10 @@
 import numpy as np
 
 from edutorch.nn import Conv2d
-from gradient_check import estimate_gradients
+from tests.gradient_check import estimate_gradients
 
 
-def test_conv2d_forward():
+def test_conv2d_forward() -> None:
     x_shape = (2, 3, 4, 4)
     w_shape = (3, 3, 4, 4)
     x = np.linspace(-0.1, 0.5, num=np.prod(x_shape)).reshape(x_shape)
@@ -30,7 +30,7 @@ def test_conv2d_forward():
     assert np.allclose(out, correct_out)
 
 
-def test_conv2d_backward():
+def test_conv2d_backward() -> None:
     x = np.random.randn(3, 3, 3, 3)
     w = np.random.randn(2, 3, 3, 3)
     b = np.random.randn(2,)
