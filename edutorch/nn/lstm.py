@@ -17,7 +17,6 @@ class LSTM(Module):
         self.Wx = np.random.normal(scale=1e-3, size=(D, H))
         self.Wh = np.random.normal(scale=1e-3, size=(H, H))
         self.b = np.random.normal(scale=1e-3, size=H)
-
         self.set_parameters("h0", "Wx", "Wh", "b")
 
     def forward(self, x: np.ndarray) -> np.ndarray:

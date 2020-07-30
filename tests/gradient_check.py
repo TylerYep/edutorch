@@ -105,6 +105,9 @@ def eval_numerical_gradient_array(
     return grad
 
 
+# The following functions have yet to be used.
+
+
 def eval_numerical_gradient_blobs(
     f: Callable[[np.ndarray], np.ndarray], inputs: np.ndarray, output: np.ndarray, h: float = 1e-5
 ) -> List[np.ndarray]:
@@ -148,10 +151,11 @@ def eval_numerical_gradient_blobs(
     return numeric_diffs
 
 
-# def eval_numerical_gradient_net(
-#     net: Module, inputs: np.ndarray, output: np.ndarray, h: float = 1e-5
-# ) -> float:
-#     return eval_numerical_gradient_blobs(lambda *args: net.forward(), inputs, output, h=h)
+def eval_numerical_gradient_net(
+    net: Module, inputs: np.ndarray, output: np.ndarray, h: float = 1e-5
+) -> List[np.ndarray]:
+    """ Ease of use function. """
+    return eval_numerical_gradient_blobs(net, inputs, output, h=h)
 
 
 def grad_check_sparse(
@@ -162,10 +166,8 @@ def grad_check_sparse(
     h: float = 1e-5,
 ) -> None:
     """
-    sample a few random elements and only return numerical
-    in this dimensions.
+    Sample a few random elements and only return numerical gradients in those dimensions.
     """
-
     for _ in range(num_checks):
         ix = tuple([random.randrange(m) for m in x.shape])
 
