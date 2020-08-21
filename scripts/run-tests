@@ -11,7 +11,7 @@ cd "${0%/*}/.."
 mypy .
 
 # Auto-code formatters
-isort -y
+isort .
 black . -l 100
 git add .
 
