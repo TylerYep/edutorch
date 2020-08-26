@@ -33,7 +33,7 @@ def test_conv2d_forward() -> None:
 def test_conv2d_backward() -> None:
     x = np.random.randn(3, 3, 3, 3)
     w = np.random.randn(2, 3, 3, 3)
-    b = np.random.randn(2,)
+    b = np.random.randn(2)
     dout = np.random.randn(3, 2, 3, 3)
 
     model = Conv2d(1, 2, kernel_size=(4, 4), stride=1, pad=1)
