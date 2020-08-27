@@ -151,13 +151,6 @@ def eval_numerical_gradient_blobs(
     return numeric_diffs
 
 
-def eval_numerical_gradient_net(
-    net: Module, inputs: np.ndarray, output: np.ndarray, h: float = 1e-5
-) -> List[np.ndarray]:
-    """ Ease of use function. """
-    return eval_numerical_gradient_blobs(net, inputs, output, h=h)
-
-
 def grad_check_sparse(
     f: Callable[[np.ndarray], np.ndarray],
     x: np.ndarray,

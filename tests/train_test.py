@@ -42,10 +42,10 @@ def test_training(fashion_mnist: Tuple[np.ndarray, ...]) -> None:
 
     for _ in range(100):
         out = model(X_train)
-        _, dx = softmax_loss(out, y_train)
+        loss, dx = softmax_loss(out, y_train)
         grads = model.backward(dx)
         optimizer.step(model, grads)
-        # print(loss)
 
+    assert loss < 1e-4
     assert not (model.fc1.w == save1).all()
     assert not (model.fc2.w == save2).all()

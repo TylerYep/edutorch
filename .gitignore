@@ -5,6 +5,7 @@ __pycache__/
 .DS_Store
 data/*
 !data/.gitkeep
+manual_test.py
 
 # C extensions
 *.so

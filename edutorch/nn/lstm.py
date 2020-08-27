@@ -87,7 +87,7 @@ class LSTM(Module):
         for i in reversed(range(T)):
             cell, _ = self.cache[i]
             dx[:, i, :], dh_i, dc_i, dWx_i, dWh_i, db_i = cell.backward(
-                dout[:, i, :] + dprev_h, dprev_c
+                (dout[:, i, :] + dprev_h, dprev_c)
             )
             dWx += dWx_i
             dWh += dWh_i

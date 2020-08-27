@@ -107,7 +107,7 @@ def test_lstm_cell_backward() -> None:
 
     _ = model(x)
 
-    dx, dh, dc, dWx, dWh, db = model.backward(dnext_h, dnext_c)
+    dx, dh, dc, dWx, dWh, db = model.backward((dnext_h, dnext_c))
 
     assert np.allclose(dx_num, dx), f"dx error: {rel_error(dx_num, dx)}"
     assert np.allclose(dh_num, dh), f"dh error: {rel_error(dh_num, dh)}"

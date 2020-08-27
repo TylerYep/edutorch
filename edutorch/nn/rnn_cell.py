@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Optional, Tuple
 
 import numpy as np
 
@@ -12,6 +12,7 @@ class RNNCell(Module):
         self.Wx = Wx
         self.Wh = Wh
         self.b = b
+        self.next_h: Optional[np.array] = None
         self.set_parameters("prev_h", "Wx", "Wh", "b")
 
     def forward(self, x: np.ndarray) -> np.ndarray:
@@ -52,6 +53,7 @@ class RNNCell(Module):
         - dWh: Gradients of hidden-to-hidden weights, of shape (H, H)
         - db: Gradients of bias vector, of shape (H,)
         """
+        assert self.next_h is not None
         (x,) = self.cache
         dh = dout * (1 - self.next_h ** 2)
         dx = dh @ self.Wx.T
