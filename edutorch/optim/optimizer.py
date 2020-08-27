@@ -13,7 +13,7 @@ class Optimizer:
     def __post_init__(self) -> None:
         self.context = self.set_context(self.model.parameters())
 
-    def set_context(self, context: Any) -> Any:
+    def set_context(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """
         Traverses down the model.parameters() tree and initializes all leaf
         nodes using the overridden init_context function.
@@ -41,13 +41,13 @@ class Optimizer:
         Parameter context should always be None from the user's perspective.
         """
 
-        def _step(model: Module, gradients: Dict[str, np.ndarray], context: Any) -> None:
+        def _step(model: Module, gradients: Dict[str, np.ndarray], context: Dict[str, Any]) -> None:
             for param_name, param in model.parameters().items():
                 step_context = context[param_name]
                 if param_name not in gradients:
                     raise ValueError(
-                        f"{model.__class__.__name__} has no gradient for {param_name}. Please "
-                        f"ensure {param_name} was assigned a gradient in model.backward()."
+                        f"{model.__class__.__name__} has no gradient for {param_name}. "
+                        f"Please ensure {param_name} was assigned a gradient in model.backward()."
                     )
 
                 # On a branch, recurse on that branch
