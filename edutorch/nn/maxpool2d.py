@@ -6,7 +6,9 @@ from .module import Module
 
 
 class MaxPool2d(Module):
-    def __init__(self, kernel_size: Tuple[int, int], stride: int = 1, pad: int = 2) -> None:
+    def __init__(
+        self, kernel_size: Tuple[int, int], stride: int = 1, pad: int = 2
+    ) -> None:
         super().__init__()
         self.kernel_size = kernel_size
         self.stride = stride

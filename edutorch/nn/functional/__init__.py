@@ -3,7 +3,8 @@ This folder contains helper functions for common mathematical functions.
 Note: this package is not equivalent to PyTorch's functional API, because
 no backwards() methods are provided for these functions!
 
-To use these functions as layers, please use the implementation in layers/ or losses/ instead.
+To use these functions as layers, please use the implementation in
+layers/ or losses/ instead.
 """
 import numpy as np
 

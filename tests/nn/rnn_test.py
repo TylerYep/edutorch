@@ -54,7 +54,9 @@ def test_rnn_backward() -> None:
     dx, dh0, dWx, dWh, db = model.backward(dout)
 
     params = {"h0": h0, "Wx": Wx, "Wh": Wh, "b": b}
-    dx_num, dh0_num, dWx_num, dWh_num, db_num = estimate_gradients(model, dout, x, params)
+    dx_num, dh0_num, dWx_num, dWh_num, db_num = estimate_gradients(
+        model, dout, x, params
+    )
 
     assert np.allclose(dx_num, dx), f"dx error: {rel_error(dx_num, dx)}"
     assert np.allclose(dh0_num, dh0), f"dh0 error: {rel_error(dh0_num, dh0)}"

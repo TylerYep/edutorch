@@ -30,7 +30,9 @@ class SGDMomentum(Optimizer):
         v = np.zeros_like(w)
         return b, v
 
-    def update(self, context: Tuple[Any, ...], w: np.ndarray, dw: np.ndarray) -> np.ndarray:
+    def update(
+        self, context: Tuple[Any, ...], w: np.ndarray, dw: np.ndarray
+    ) -> np.ndarray:
         (b, v) = context
 
         v = b * v - self.lr * dw

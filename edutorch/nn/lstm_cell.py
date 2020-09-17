@@ -8,7 +8,12 @@ from .module import Module
 
 class LSTMCell(Module):
     def __init__(
-        self, prev_h: np.ndarray, prev_c: np.ndarray, Wx: np.ndarray, Wh: np.ndarray, b: np.ndarray
+        self,
+        prev_h: np.ndarray,
+        prev_c: np.ndarray,
+        Wx: np.ndarray,
+        Wh: np.ndarray,
+        b: np.ndarray,
     ) -> None:
         super().__init__()
         self.prev_h = prev_h
@@ -44,7 +49,12 @@ class LSTMCell(Module):
         """
         H = self.prev_h.shape[1]
         a = self.prev_h @ self.Wh + x @ self.Wx + self.b
-        a_i, a_f, a_o, a_g = a[:, :H], a[:, H : 2 * H], a[:, 2 * H : 3 * H], a[:, 3 * H :]
+        a_i, a_f, a_o, a_g = (
+            a[:, :H],
+            a[:, H : 2 * H],
+            a[:, 2 * H : 3 * H],
+            a[:, 3 * H :],
+        )
         self.next_c = sigmoid(a_f) * self.prev_c + sigmoid(a_i) * np.tanh(a_g)
         self.next_h = sigmoid(a_o) * np.tanh(self.next_c)
         self.cache = (x, a)
@@ -78,7 +88,12 @@ class LSTMCell(Module):
         dnext_h, dnext_c = dout
         H = dnext_h.shape[1]
         x, a = self.cache
-        a_i, a_f, a_o, a_g = a[:, :H], a[:, H : 2 * H], a[:, 2 * H : 3 * H], a[:, 3 * H :]
+        a_i, a_f, a_o, a_g = (
+            a[:, :H],
+            a[:, H : 2 * H],
+            a[:, 2 * H : 3 * H],
+            a[:, 3 * H :],
+        )
         i, f, o, g = sigmoid(a_i), sigmoid(a_f), sigmoid(a_o), np.tanh(a_g)
 
         dc = dnext_c + dnext_h * d_tanh(self.next_c) * o

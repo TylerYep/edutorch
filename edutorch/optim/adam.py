@@ -33,12 +33,14 @@ class Adam(Optimizer):
         t = 0
         return m, v, t
 
-    def update(self, context: Tuple[Any, ...], w: np.ndarray, dw: np.ndarray) -> np.ndarray:
+    def update(
+        self, context: Tuple[Any, ...], w: np.ndarray, dw: np.ndarray
+    ) -> np.ndarray:
         """
         w must have the same shape as params.
 
-        For efficiency, update rules may perform in-place updates, mutating w and
-        setting next_w equal to w.
+        For efficiency, update rules may perform in-place updates, mutating w
+        and setting next_w equal to w.
         """
         (m, v, t) = context
 

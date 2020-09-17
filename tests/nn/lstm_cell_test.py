@@ -69,7 +69,9 @@ def estimate_gradients(
     # Add x as a special case
     approx_derivatives = [
         eval_numerical_gradient_array(grad_fn(model, None, "h", **kwparams), x, dnext_h)
-        + eval_numerical_gradient_array(grad_fn(model, None, "c", **kwparams), x, dnext_c)
+        + eval_numerical_gradient_array(
+            grad_fn(model, None, "c", **kwparams), x, dnext_c
+        )
     ]
     for name, param in kwparams.items():
         # Shallow copy works here because we replace the target element with None.

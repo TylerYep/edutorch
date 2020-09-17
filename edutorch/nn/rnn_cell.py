@@ -6,7 +6,9 @@ from .module import Module
 
 
 class RNNCell(Module):
-    def __init__(self, prev_h: np.ndarray, Wx: np.ndarray, Wh: np.ndarray, b: np.ndarray) -> None:
+    def __init__(
+        self, prev_h: np.ndarray, Wx: np.ndarray, Wh: np.ndarray, b: np.ndarray
+    ) -> None:
         super().__init__()
         self.prev_h = prev_h
         self.Wx = Wx
@@ -43,7 +45,7 @@ class RNNCell(Module):
         Backward pass for a single timestep of a vanilla RNN.
 
         Inputs:
-        - dout/dnext_h: Gradient of loss with respect to next hidden state, of shape (N, H)
+        - dout/dnext_h: Gradient of loss w/ respect to next hidden state (N, H)
         - cache: Cache object from the forward pass
 
         Returns a tuple of:

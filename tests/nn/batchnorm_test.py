@@ -28,12 +28,14 @@ def test_batchnorm_forward_preset_gamma_beta() -> None:
 
     a_norm = model(a)
 
-    assert np.allclose(
-        a_norm.mean(axis=0), model.beta
-    ), f"After batch norm (gamma={model.gamma}, beta={model.beta}), means should be close to beta."
-    assert np.allclose(
-        a_norm.std(axis=0), model.gamma
-    ), f"After batch norm (gamma={model.gamma}, beta={model.beta}), std should be close to gamma."
+    assert np.allclose(a_norm.mean(axis=0), model.beta), (
+        f"After batch norm (gamma={model.gamma}, "
+        f"beta={model.beta}), means should be close to beta."
+    )
+    assert np.allclose(a_norm.std(axis=0), model.gamma), (
+        f"After batch norm (gamma={model.gamma}, "
+        f"beta={model.beta}), std should be close to gamma."
+    )
 
 
 def test_batchnorm_backward() -> None:

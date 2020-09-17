@@ -17,12 +17,13 @@ class LayerNorm(Module):
         """
         Forward pass for layer normalization.
 
-        During both training and test-time, the incoming data is normalized per data-point,
-        before being scaled by gamma and beta parameters identical to that of batch normalization.
+        During both training and test-time, the incoming data is normalized
+        per data-point, before being scaled by gamma and beta parameters identical
+        to that of batch normalization.
 
-        Note that in contrast to batch normalization, the behavior during train and test-time for
-        layer normalization are identical, and we do not need to keep track of running averages
-        of any sort.
+        Note that in contrast to batch normalization, the behavior during train
+        and test-time for layer normalization are identical, and we do not need
+        to keep track of running averages of any sort.
 
         Uses transpose matrix transformations to reuse batch norm code.
 
@@ -73,7 +74,9 @@ class LayerNorm(Module):
 
         x_hat = x_hat.T
         dx_hat = dx_hat.T
-        dx = (dx_hat - np.mean(dx_hat, axis=0) - x_hat * np.mean(dx_hat * x_hat, axis=0)) / v
+        dx = (
+            dx_hat - np.mean(dx_hat, axis=0) - x_hat * np.mean(dx_hat * x_hat, axis=0)
+        ) / v
         dx = dx.T
 
         return dx, dgamma, dbeta

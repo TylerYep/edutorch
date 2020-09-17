@@ -28,12 +28,14 @@ def test_spatial_batchnorm_forward_preset_gamma_beta() -> None:
 
     x_norm = model(x)
 
-    assert np.allclose(
-        x_norm.mean(axis=(0, 2, 3)), model.beta
-    ), f"After spatial batch norm (gamma={model.gamma}, beta={model.beta}), means should be ~beta."
-    assert np.allclose(
-        x_norm.std(axis=(0, 2, 3)), model.gamma
-    ), f"After spatial batch norm (gamma={model.gamma}, beta={model.beta}), std should be ~gamma."
+    assert np.allclose(x_norm.mean(axis=(0, 2, 3)), model.beta), (
+        f"After spatial batch norm (gamma={model.gamma}, "
+        f"beta={model.beta}), means should be ~beta."
+    )
+    assert np.allclose(x_norm.std(axis=(0, 2, 3)), model.gamma), (
+        f"After spatial batch norm (gamma={model.gamma}, "
+        f"beta={model.beta}), std should be ~gamma."
+    )
 
 
 def test_spatial_batchnorm_backward() -> None:

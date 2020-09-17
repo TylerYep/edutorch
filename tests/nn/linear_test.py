@@ -13,7 +13,9 @@ def test_linear_forward() -> None:
 
     x = np.linspace(-0.1, 0.5, num=input_size).reshape(input_dim, *input_shape)
     model = Linear(input_dim, output_dim)
-    model.w = np.linspace(-0.2, 0.3, num=weight_size).reshape(np.prod(input_shape), output_dim)
+    model.w = np.linspace(-0.2, 0.3, num=weight_size).reshape(
+        np.prod(input_shape), output_dim
+    )
     model.b = np.linspace(-0.3, 0.1, num=output_dim)
 
     out = model(x)

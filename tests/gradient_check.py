@@ -45,12 +45,17 @@ def estimate_gradients(
 
         # the numerical gradient function with respect to variable _name_
         f_name = grad_fn(model, x, **new_kwargs)
-        approx_derivatives.append(eval_numerical_gradient_array(f_name, param.copy(), dout))
+        approx_derivatives.append(
+            eval_numerical_gradient_array(f_name, param.copy(), dout)
+        )
     return approx_derivatives
 
 
 def eval_numerical_gradient(
-    f: Callable[[np.ndarray], np.ndarray], x: np.ndarray, verbose: bool = False, h: float = 1e-5
+    f: Callable[[np.ndarray], np.ndarray],
+    x: np.ndarray,
+    verbose: bool = False,
+    h: float = 1e-5,
 ) -> np.ndarray:
     """
     A naive implementation of numerical gradient of f at x
@@ -82,7 +87,10 @@ def eval_numerical_gradient(
 
 
 def eval_numerical_gradient_array(
-    f: Callable[[np.ndarray], np.ndarray], x: np.ndarray, df: np.ndarray, h: float = 1e-5
+    f: Callable[[np.ndarray], np.ndarray],
+    x: np.ndarray,
+    df: np.ndarray,
+    h: float = 1e-5,
 ) -> np.ndarray:
     """
     Evaluate a numeric gradient for a function that accepts a numpy
@@ -109,7 +117,10 @@ def eval_numerical_gradient_array(
 
 
 def eval_numerical_gradient_blobs(
-    f: Callable[[np.ndarray], np.ndarray], inputs: np.ndarray, output: np.ndarray, h: float = 1e-5
+    f: Callable[[np.ndarray], np.ndarray],
+    inputs: np.ndarray,
+    output: np.ndarray,
+    h: float = 1e-5,
 ) -> List[np.ndarray]:
     """
     Compute numeric gradients for a function that operates on input
@@ -159,7 +170,8 @@ def grad_check_sparse(
     h: float = 1e-5,
 ) -> None:
     """
-    Sample a few random elements and only return numerical gradients in those dimensions.
+    Sample a few random elements and only return
+    numerical gradients in those dimensions.
     """
     for _ in range(num_checks):
         ix = tuple([random.randrange(m) for m in x.shape])
@@ -173,8 +185,11 @@ def grad_check_sparse(
 
         grad_numerical = (fxph - fxmh) / (2 * h)
         grad_analytic = analytic_grad[ix]
-        error = abs(grad_numerical - grad_analytic) / (abs(grad_numerical) + abs(grad_analytic))
+        error = abs(grad_numerical - grad_analytic) / (
+            abs(grad_numerical) + abs(grad_analytic)
+        )
         print(
-            "numerical: %f analytic: %f, relative error: %e"
-            % (grad_numerical, grad_analytic, error)
+            f"numerical: {grad_numerical}, "
+            f"analytic: {grad_analytic}, "
+            f"relative error: {error}"
         )

@@ -36,12 +36,14 @@ def test_layernorm_forward_preset_gamma_beta() -> None:
 
     a_norm = model(a)
 
-    assert np.allclose(
-        a_norm.mean(axis=1), beta
-    ), f"After layer norm (gamma={model.gamma}, beta={model.beta}), means should be close to beta."
-    assert np.allclose(
-        a_norm.std(axis=1), gamma
-    ), f"After layer norm (gamma={model.gamma}, beta={model.beta}), std should be close to gamma."
+    assert np.allclose(a_norm.mean(axis=1), beta), (
+        f"After layer norm (gamma={model.gamma}, "
+        f"beta={model.beta}), means should be close to beta."
+    )
+    assert np.allclose(a_norm.std(axis=1), gamma), (
+        f"After layer norm (gamma={model.gamma}, "
+        f"beta={model.beta}), std should be close to gamma."
+    )
 
 
 def test_layernorm_backward() -> None:

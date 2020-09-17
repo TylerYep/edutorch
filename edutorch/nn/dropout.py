@@ -6,7 +6,9 @@ from .module import Module
 
 
 class Dropout(Module):
-    def __init__(self, p: float, train_mode: bool = True, seed: Optional[int] = None) -> None:
+    def __init__(
+        self, p: float, train_mode: bool = True, seed: Optional[int] = None
+    ) -> None:
         super().__init__()
         self.p = p
         self.train_mode = train_mode
@@ -34,7 +36,7 @@ class Dropout(Module):
         NOTE: Please implement **inverted** dropout, not the vanilla version of dropout.
         See http://cs231n.github.io/neural-networks-2/#reg for more details.
 
-        NOTE 2: Keep in mind that p is the probability of **keep** a neuron
+        NOTE: Keep in mind that p is the probability of **keep** a neuron
         output; this might be contrary to some sources, where it is referred to
         as the probability of dropping a neuron output.
         """

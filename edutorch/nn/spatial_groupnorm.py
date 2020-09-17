@@ -73,7 +73,9 @@ class SpatialGroupNorm(Module):
 
         x_hat = x_hat.reshape(N * self.G, -1).T
         dx_hat = dx_hat.reshape(N * self.G, -1).T
-        dx = (dx_hat - np.mean(dx_hat, axis=0) - x_hat * np.mean(dx_hat * x_hat, axis=0)) / v
+        dx = (
+            dx_hat - np.mean(dx_hat, axis=0) - x_hat * np.mean(dx_hat * x_hat, axis=0)
+        ) / v
         dx = dx.T.reshape(N, C, H, W)
 
         return dx, dgamma, dbeta

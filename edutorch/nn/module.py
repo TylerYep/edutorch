@@ -12,7 +12,9 @@ class Module:
         raise NotImplementedError("Modules must implement the forward pass.")
 
     def backward(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:
-        raise NotImplementedError("Modules execute local backprop to return parameter gradients.")
+        raise NotImplementedError(
+            "Modules execute local backprop to return parameter gradients."
+        )
 
     def __call__(self, x: np.ndarray) -> np.ndarray:
         return self.forward(x)
@@ -32,4 +34,6 @@ class Module:
                     submodel.parameters() if isinstance(submodel, Module) else submodel
                 )
             else:
-                raise ValueError(f"Not valid attribute of {self.__class__.__name__}: {layer_name}")
+                raise ValueError(
+                    f"Not valid attribute of {self.__class__.__name__}: {layer_name}"
+                )

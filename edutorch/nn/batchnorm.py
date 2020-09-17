@@ -7,7 +7,11 @@ from .module import Module
 
 class BatchNorm(Module):
     def __init__(
-        self, num_features: int, train_mode: bool = True, eps: float = 1e-5, momentum: float = 0.9
+        self,
+        num_features: int,
+        train_mode: bool = True,
+        eps: float = 1e-5,
+        momentum: float = 0.9,
     ) -> None:
         super().__init__()
         self.train_mode = train_mode
@@ -114,7 +118,9 @@ class BatchNorm(Module):
         xn, std = self.cache
 
         dx_hat = dout * self.gamma
-        dx = (dx_hat - np.mean(dx_hat, axis=0) - xn * np.mean(dx_hat * xn, axis=0)) / std
+        dx = (
+            dx_hat - np.mean(dx_hat, axis=0) - xn * np.mean(dx_hat * xn, axis=0)
+        ) / std
 
         dgamma = np.sum(dout * xn, axis=0)
         dbeta = np.sum(dout, axis=0)

@@ -82,7 +82,9 @@ class RNN(Module):
 
         for i in reversed(range(T)):
             cell = self.cache[i]
-            dx[:, i, :], dh_i, dWx_i, dWh_i, db_i = cell.backward(dout[:, i, :] + dprev_h)
+            dx[:, i, :], dh_i, dWx_i, dWh_i, db_i = cell.backward(
+                dout[:, i, :] + dprev_h
+            )
             dWx += dWx_i
             dWh += dWh_i
             db += db_i

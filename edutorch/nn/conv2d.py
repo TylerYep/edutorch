@@ -15,7 +15,9 @@ class Conv2d(Module):
         pad: int = 2,
     ) -> None:
         super().__init__()
-        self.w = np.random.normal(scale=1e-3, size=(out_channels, in_channels, *kernel_size))
+        self.w = np.random.normal(
+            scale=1e-3, size=(out_channels, in_channels, *kernel_size)
+        )
         self.b = np.zeros(out_channels)
         self.stride = stride
         self.pad = pad
@@ -39,9 +41,9 @@ class Conv2d(Module):
         - 'pad': The number of pixels that will be used to zero-pad the input.
 
 
-        During padding, 'pad' zeros should be placed symmetrically (i.e equally on both sides)
-        along the height and width axes of the input. Be careful not to modify the original
-        input x directly.
+        During padding, 'pad' zeros should be placed symmetrically
+        (i.e equally on both sides) along the height and width axes of the input.
+        Be careful not to modify the original input x directly.
 
         Returns a tuple of:
         - out: Output data, of shape (N, F, H', W') where H' and W' are given by
@@ -64,7 +66,8 @@ class Conv2d(Module):
                 for i in range(0, H_prime * stride, stride):
                     for j in range(0, W_prime * stride, stride):
                         out[n, f, i // stride, j // stride] = (
-                            np.sum(self.w[f] * x_padded[n, :, i : i + HH, j : j + WW]) + self.b[f]
+                            np.sum(self.w[f] * x_padded[n, :, i : i + HH, j : j + WW])
+                            + self.b[f]
                         )
         self.cache = (x,)
         return out
