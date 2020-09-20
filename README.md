@@ -16,7 +16,6 @@ One notable difference between EduTorch and PyTorch is that EduTorch _does NOT p
 
 There is no CUDA or GPU support either, for the same reasons.
 
-
 # Contributing
 All issues and pull requests are much appreciated!
 - First, be sure to run `scripts/install-hooks`.

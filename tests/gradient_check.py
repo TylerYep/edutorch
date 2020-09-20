@@ -174,7 +174,7 @@ def grad_check_sparse(
     numerical gradients in those dimensions.
     """
     for _ in range(num_checks):
-        ix = tuple([random.randrange(m) for m in x.shape])
+        ix = tuple(random.randrange(m) for m in x.shape)
 
         oldval = x[ix]
         x[ix] = oldval + h  # increment by h

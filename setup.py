@@ -5,7 +5,7 @@ with open("README.md") as f:
 
 setuptools.setup(
     name="edutorch",
-    version="0.0.2",
+    version="0.0.3",
     author="Tyler Yep",
     author_email="tyep10@gmail.com",
     description="Rewritten PyTorch framework designed to help you learn AI/ML",

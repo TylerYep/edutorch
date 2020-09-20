@@ -7,7 +7,7 @@ from torchvision import datasets
 
 
 @pytest.fixture(autouse=True)
-def set_seed() -> None:
+def _set_seed() -> None:
     random.seed(0)
     np.random.seed(0)
 
