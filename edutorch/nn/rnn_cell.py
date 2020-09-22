@@ -55,7 +55,9 @@ class RNNCell(Module):
         - dWh: Gradients of hidden-to-hidden weights, of shape (H, H)
         - db: Gradients of bias vector, of shape (H,)
         """
-        assert self.next_h is not None
+        if self.next_h is None:
+            raise RuntimeError("self.next_h should not be None.")
+
         (x,) = self.cache
         dh = dout * (1 - self.next_h ** 2)
         dx = dh @ self.Wx.T
