@@ -7,7 +7,7 @@ setuptools.setup(
     name="edutorch",
     version="0.0.3",
     author="Tyler Yep",
-    author_email="tyep10@gmail.com",
+    author_email="tyep@cs.stanford.edu",
     description="Rewritten PyTorch framework designed to help you learn AI/ML",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
