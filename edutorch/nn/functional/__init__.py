@@ -28,3 +28,6 @@ def sigmoid(x: np.ndarray) -> np.ndarray:
     top = np.ones_like(x)
     top[neg_mask] = z[neg_mask]
     return top / (1 + z)
+
+
+__all__ = ("softmax", "sigmoid")
