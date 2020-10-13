@@ -12,12 +12,12 @@ PyTorch is one of the most amazing frameworks for building and training deep neu
 In this project, I provide my own version of the PyTorch framework, designed to help you understand the key concepts. The goal is to provide explicit implementations of popular layers, models, and optimizers. Above all else, this code is designed to be readable and clear. Many of these examples are modified from Stanford's CS 230 / 231N course materials available online.
 
 ## EduTorch vs PyTorch
-One notable difference between EduTorch and PyTorch is that EduTorch _does NOT provide autograd_. There are many educational benefits to deriving/implementing the backprop step yourself, and if you want automatic gradient calculations, you are better off using the real framework. Additionally, if you wanted to learn how the autograd system is implemented, you can check out Andrej Karpathy's [micrograd project](https://github.com/karpathy/micrograd).
+One notable difference between EduTorch and PyTorch is that EduTorch _does NOT provide autograd_. There are many educational benefits to deriving/implementing the backprop step yourself, and if you want automatic gradient calculations, you are better off using the real framework. If you really want autograd for an EduTorch-like project, you might want to consider using Brown University's [BrunoFlow](https://github.com/Brown-Deep-Learning/brunoflow). Or, if you just want to learn how the autograd system is implemented, you can check out Andrej Karpathy's [micrograd project](https://github.com/karpathy/micrograd).
 
-There is no CUDA or GPU support either, for the same reasons.
+There is no CUDA or GPU support for EduTorch either, for the same reasons.
 
 # Contributing
 All issues and pull requests are much appreciated!
-- First, be sure to run `scripts/install-hooks`.
+- First, be sure to run `pre-commit install`.
 - To run all tests and use auto-formatting tools, check out `scripts/run-tests`.
 - To only run unit tests, run `pytest`.
