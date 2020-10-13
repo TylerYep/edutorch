@@ -4,5 +4,8 @@ python:
   - "3.8"
 install:
   - pip install -r requirements.txt
+  - pip install pytest-cov pytest codecov
 script:
-  - pytest
+  - pytest --cov=edutorch --cov-report= --durations=0
+after_success:
+  - codecov
