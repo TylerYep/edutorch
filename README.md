@@ -19,5 +19,5 @@ There is no CUDA or GPU support for EduTorch either, for the same reasons.
 # Contributing
 All issues and pull requests are much appreciated!
 - First, be sure to run `pre-commit install`.
-- To run all tests and use auto-formatting tools, check out `scripts/run-tests`.
+- To run all tests and use auto-formatting tools, use `pre-commit run`.
 - To only run unit tests, run `pytest`.
