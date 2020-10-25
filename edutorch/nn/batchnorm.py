@@ -105,7 +105,6 @@ class BatchNorm(Module):
         For this implementation you should work out the derivatives for the batch
         normalizaton backward pass on paper and simplify as much as possible. You
         should be able to derive a simple expression for the backward pass.
-        See the jupyter notebook for more hints.
 
         Note: This implementation should expect to receive the same cache variable
         as batchnorm_backward, but might not use all of the values in the cache.

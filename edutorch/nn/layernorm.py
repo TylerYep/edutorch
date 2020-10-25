@@ -45,9 +45,7 @@ class LayerNorm(Module):
         x_hat = (x - sample_mean) / v
         x_hat = x_hat.T
         out = self.gamma * x_hat + self.beta
-
         self.cache = (x_hat, v)
-
         return out
 
     def backward(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:

@@ -46,5 +46,4 @@ def temporal_softmax_loss(
     dx_flat *= mask_flat[:, None]
 
     dx = dx_flat.reshape(N, T, V)
-
     return loss, dx
