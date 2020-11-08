@@ -1,7 +1,7 @@
 import os
 import pprint
 
-IGNORED_FOLDERS = {""}
+IGNORED_FOLDERS = {"ml"}
 IGNORED_FILES = {""}
 SRC_FOLDER = "edutorch"
 TEST_FOLDER = "tests"
