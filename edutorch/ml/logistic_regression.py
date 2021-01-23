@@ -1,5 +1,4 @@
 # pylint: disable=abstract-method, not-callable
-import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -88,7 +87,7 @@ def optimize(
             )
 
 
-def make_tensor(data: np.array, is_input: bool) -> torch.Tensor:
+def make_tensor(data: torch.Tensor, is_input: bool) -> torch.Tensor:
     """
     Torch is very specific that the input and output have to be lists of matrices.
     Our current input/output is just a single value, so we are going to need

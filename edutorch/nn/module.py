@@ -14,7 +14,7 @@ class Module:
     def forward(self, x: np.ndarray) -> np.ndarray:
         raise NotImplementedError("Modules must implement the forward pass.")
 
-    def backward(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:
+    def backward(self, dout: np.ndarray) -> Any:
         raise NotImplementedError(
             "Modules must implement local backward pass to return parameter gradients."
         )

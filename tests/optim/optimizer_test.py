@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Dict, Tuple
 
 import numpy as np
 import pytest
@@ -20,7 +20,7 @@ class MissingGradients(Module):
         x = self.fc2(x)
         return x
 
-    def backward(self, dout: np.ndarray) -> np.ndarray:
+    def backward(self, dout: np.ndarray) -> Dict[str, np.ndarray]:
         dx2, _, _ = self.fc2.backward(dout)
         _, _, _ = self.fc1.backward(dx2)
         return {}
@@ -37,7 +37,7 @@ class MissingParameters(Module):
         x = self.fc2(x)
         return x
 
-    def backward(self, dout: np.ndarray) -> np.ndarray:
+    def backward(self, dout: np.ndarray) -> Dict[str, Dict[str, np.ndarray]]:
         grads = {}
         dx2, dw2, db2 = self.fc2.backward(dout)
         grads["fc2"] = {"w": dw2, "b": db2}
@@ -74,5 +74,11 @@ def test_missing_gradients(fashion_mnist: Tuple[np.ndarray, ...]) -> None:
     _, dx = softmax_loss(out, y_train)
     grads = model.backward(dx)
 
-    with pytest.raises(ValueError):
+    with pytest.raises(
+        ValueError,
+        match=(
+            "MissingGradients has no gradient for fc1. "
+            "Please ensure fc1 was assigned a gradient in model.backward()."
+        ),
+    ):
         optimizer.step(model, grads)

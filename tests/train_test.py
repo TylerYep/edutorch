@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Dict, Tuple
 
 import numpy as np
 
@@ -21,7 +21,7 @@ class Example(Module):
         x = self.fc2(x)
         return x
 
-    def backward(self, dout: np.ndarray) -> np.ndarray:
+    def backward(self, dout: np.ndarray) -> Dict[str, Dict[str, np.ndarray]]:
         grads = {}
         dx2, dw2, db2 = self.fc2.backward(dout)
         grads["fc2"] = {"w": dw2, "b": db2}
