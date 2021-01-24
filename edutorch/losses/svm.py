@@ -19,7 +19,7 @@ def svm_loss(x: np.ndarray, y: np.ndarray) -> Tuple[float, np.ndarray]:
     """
     N = x.shape[0]
     correct_class_scores = x[np.arange(N), y]
-    margins = np.maximum(0, x - correct_class_scores[:, np.newaxis] + 1.0)
+    margins = np.maximum(0, x - correct_class_scores[:, np.newaxis] + 1)
     margins[np.arange(N), y] = 0
     loss = np.sum(margins) / N
     num_pos = np.sum(margins > 0, axis=1)

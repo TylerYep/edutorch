@@ -91,7 +91,7 @@ class LinearClassifier(ABC):
         - gradient with respect to self.W; an array of the same shape as W
         """
         del X, y
-        return 0.0, np.zeros_like(self.W)
+        return 0, np.zeros_like(self.W)
 
     def regularize(
         self, loss: float, dW: np.ndarray, num_train: int

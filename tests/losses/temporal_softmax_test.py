@@ -11,8 +11,8 @@ def test_temporal_softmax_output() -> None:
         mask = np.random.rand(N, T) <= p
         return temporal_softmax_loss(x, y, mask)[0]
 
-    assert abs(check_loss(100, 1, 10, 1.0) - 2.3) < 5e-2
-    assert abs(check_loss(100, 10, 10, 1.0) - 23) < 5e-2
+    assert abs(check_loss(100, 1, 10, 1) - 2.3) < 5e-2
+    assert abs(check_loss(100, 10, 10, 1) - 23) < 5e-2
     assert abs(check_loss(5000, 10, 10, 0.1) - 2.3) < 5e-2
 
 

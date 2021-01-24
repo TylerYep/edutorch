@@ -153,7 +153,7 @@ class BatchNorm(Module):
             dxc = dxn / std
             dstd = -np.sum((dxn * xn) / std, axis=0)
             dvar = 0.5 * dstd / std
-            dxc += (2.0 / N) * (xn * std) * dvar
+            dxc += (2 / N) * (xn * std) * dvar
             dmu = np.sum(dxc, axis=0)
             dx = dxc - dmu / N
 

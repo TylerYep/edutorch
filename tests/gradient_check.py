@@ -155,7 +155,7 @@ def eval_numerical_gradient_blobs(
             neg = np.copy(output.vals)
             input_blob.vals[idx] = orig
 
-            diff[idx] = np.sum((pos - neg) * output.diffs) / (2.0 * h)
+            diff[idx] = np.sum((pos - neg) * output.diffs) / (2 * h)
 
             it.iternext()
         numeric_diffs.append(diff)

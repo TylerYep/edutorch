@@ -23,8 +23,8 @@ def test_batchnorm_forward_preset_gamma_beta() -> None:
     D = 3
     a = np.random.randn(200, D)
     model = BatchNorm(D)
-    model.gamma = np.asarray([1.0, 2.0, 3.0])
-    model.beta = np.asarray([11.0, 12.0, 13.0])
+    model.gamma = np.asarray([1, 2, 3])
+    model.beta = np.asarray([11, 12, 13])
 
     a_norm = model(a)
 
