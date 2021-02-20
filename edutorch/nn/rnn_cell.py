@@ -1,4 +1,4 @@
-from typing import Optional, Tuple
+from __future__ import annotations
 
 import numpy as np
 
@@ -14,7 +14,7 @@ class RNNCell(Module):
         self.Wx = Wx
         self.Wh = Wh
         self.b = b
-        self.next_h: Optional[np.ndarray] = None
+        self.next_h: np.ndarray | None = None
         self.set_parameters("prev_h", "Wx", "Wh", "b")
 
     def forward(self, x: np.ndarray) -> np.ndarray:
@@ -40,7 +40,7 @@ class RNNCell(Module):
         self.cache = (x,)
         return self.next_h
 
-    def backward(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:
+    def backward(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
         """
         Backward pass for a single timestep of a vanilla RNN.
 

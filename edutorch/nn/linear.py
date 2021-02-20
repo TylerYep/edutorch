@@ -1,4 +1,4 @@
-from typing import Tuple
+from __future__ import annotations
 
 import numpy as np
 
@@ -32,7 +32,7 @@ class Linear(Module):
         self.cache = (x,)
         return x.reshape(x.shape[0], -1).dot(self.w) + self.b
 
-    def backward(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:
+    def backward(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
         """
         Computes the backward pass for an affine layer.
 

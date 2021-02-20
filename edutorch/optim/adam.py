@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import Any, Tuple
+from typing import Any
 
 import numpy as np
 
@@ -23,10 +25,10 @@ class Adam(Optimizer):
 
     model: Module
     lr: float = 1e-3
-    betas: Tuple[float, float] = (0.9, 0.999)
+    betas: tuple[float, float] = (0.9, 0.999)
     eps: float = 1e-08
 
-    def init_context(self, w: np.ndarray) -> Tuple[Any, ...]:
+    def init_context(self, w: np.ndarray) -> tuple[Any, ...]:
         """ Initialize context using weights. """
         m = np.zeros_like(w)
         v = np.zeros_like(w)
@@ -34,7 +36,7 @@ class Adam(Optimizer):
         return m, v, t
 
     def update(
-        self, context: Tuple[Any, ...], w: np.ndarray, dw: np.ndarray
+        self, context: tuple[Any, ...], w: np.ndarray, dw: np.ndarray
     ) -> np.ndarray:
         """
         w must have the same shape as params.

@@ -1,4 +1,4 @@
-from typing import Tuple
+from __future__ import annotations
 
 import numpy as np
 
@@ -52,7 +52,7 @@ class RNN(Module):
             self.cache += (cell,)
         return h
 
-    def backward(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:
+    def backward(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
         """
         Compute the backward pass for a vanilla RNN over an entire sequence of data.
 

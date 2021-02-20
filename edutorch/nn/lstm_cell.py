@@ -1,4 +1,4 @@
-from typing import Optional, Tuple
+from __future__ import annotations
 
 import numpy as np
 
@@ -21,11 +21,11 @@ class LSTMCell(Module):
         self.Wx = Wx
         self.Wh = Wh
         self.b = b
-        self.next_h: Optional[np.ndarray] = None
-        self.next_c: Optional[np.ndarray] = None
+        self.next_h: np.ndarray | None = None
+        self.next_c: np.ndarray | None = None
         self.set_parameters("prev_h", "prev_c", "Wx", "Wh", "b")
 
-    def forward(self, x: np.ndarray) -> Tuple[np.ndarray, ...]:
+    def forward(self, x: np.ndarray) -> tuple[np.ndarray, ...]:
         """
         Forward pass for a single timestep of an LSTM.
 
@@ -61,7 +61,7 @@ class LSTMCell(Module):
 
         return self.next_h, self.next_c
 
-    def backward(self, dout: Tuple[np.ndarray, ...]) -> Tuple[np.ndarray, ...]:
+    def backward(self, dout: tuple[np.ndarray, ...]) -> tuple[np.ndarray, ...]:
         """
         Backward pass for a single timestep of an LSTM.
 

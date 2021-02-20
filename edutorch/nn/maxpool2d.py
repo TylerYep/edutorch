@@ -1,4 +1,4 @@
-from typing import Tuple
+from __future__ import annotations
 
 import numpy as np
 
@@ -7,7 +7,7 @@ from .module import Module
 
 class MaxPool2d(Module):
     def __init__(
-        self, kernel_size: Tuple[int, int], stride: int = 1, pad: int = 2
+        self, kernel_size: tuple[int, int], stride: int = 1, pad: int = 2
     ) -> None:
         super().__init__()
         self.kernel_size = kernel_size

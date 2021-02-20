@@ -1,9 +1,9 @@
-from typing import Tuple
+from __future__ import annotations
 
 import numpy as np
 
 
-def softmax_loss(x: np.ndarray, y: np.ndarray) -> Tuple[float, np.ndarray]:
+def softmax_loss(x: np.ndarray, y: np.ndarray) -> tuple[float, np.ndarray]:
     """
     Computes the loss and gradient for softmax classification.
 

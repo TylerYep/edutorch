@@ -1,12 +1,14 @@
-from typing import Any, Dict, Tuple
+from __future__ import annotations
+
+from typing import Any
 
 import numpy as np
 
 
 class Module:
     def __init__(self) -> None:
-        self.cache: Tuple[Any, ...] = ()
-        self._params: Dict[str, Dict[str, Any]] = {}
+        self.cache: tuple[Any, ...] = ()
+        self._params: dict[str, dict[str, Any]] = {}
 
     def __call__(self, x: np.ndarray) -> np.ndarray:
         return self.forward(x)
@@ -19,7 +21,7 @@ class Module:
             "Modules must implement local backward pass to return parameter gradients."
         )
 
-    def parameters(self) -> Dict[str, Dict[str, Any]]:
+    def parameters(self) -> dict[str, dict[str, Any]]:
         """
         This function returns the parameters of the model that need gradients,
         in the order that they are returned in backward().

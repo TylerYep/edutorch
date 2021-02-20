@@ -1,4 +1,4 @@
-from typing import Dict, Tuple
+from __future__ import annotations
 
 import numpy as np
 
@@ -21,7 +21,7 @@ class Example(Module):
         x = self.fc2(x)
         return x
 
-    def backward(self, dout: np.ndarray) -> Dict[str, Dict[str, np.ndarray]]:
+    def backward(self, dout: np.ndarray) -> dict[str, dict[str, np.ndarray]]:
         grads = {}
         dx2, dw2, db2 = self.fc2.backward(dout)
         grads["fc2"] = {"w": dw2, "b": db2}
@@ -31,7 +31,7 @@ class Example(Module):
         return grads
 
 
-def test_training(fashion_mnist: Tuple[np.ndarray, ...]) -> None:
+def test_training(fashion_mnist: tuple[np.ndarray, ...]) -> None:
     X_train, y_train, _, _ = fashion_mnist
 
     model = Example()

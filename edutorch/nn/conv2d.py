@@ -1,4 +1,4 @@
-from typing import Tuple
+from __future__ import annotations
 
 import numpy as np
 
@@ -10,7 +10,7 @@ class Conv2d(Module):
         self,
         in_channels: int,
         out_channels: int,
-        kernel_size: Tuple[int, int],
+        kernel_size: tuple[int, int],
         stride: int = 1,
         pad: int = 2,
     ) -> None:
@@ -72,7 +72,7 @@ class Conv2d(Module):
         self.cache = (x,)
         return out
 
-    def backward(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:
+    def backward(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
         """
         A naive implementation of the backward pass for a convolutional layer.
 

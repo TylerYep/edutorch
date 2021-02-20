@@ -1,4 +1,4 @@
-from typing import Tuple
+from __future__ import annotations
 
 import numpy as np
 
@@ -33,7 +33,7 @@ class TemporalLinear(Module):
         self.cache = (x,)
         return x.reshape(N * T, D).dot(self.w).reshape(N, T, M) + self.b
 
-    def backward(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:
+    def backward(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
         """
         Backward pass for temporal affine layer.
 

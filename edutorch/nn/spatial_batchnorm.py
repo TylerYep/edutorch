@@ -1,4 +1,4 @@
-from typing import Tuple
+from __future__ import annotations
 
 import numpy as np
 
@@ -34,7 +34,7 @@ class SpatialBatchNorm(BatchNorm):
         out = out_flat.reshape(N, H, W, C).transpose(0, 3, 1, 2)
         return out
 
-    def backward(self, dout: np.ndarray) -> Tuple[np.ndarray, ...]:
+    def backward(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
         """
         Computes the backward pass for spatial batch normalization.
 

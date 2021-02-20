@@ -1,4 +1,4 @@
-from typing import Tuple
+from __future__ import annotations
 
 import numpy as np
 import pytest
@@ -7,7 +7,7 @@ from edutorch.ml.knn import KNearestNeighbors
 
 
 @pytest.mark.skip(reason="Takes too long to run")
-def test_knn_compute_distance(fashion_mnist: Tuple[np.ndarray, ...]) -> None:
+def test_knn_compute_distance(fashion_mnist: tuple[np.ndarray, ...]) -> None:
     X_train, y_train, X_test, _ = fashion_mnist
 
     knn = KNearestNeighbors(X_train, y_train)

@@ -1,9 +1,9 @@
-from typing import Tuple
+from __future__ import annotations
 
 import numpy as np
 
 
-def svm_loss(x: np.ndarray, y: np.ndarray) -> Tuple[float, np.ndarray]:
+def svm_loss(x: np.ndarray, y: np.ndarray) -> tuple[float, np.ndarray]:
     """
     Computes the loss and gradient using for multiclass SVM classification.
 

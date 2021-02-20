@@ -1,4 +1,4 @@
-from typing import Tuple
+from __future__ import annotations
 
 import numpy as np
 
@@ -17,7 +17,7 @@ def softmax(f: np.ndarray) -> np.ndarray:
 class SoftmaxClassifier(LinearClassifier):
     """ A subclass that uses the Softmax + Cross-entropy loss function. """
 
-    def loss(self, X: np.ndarray, y: np.ndarray) -> Tuple[float, np.ndarray]:
+    def loss(self, X: np.ndarray, y: np.ndarray) -> tuple[float, np.ndarray]:
         """
         Softmax loss function, vectorized version.
         Inputs and outputs are the same as softmax_loss_naive.
@@ -37,7 +37,7 @@ class SoftmaxClassifier(LinearClassifier):
 
     def softmax_loss_naive(
         self, X: np.ndarray, y: np.ndarray
-    ) -> Tuple[float, np.ndarray]:
+    ) -> tuple[float, np.ndarray]:
         """
         Softmax loss function, naive implementation (with loops)
         Inputs have dimension D, there are C classes, and we operate on minibatches

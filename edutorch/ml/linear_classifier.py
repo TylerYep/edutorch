@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 from abc import ABC, abstractmethod
-from typing import Tuple
 
 import numpy as np
 
@@ -75,7 +76,7 @@ class LinearClassifier(ABC):
         return y_pred
 
     @abstractmethod
-    def loss(self, X: np.ndarray, y: np.ndarray) -> Tuple[float, np.ndarray]:
+    def loss(self, X: np.ndarray, y: np.ndarray) -> tuple[float, np.ndarray]:
         """
         Compute the loss function and its derivative.
         Subclasses will override this.
@@ -95,7 +96,7 @@ class LinearClassifier(ABC):
 
     def regularize(
         self, loss: float, dW: np.ndarray, num_train: int
-    ) -> Tuple[float, np.ndarray]:
+    ) -> tuple[float, np.ndarray]:
         """
         Right now, the loss is a sum over all training examples, but we want it
         to be an average instead so we divide by num_train.

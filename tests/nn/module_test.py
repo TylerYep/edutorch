@@ -1,4 +1,4 @@
-from typing import Dict
+from __future__ import annotations
 
 import numpy as np
 import pytest
@@ -18,7 +18,7 @@ class ExtraParameters(Module):
         x = self.fc2(x)
         return x
 
-    def backward(self, dout: np.ndarray) -> Dict[str, Dict[str, np.ndarray]]:
+    def backward(self, dout: np.ndarray) -> dict[str, dict[str, np.ndarray]]:
         grads = {}
         dx2, dw2, db2 = self.fc2.backward(dout)
         grads["fc2"] = {"w": dw2, "b": db2}

@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 import random
-from typing import Tuple
 
 import numpy as np
 import pytest
@@ -13,7 +14,7 @@ def _set_random_seed() -> None:
 
 
 @pytest.fixture(scope="session")
-def fashion_mnist(num_train: int = 100, num_test: int = 10) -> Tuple[np.ndarray, ...]:
+def fashion_mnist(num_train: int = 100, num_test: int = 10) -> tuple[np.ndarray, ...]:
     train_set = datasets.FashionMNIST("data/", train=True, download=True)
     test_set = datasets.FashionMNIST("data/", train=False, download=True)
 

@@ -1,4 +1,4 @@
-from typing import Dict, Tuple
+from __future__ import annotations
 
 import numpy as np
 import pytest
@@ -20,7 +20,7 @@ class MissingGradients(Module):
         x = self.fc2(x)
         return x
 
-    def backward(self, dout: np.ndarray) -> Dict[str, np.ndarray]:
+    def backward(self, dout: np.ndarray) -> dict[str, np.ndarray]:
         dx2, _, _ = self.fc2.backward(dout)
         _, _, _ = self.fc1.backward(dx2)
         return {}
@@ -37,7 +37,7 @@ class MissingParameters(Module):
         x = self.fc2(x)
         return x
 
-    def backward(self, dout: np.ndarray) -> Dict[str, Dict[str, np.ndarray]]:
+    def backward(self, dout: np.ndarray) -> dict[str, dict[str, np.ndarray]]:
         grads = {}
         dx2, dw2, db2 = self.fc2.backward(dout)
         grads["fc2"] = {"w": dw2, "b": db2}
@@ -46,7 +46,7 @@ class MissingParameters(Module):
         return grads
 
 
-def test_missing_params(fashion_mnist: Tuple[np.ndarray, ...]) -> None:
+def test_missing_params(fashion_mnist: tuple[np.ndarray, ...]) -> None:
     X_train, y_train, _, _ = fashion_mnist
 
     model = MissingParameters()
@@ -64,7 +64,7 @@ def test_missing_params(fashion_mnist: Tuple[np.ndarray, ...]) -> None:
     assert (model.fc2.w == save2).all()
 
 
-def test_missing_gradients(fashion_mnist: Tuple[np.ndarray, ...]) -> None:
+def test_missing_gradients(fashion_mnist: tuple[np.ndarray, ...]) -> None:
     X_train, y_train, _, _ = fashion_mnist
 
     model = MissingGradients()

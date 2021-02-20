@@ -1,4 +1,6 @@
-from typing import Callable, Dict, List
+from __future__ import annotations
+
+from typing import Callable
 
 import numpy as np
 
@@ -43,15 +45,15 @@ def estimate_gradients(
     dnext_h: np.ndarray,
     dnext_c: np.ndarray,
     x: np.ndarray,
-    kwparams: Dict[str, np.ndarray],
-) -> List[np.ndarray]:
+    kwparams: dict[str, np.ndarray],
+) -> list[np.ndarray]:
     """
     Gets the gradient estimate for all parameters of the model. Overrides each
     parameter of the model using the values in kwparams.
     """
 
     def grad_fn(
-        model: Module, x: np.ndarray, h_or_c: str, **kwargs: Dict[str, np.ndarray]
+        model: Module, x: np.ndarray, h_or_c: str, **kwargs: dict[str, np.ndarray]
     ) -> Callable[[np.ndarray], np.ndarray]:
         """
         Returns a grad function that takes in an input z and sets all attributes

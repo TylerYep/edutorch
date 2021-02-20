@@ -5,6 +5,7 @@ python:
   - "3.9"
 install:
   - pip install -r requirements.txt
+  - pip install --upgrade pytest
   - pip install pytest-cov codecov
 script:
   - pytest --cov=edutorch --cov-report= --durations=0

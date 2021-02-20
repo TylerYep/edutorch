@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 import random
-from typing import Callable, Dict, List
+from typing import Callable
 
 import numpy as np
 
@@ -12,15 +14,15 @@ def rel_error(x: np.ndarray, y: np.ndarray) -> np.ndarray:
 
 
 def estimate_gradients(
-    model: Module, dout: np.ndarray, x: np.ndarray, kwparams: Dict[str, np.ndarray]
-) -> List[np.ndarray]:
+    model: Module, dout: np.ndarray, x: np.ndarray, kwparams: dict[str, np.ndarray]
+) -> list[np.ndarray]:
     """
     Gets the gradient estimate for all parameters of the model. Overrides each
     parameter of the model using the values in kwparams.
     """
 
     def grad_fn(
-        model: Module, x: np.ndarray, **kwargs: Dict[str, np.ndarray]
+        model: Module, x: np.ndarray, **kwargs: dict[str, np.ndarray]
     ) -> Callable[[np.ndarray], np.ndarray]:
         """
         Returns a grad function that takes in an input z and sets all attributes
@@ -121,7 +123,7 @@ def eval_numerical_gradient_blobs(
     inputs: np.ndarray,
     output: np.ndarray,
     h: float = 1e-5,
-) -> List[np.ndarray]:
+) -> list[np.ndarray]:
     """
     Compute numeric gradients for a function that operates on input
     and output blobs.

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import Any, Dict, Tuple
+from typing import Any
 
 import numpy as np
 
@@ -13,7 +15,7 @@ class Optimizer:
     def __post_init__(self) -> None:
         self.context = self.set_context(self.model.parameters())
 
-    def set_context(self, context: Dict[str, Any]) -> Dict[str, Any]:
+    def set_context(self, context: dict[str, Any]) -> dict[str, Any]:
         """
         Traverses down the model.parameters() tree and initializes all leaf
         nodes using the overridden init_context function.
@@ -26,19 +28,19 @@ class Optimizer:
             )
         return context
 
-    def init_context(self, w: np.ndarray) -> Tuple[Any, ...]:
+    def init_context(self, w: np.ndarray) -> tuple[Any, ...]:
         """ This function initializes any context variables, running averages, etc. """
         raise NotImplementedError
 
     def update(
-        self, context: Tuple[Any, ...], w: np.ndarray, dw: np.ndarray
+        self, context: tuple[Any, ...], w: np.ndarray, dw: np.ndarray
     ) -> np.ndarray:
         """
         This function updates a single weight using the context and values of w and dw.
         """
         raise NotImplementedError
 
-    def step(self, model: Module, gradients: Dict[str, np.ndarray]) -> None:
+    def step(self, model: Module, gradients: dict[str, np.ndarray]) -> None:
         """
         Model parameters and gradients should be matching dictionaries.
         Traverse both dictionaries simultaneously - on each branch,
@@ -49,7 +51,7 @@ class Optimizer:
         """
 
         def _step(
-            model: Module, gradients: Dict[str, np.ndarray], context: Dict[str, Any]
+            model: Module, gradients: dict[str, np.ndarray], context: dict[str, Any]
         ) -> None:
             for param_name, param in model.parameters().items():
                 step_context = context[param_name]

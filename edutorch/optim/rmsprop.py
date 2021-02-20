@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import Any, Tuple
+from typing import Any
 
 import numpy as np
 
@@ -26,13 +28,13 @@ class RMSProp(Optimizer):
     decay_rate: float = 0.99
     eps: float = 1e-8
 
-    def init_context(self, w: np.ndarray) -> Tuple[Any, ...]:
+    def init_context(self, w: np.ndarray) -> tuple[Any, ...]:
         """ Initialize context using weights. """
         v = np.zeros_like(w)
         return (v,)
 
     def update(
-        self, context: Tuple[Any, ...], w: np.ndarray, dw: np.ndarray
+        self, context: tuple[Any, ...], w: np.ndarray, dw: np.ndarray
     ) -> np.ndarray:
         (v,) = context
 
