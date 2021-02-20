@@ -1,4 +1,4 @@
-from typing import Optional
+from __future__ import annotations
 
 import numpy as np
 
@@ -7,7 +7,7 @@ from .module import Module
 
 class Dropout(Module):
     def __init__(
-        self, p: float, train_mode: bool = True, seed: Optional[int] = None
+        self, p: float, train_mode: bool = True, seed: int | None = None
     ) -> None:
         super().__init__()
         self.p = p
