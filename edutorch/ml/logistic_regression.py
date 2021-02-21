@@ -1,4 +1,3 @@
-# pylint: disable=abstract-method, not-callable
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -47,7 +46,6 @@ def optimize(
     # At the beginning, default minimum loss to infinity
     min_loss = float("inf")
     counter = 0
-
     while counter < max_iters:
         # Wipe any existing gradients from previous iterations!
         # (don't forget to do this for your own code!)
@@ -94,4 +92,5 @@ def make_tensor(data: torch.Tensor, is_input: bool) -> torch.Tensor:
     to make it a n x 1 "tensor".
     """
     dim = 0 if is_input else 1
+    # pylint: disable=not-callable
     return torch.tensor(data[:, dim]).unsqueeze(1).float()  # type: ignore
