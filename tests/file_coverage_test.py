@@ -17,7 +17,7 @@ def test_file_coverage() -> None:
             and not set(filepath.parts) & IGNORED_FOLDERS
         ):
             partner = TEST_FOLDER / filepath.relative_to(SRC_FOLDER)
-            partner = partner.with_stem(f"{partner.stem}_test")
+            partner = partner.with_name(f"{partner.stem}_test.py")
             if not partner.is_file():
                 untested_files.append((str(filepath), str(partner)))
     assert not untested_files, pprint.pformat(untested_files)
