@@ -1,26 +1,23 @@
-import os
 import pprint
+from pathlib import Path
 
-IGNORED_FOLDERS = {"ml"}
-IGNORED_FILES = {""}
-SRC_FOLDER = "edutorch"
-TEST_FOLDER = "tests"
+IGNORED_FOLDERS = {"__pycache__", "ml"}
+IGNORED_FILES = {"__init__.py"}
+SRC_FOLDER = Path("edutorch")
+TEST_FOLDER = Path("tests")
 
 
 def test_file_coverage() -> None:
     untested_files = []
-    if not os.path.isdir(SRC_FOLDER) or not os.path.isdir(SRC_FOLDER):
+    if not SRC_FOLDER.is_dir() or not TEST_FOLDER.is_dir():
         raise RuntimeError(f"{SRC_FOLDER} and/or {TEST_FOLDER} does not exist.")
-    for root, _, files in os.walk(SRC_FOLDER):
-        if set(os.path.normpath(root).split(os.sep)) & IGNORED_FOLDERS:
-            continue
-        new_root = root.replace(SRC_FOLDER, TEST_FOLDER)
-        for filename in files:
-            if filename in IGNORED_FILES:
-                continue
-            basename, ext = os.path.splitext(filename)
-            if ext == ".py" and "__" not in filename:
-                partner = os.path.join(new_root, basename + "_test.py")
-                if not os.path.isfile(partner):
-                    untested_files.append((os.path.join(root, filename), partner))
+    for filepath in SRC_FOLDER.rglob("*.py"):
+        if (
+            filepath.name not in IGNORED_FILES
+            and not set(filepath.parts) & IGNORED_FOLDERS
+        ):
+            partner = TEST_FOLDER / filepath.relative_to(SRC_FOLDER)
+            partner = partner.with_stem(f"{partner.stem}_test")
+            if not partner.is_file():
+                untested_files.append((str(filepath), str(partner)))
     assert not untested_files, pprint.pformat(untested_files)
