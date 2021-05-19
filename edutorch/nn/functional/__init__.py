@@ -10,7 +10,7 @@ import numpy as np
 
 
 def softmax(f: np.ndarray) -> np.ndarray:
-    """ Numerically stable implementation of softmax. """
+    """Numerically stable implementation of softmax."""
     f -= np.max(f)
     exp_f = np.exp(f)
     if len(f.shape) == 1:
@@ -19,7 +19,7 @@ def softmax(f: np.ndarray) -> np.ndarray:
 
 
 def sigmoid(x: np.ndarray) -> np.ndarray:
-    """ A numerically stable version of the logistic sigmoid function. """
+    """A numerically stable version of the logistic sigmoid function."""
     pos_mask = x >= 0
     neg_mask = x < 0
     z = np.zeros_like(x)

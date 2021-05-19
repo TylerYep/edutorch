@@ -6,7 +6,7 @@ from .linear_classifier import LinearClassifier
 
 
 def softmax(f: np.ndarray) -> np.ndarray:
-    """ Numerically stable implementation of softmax. """
+    """Numerically stable implementation of softmax."""
     f -= np.max(f)
     exp_f = np.exp(f)
     if len(f.shape) == 1:
@@ -15,7 +15,7 @@ def softmax(f: np.ndarray) -> np.ndarray:
 
 
 class SoftmaxClassifier(LinearClassifier):
-    """ A subclass that uses the Softmax + Cross-entropy loss function. """
+    """A subclass that uses the Softmax + Cross-entropy loss function."""
 
     def loss(self, X: np.ndarray, y: np.ndarray) -> tuple[float, np.ndarray]:
         """

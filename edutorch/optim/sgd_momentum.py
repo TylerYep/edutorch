@@ -27,7 +27,7 @@ class SGDMomentum(Optimizer):
     momentum: float = 0.9
 
     def init_context(self, w: np.ndarray) -> tuple[Any, ...]:
-        """ Initialize context using weights. """
+        """Initialize context using weights."""
         b = self.momentum
         v = np.zeros_like(w)
         return b, v

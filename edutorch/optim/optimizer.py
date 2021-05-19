@@ -29,7 +29,7 @@ class Optimizer:
         return context
 
     def init_context(self, w: np.ndarray) -> tuple[Any, ...]:
-        """ This function initializes any context variables, running averages, etc. """
+        """This function initializes any context variables, running averages, etc."""
         raise NotImplementedError
 
     def update(

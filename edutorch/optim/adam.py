@@ -29,7 +29,7 @@ class Adam(Optimizer):
     eps: float = 1e-08
 
     def init_context(self, w: np.ndarray) -> tuple[Any, ...]:
-        """ Initialize context using weights. """
+        """Initialize context using weights."""
         m = np.zeros_like(w)
         v = np.zeros_like(w)
         t = 0

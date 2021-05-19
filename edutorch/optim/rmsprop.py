@@ -29,7 +29,7 @@ class RMSProp(Optimizer):
     eps: float = 1e-8
 
     def init_context(self, w: np.ndarray) -> tuple[Any, ...]:
-        """ Initialize context using weights. """
+        """Initialize context using weights."""
         v = np.zeros_like(w)
         return (v,)
 

@@ -5,7 +5,7 @@ from torch.optim import Adam
 
 
 class LogisticRegression(nn.Module):  # type: ignore
-    """ Think of this as Sigmoidal Classification! """
+    """Think of this as Sigmoidal Classification!"""
 
     def __init__(self) -> None:
         super().__init__()

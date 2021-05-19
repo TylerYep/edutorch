@@ -2,7 +2,7 @@ import numpy as np
 
 
 class KNearestNeighbors:
-    """ A k-NN classifier with L2 distance """
+    """A k-NN classifier with L2 distance"""
 
     def __init__(self, X_train: np.ndarray, y_train: np.ndarray, k: int = 3) -> None:
         """

@@ -61,7 +61,7 @@ def estimate_gradients(
         """
 
         def dx_or_other_fn(z: np.ndarray) -> np.ndarray:
-            """ Function used as input to eval_numerical_gradient. """
+            """Function used as input to eval_numerical_gradient."""
             for key, val in kwargs.items():
                 setattr(model, key, z if val is None else val)
             return model(z if x is None else x)[0 if h_or_c == "h" else 1]

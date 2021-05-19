@@ -6,7 +6,7 @@ from .linear_classifier import LinearClassifier
 
 
 class SVMClassifier(LinearClassifier):
-    """ A subclass that uses the Multiclass SVM loss function """
+    """A subclass that uses the Multiclass SVM loss function"""
 
     def loss(self, X: np.ndarray, y: np.ndarray) -> tuple[float, np.ndarray]:
         """

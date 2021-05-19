@@ -19,7 +19,7 @@ class SGD(Optimizer):
     lr: float = 1e-2
 
     def init_context(self, w: np.ndarray) -> tuple[Any, ...]:
-        """ Initialize context using weights. """
+        """Initialize context using weights."""
         del w
         return ()
 

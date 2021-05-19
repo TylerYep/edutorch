@@ -9,7 +9,7 @@ from edutorch.nn import Module
 
 
 def rel_error(x: np.ndarray, y: np.ndarray) -> np.ndarray:
-    """ Returns relative error """
+    """Returns relative error"""
     return np.max(np.abs(x - y) / (np.maximum(1e-8, np.abs(x) + np.abs(y))))
 
 
@@ -30,7 +30,7 @@ def estimate_gradients(
         """
 
         def dx_or_other_fn(z: np.ndarray) -> np.ndarray:
-            """ Function used as input to eval_numerical_gradient. """
+            """Function used as input to eval_numerical_gradient."""
             for key, val in kwargs.items():
                 setattr(model, key, z if val is None else val)
             return model(z if x is None else x)

@@ -6,7 +6,7 @@ import numpy as np
 
 
 class LinearClassifier(ABC):
-    """ A simple linear classifier abstract class. """
+    """A simple linear classifier abstract class."""
 
     def __init__(
         self,
