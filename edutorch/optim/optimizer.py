@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, cast
+from typing import Any
 
 import numpy as np
 
@@ -65,7 +65,7 @@ class Optimizer:
                 # On a branch, recurse on that branch
                 if isinstance(param, dict):
                     submodel = getattr(model, param_name)
-                    subgradients = cast(dict[str, np.ndarray], gradients[param_name])
+                    subgradients: dict[str, np.ndarray] = gradients[param_name]
                     _step(submodel, subgradients, step_context)
 
                 # On a leaf, update the weight in that leaf
