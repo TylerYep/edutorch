@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, cast
 
 import numpy as np
 
@@ -34,13 +34,13 @@ class Optimizer:
 
     def update(
         self, context: tuple[Any, ...], w: np.ndarray, dw: np.ndarray
-    ) -> np.ndarray:
+    ) -> tuple[np.ndarray, tuple[np.ndarray, ...]]:
         """
         This function updates a single weight using the context and values of w and dw.
         """
         raise NotImplementedError
 
-    def step(self, model: Module, gradients: dict[str, np.ndarray]) -> None:
+    def step(self, model: Module, gradients: dict[str, Any]) -> None:
         """
         Model parameters and gradients should be matching dictionaries.
         Traverse both dictionaries simultaneously - on each branch,
@@ -51,7 +51,7 @@ class Optimizer:
         """
 
         def _step(
-            model: Module, gradients: dict[str, np.ndarray], context: dict[str, Any]
+            model: Module, gradients: dict[str, Any], context: dict[str, Any]
         ) -> None:
             for param_name, param in model.parameters().items():
                 step_context = context[param_name]
@@ -65,7 +65,8 @@ class Optimizer:
                 # On a branch, recurse on that branch
                 if isinstance(param, dict):
                     submodel = getattr(model, param_name)
-                    _step(submodel, gradients[param_name], step_context)
+                    subgradients = cast(dict[str, np.ndarray], gradients[param_name])
+                    _step(submodel, subgradients, step_context)
 
                 # On a leaf, update the weight in that leaf
                 else:

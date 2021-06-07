@@ -35,7 +35,7 @@ class RMSProp(Optimizer):
 
     def update(
         self, context: tuple[Any, ...], w: np.ndarray, dw: np.ndarray
-    ) -> np.ndarray:
+    ) -> tuple[np.ndarray, tuple[np.ndarray, ...]]:
         (v,) = context
 
         v = self.decay_rate * v + (1 - self.decay_rate) * dw ** 2

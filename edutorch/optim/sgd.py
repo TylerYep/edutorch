@@ -25,9 +25,9 @@ class SGD(Optimizer):
 
     def update(
         self, context: tuple[Any, ...], w: np.ndarray, dw: np.ndarray
-    ) -> np.ndarray:
+    ) -> tuple[np.ndarray, tuple[np.ndarray, ...]]:
         del context
 
         w -= self.lr * dw
 
-        return w
+        return w, ()

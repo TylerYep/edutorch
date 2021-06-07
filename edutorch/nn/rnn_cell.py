@@ -14,7 +14,7 @@ class RNNCell(Module):
         self.Wx = Wx
         self.Wh = Wh
         self.b = b
-        self.next_h: np.ndarray | None = None
+        self.next_h: np.ndarray
         self.set_parameters("prev_h", "Wx", "Wh", "b")
 
     def forward(self, x: np.ndarray) -> np.ndarray:

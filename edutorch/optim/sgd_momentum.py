@@ -34,7 +34,7 @@ class SGDMomentum(Optimizer):
 
     def update(
         self, context: tuple[Any, ...], w: np.ndarray, dw: np.ndarray
-    ) -> np.ndarray:
+    ) -> tuple[np.ndarray, tuple[np.ndarray, ...]]:
         (b, v) = context
 
         v = b * v - self.lr * dw

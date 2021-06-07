@@ -53,7 +53,7 @@ def estimate_gradients(
     """
 
     def grad_fn(
-        model: Module, x: np.ndarray, h_or_c: str, **kwargs: dict[str, np.ndarray]
+        model: Module, x: np.ndarray | None, h_or_c: str, **kwargs: np.ndarray | None
     ) -> Callable[[np.ndarray], np.ndarray]:
         """
         Returns a grad function that takes in an input z and sets all attributes
@@ -77,7 +77,7 @@ def estimate_gradients(
     ]
     for name, param in kwparams.items():
         # Shallow copy works here because we replace the target element with None.
-        new_kwargs = dict(kwparams)
+        new_kwargs: dict[str, np.ndarray | None] = dict(kwparams)
         new_kwargs[name] = None
         approx_derivatives.append(
             eval_numerical_gradient_array(

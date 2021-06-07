@@ -32,7 +32,7 @@ def test_maxpool2d_backward() -> None:
     dout = np.random.randn(3, 2, 2, 2)
 
     model = MaxPool2d(kernel_size=(2, 2), stride=2)
-    dx_num = estimate_gradients(model, dout, x, {})
+    (dx_num,) = estimate_gradients(model, dout, x, {})
 
     _ = model(x)
     dx = model.backward(dout)

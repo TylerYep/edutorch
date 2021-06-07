@@ -21,8 +21,8 @@ class LSTMCell(Module):
         self.Wx = Wx
         self.Wh = Wh
         self.b = b
-        self.next_h: np.ndarray | None = None
-        self.next_c: np.ndarray | None = None
+        self.next_h: np.ndarray
+        self.next_c: np.ndarray
         self.set_parameters("prev_h", "prev_c", "Wx", "Wh", "b")
 
     def forward(self, x: np.ndarray) -> tuple[np.ndarray, ...]:

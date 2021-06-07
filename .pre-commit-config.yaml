@@ -25,12 +25,12 @@ repos:
         language: python
         types: [python]
 
-      # - id: mypy
-      #   name: mypy
-      #   entry: mypy
-      #   language: python
-      #   types: [python]
-      #   require_serial: true
+      - id: mypy
+        name: mypy
+        entry: mypy
+        language: python
+        types: [python]
+        require_serial: true
 
       - id: pylint
         name: pylint

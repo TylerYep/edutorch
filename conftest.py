@@ -4,7 +4,7 @@ import random
 
 import numpy as np
 import pytest
-from torchvision import datasets
+from torchvision import datasets  # type: ignore[import]
 
 
 @pytest.fixture(autouse=True)

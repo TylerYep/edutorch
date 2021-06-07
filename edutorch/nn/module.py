@@ -13,10 +13,10 @@ class Module:
     def __call__(self, x: np.ndarray) -> np.ndarray:
         return self.forward(x)
 
-    def forward(self, x: np.ndarray) -> np.ndarray:
+    def forward(self, x: np.ndarray) -> Any:
         raise NotImplementedError("Modules must implement the forward pass.")
 
-    def backward(self, dout: np.ndarray) -> Any:
+    def backward(self, dout: Any) -> Any:
         raise NotImplementedError(
             "Modules must implement local backward pass to return parameter gradients."
         )

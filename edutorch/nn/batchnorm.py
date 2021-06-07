@@ -126,7 +126,7 @@ class BatchNorm(Module):
 
         return dx, dgamma, dbeta
 
-    def backward_naive(self, dout: np.ndarray) -> np.ndarray:
+    def backward_naive(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
         """
         Backward pass for batch normalization.
 

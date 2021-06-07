@@ -25,7 +25,7 @@ def test_relu_backward() -> None:
     dout = np.random.randn(*x.shape)
 
     model = ReLU()
-    dx_num = estimate_gradients(model, dout, x, {})
+    (dx_num,) = estimate_gradients(model, dout, x, {})
 
     _ = model(x)
     dx = model.backward(dout)

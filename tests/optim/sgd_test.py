@@ -12,7 +12,7 @@ def test_sgd() -> None:
     model = Linear(N, D)
     optimizer = SGD(model, lr=1e-2)
 
-    next_w = optimizer.update(optimizer.context["w"], w, dw)
+    next_w, _ = optimizer.update(optimizer.context["w"], w, dw)
     expected_next_w = np.asarray(
         [
             [-0.394, -0.34189474, -0.28978947, -0.23768421, -0.18557895],

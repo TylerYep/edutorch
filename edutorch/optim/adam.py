@@ -37,7 +37,7 @@ class Adam(Optimizer):
 
     def update(
         self, context: tuple[Any, ...], w: np.ndarray, dw: np.ndarray
-    ) -> np.ndarray:
+    ) -> tuple[np.ndarray, tuple[np.ndarray, ...]]:
         """
         w must have the same shape as params.
 

@@ -33,6 +33,6 @@ def test_dropout_backward() -> None:
 
     _ = model(x)
     dx = model.backward(dout)
-    dx_num = estimate_gradients(model, dout, x, {})
+    (dx_num,) = estimate_gradients(model, dout, x, {})
 
     assert np.allclose(dx, dx_num)
