@@ -8,8 +8,10 @@ layers/ or losses/ instead.
 """
 import numpy as np
 
+from edutorch.typing import NPArray
 
-def softmax(f: np.ndarray) -> np.ndarray:
+
+def softmax(f: NPArray) -> NPArray:
     """Numerically stable implementation of softmax."""
     f -= np.max(f)
     exp_f = np.exp(f)
@@ -18,7 +20,7 @@ def softmax(f: np.ndarray) -> np.ndarray:
     return exp_f / np.sum(exp_f, axis=1).reshape(-1, 1)
 
 
-def sigmoid(x: np.ndarray) -> np.ndarray:
+def sigmoid(x: NPArray) -> NPArray:
     """A numerically stable version of the logistic sigmoid function."""
     pos_mask = x >= 0
     neg_mask = x < 0

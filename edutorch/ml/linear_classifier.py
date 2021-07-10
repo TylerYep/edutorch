@@ -4,16 +4,14 @@ from abc import ABC, abstractmethod
 
 import numpy as np
 
+from edutorch.typing import NPArray
+
 
 class LinearClassifier(ABC):
     """A simple linear classifier abstract class."""
 
     def __init__(
-        self,
-        X: np.ndarray,
-        y: np.ndarray,
-        learning_rate: float = 1e-3,
-        reg: float = 1e-5,
+        self, X: NPArray, y: NPArray, learning_rate: float = 1e-3, reg: float = 1e-5
     ) -> None:
         """
         Train this linear classifier using stochastic gradient descent.
@@ -58,7 +56,7 @@ class LinearClassifier(ABC):
             if it % 100 == 0:
                 print("iteration %d / %d: loss %f" % (it, num_iters, loss))
 
-    def predict(self, X: np.ndarray) -> np.ndarray:
+    def predict(self, X: NPArray) -> NPArray:
         """
         Use the trained weights of this linear classifier to predict labels for
         data points.
@@ -76,7 +74,7 @@ class LinearClassifier(ABC):
         return y_pred
 
     @abstractmethod
-    def loss(self, X: np.ndarray, y: np.ndarray) -> tuple[float, np.ndarray]:
+    def loss(self, X: NPArray, y: NPArray) -> tuple[float, NPArray]:
         """
         Compute the loss function and its derivative.
         Subclasses will override this.
@@ -95,8 +93,8 @@ class LinearClassifier(ABC):
         return 0, np.zeros_like(self.W)
 
     def regularize(
-        self, loss: float, dW: np.ndarray, num_train: int
-    ) -> tuple[float, np.ndarray]:
+        self, loss: float, dW: NPArray, num_train: int
+    ) -> tuple[float, NPArray]:
         """
         Right now, the loss is a sum over all training examples, but we want it
         to be an average instead so we divide by num_train.

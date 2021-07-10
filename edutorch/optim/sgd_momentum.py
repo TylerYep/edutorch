@@ -5,6 +5,8 @@ from typing import Any
 
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from ..nn.module import Module
 from .optimizer import Optimizer
 
@@ -26,15 +28,15 @@ class SGDMomentum(Optimizer):
     lr: float = 1e-2
     momentum: float = 0.9
 
-    def init_context(self, w: np.ndarray) -> tuple[Any, ...]:
+    def init_context(self, w: NPArray) -> tuple[Any, ...]:
         """Initialize context using weights."""
         b = self.momentum
         v = np.zeros_like(w)
         return b, v
 
     def update(
-        self, context: tuple[Any, ...], w: np.ndarray, dw: np.ndarray
-    ) -> tuple[np.ndarray, tuple[np.ndarray, ...]]:
+        self, context: tuple[Any, ...], w: NPArray, dw: NPArray
+    ) -> tuple[NPArray, tuple[NPArray, ...]]:
         (b, v) = context
 
         v = b * v - self.lr * dw

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from .module import Module
 
 
@@ -12,7 +14,7 @@ class Linear(Module):
         self.b = np.zeros(output_dim)
         self.set_parameters("w", "b")
 
-    def forward(self, x: np.ndarray) -> np.ndarray:
+    def forward(self, x: NPArray) -> NPArray:
         """
         Computes the forward pass for an affine (fully-connected) layer.
 
@@ -32,7 +34,7 @@ class Linear(Module):
         self.cache = (x,)
         return x.reshape(x.shape[0], -1).dot(self.w) + self.b
 
-    def backward(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
+    def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         Computes the backward pass for an affine layer.
 

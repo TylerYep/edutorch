@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from .linear_classifier import LinearClassifier
 
 
-def softmax(f: np.ndarray) -> np.ndarray:
+def softmax(f: NPArray) -> NPArray:
     """Numerically stable implementation of softmax."""
     f -= np.max(f)
     exp_f = np.exp(f)
@@ -17,7 +19,7 @@ def softmax(f: np.ndarray) -> np.ndarray:
 class SoftmaxClassifier(LinearClassifier):
     """A subclass that uses the Softmax + Cross-entropy loss function."""
 
-    def loss(self, X: np.ndarray, y: np.ndarray) -> tuple[float, np.ndarray]:
+    def loss(self, X: NPArray, y: NPArray) -> tuple[float, NPArray]:
         """
         Softmax loss function, vectorized version.
         Inputs and outputs are the same as softmax_loss_naive.
@@ -35,9 +37,7 @@ class SoftmaxClassifier(LinearClassifier):
 
         return loss, dW
 
-    def softmax_loss_naive(
-        self, X: np.ndarray, y: np.ndarray
-    ) -> tuple[float, np.ndarray]:
+    def softmax_loss_naive(self, X: NPArray, y: NPArray) -> tuple[float, NPArray]:
         """
         Softmax loss function, naive implementation (with loops)
         Inputs have dimension D, there are C classes, and we operate on minibatches

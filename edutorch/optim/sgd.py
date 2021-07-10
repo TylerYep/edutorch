@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-import numpy as np
+from edutorch.typing import NPArray
 
 from ..nn.module import Module
 from .optimizer import Optimizer
@@ -18,14 +18,14 @@ class SGD(Optimizer):
     model: Module
     lr: float = 1e-2
 
-    def init_context(self, w: np.ndarray) -> tuple[Any, ...]:
+    def init_context(self, w: NPArray) -> tuple[Any, ...]:
         """Initialize context using weights."""
         del w
         return ()
 
     def update(
-        self, context: tuple[Any, ...], w: np.ndarray, dw: np.ndarray
-    ) -> tuple[np.ndarray, tuple[np.ndarray, ...]]:
+        self, context: tuple[Any, ...], w: NPArray, dw: NPArray
+    ) -> tuple[NPArray, tuple[NPArray, ...]]:
         del context
 
         w -= self.lr * dw

@@ -1,10 +1,12 @@
 import numpy as np
 
+from edutorch.typing import NPArray
+
 
 class KNearestNeighbors:
     """A k-NN classifier with L2 distance"""
 
-    def __init__(self, X_train: np.ndarray, y_train: np.ndarray, k: int = 3) -> None:
+    def __init__(self, X_train: NPArray, y_train: NPArray, k: int = 3) -> None:
         """
         Train the classifier. For k-nearest neighbors this is just
         memorizing the training data.
@@ -21,7 +23,7 @@ class KNearestNeighbors:
         self.X_train = X_train
         self.y_train = y_train
 
-    def predict(self, X: np.ndarray) -> np.ndarray:
+    def predict(self, X: NPArray) -> NPArray:
         """
         Predict labels for test data using this classifier.
 
@@ -36,7 +38,7 @@ class KNearestNeighbors:
         dists = self.compute_distances(X)
         return self.predict_labels(dists)
 
-    def compute_distances(self, X: np.ndarray, num_loops: int = 0) -> np.ndarray:
+    def compute_distances(self, X: NPArray, num_loops: int = 0) -> NPArray:
         """
         Compute the distance between each test point in X and each training point
         in self.X_train using no explicit loops.
@@ -71,7 +73,7 @@ class KNearestNeighbors:
 
         return dists
 
-    def predict_labels(self, dists: np.ndarray) -> np.ndarray:
+    def predict_labels(self, dists: NPArray) -> NPArray:
         """
         Given a matrix of distances between test points and training points,
         predict a label for each test point.

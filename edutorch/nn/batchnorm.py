@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from .module import Module
 
 
@@ -24,7 +26,7 @@ class BatchNorm(Module):
         self.beta = np.zeros(num_features)
         self.set_parameters("running_mean", "running_var", "gamma", "beta")
 
-    def forward(self, x: np.ndarray) -> np.ndarray:
+    def forward(self, x: NPArray) -> NPArray:
         """
         Forward pass for batch normalization.
         Uses minibatch statistics to compute the mean and variance, use
@@ -98,7 +100,7 @@ class BatchNorm(Module):
 
         return out
 
-    def backward(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
+    def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         Alternative backward pass for batch normalization.
 
@@ -126,7 +128,7 @@ class BatchNorm(Module):
 
         return dx, dgamma, dbeta
 
-    def backward_naive(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
+    def backward_naive(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         Backward pass for batch normalization.
 

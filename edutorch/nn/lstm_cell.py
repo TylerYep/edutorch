@@ -2,18 +2,15 @@ from __future__ import annotations
 
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from .functional import sigmoid
 from .module import Module
 
 
 class LSTMCell(Module):
     def __init__(
-        self,
-        prev_h: np.ndarray,
-        prev_c: np.ndarray,
-        Wx: np.ndarray,
-        Wh: np.ndarray,
-        b: np.ndarray,
+        self, prev_h: NPArray, prev_c: NPArray, Wx: NPArray, Wh: NPArray, b: NPArray
     ) -> None:
         super().__init__()
         self.prev_h = prev_h
@@ -21,11 +18,11 @@ class LSTMCell(Module):
         self.Wx = Wx
         self.Wh = Wh
         self.b = b
-        self.next_h: np.ndarray
-        self.next_c: np.ndarray
+        self.next_h: NPArray
+        self.next_c: NPArray
         self.set_parameters("prev_h", "prev_c", "Wx", "Wh", "b")
 
-    def forward(self, x: np.ndarray) -> tuple[np.ndarray, ...]:
+    def forward(self, x: NPArray) -> tuple[NPArray, ...]:
         """
         Forward pass for a single timestep of an LSTM.
 
@@ -61,7 +58,7 @@ class LSTMCell(Module):
 
         return self.next_h, self.next_c
 
-    def backward(self, dout: tuple[np.ndarray, ...]) -> tuple[np.ndarray, ...]:
+    def backward(self, dout: tuple[NPArray, ...]) -> tuple[NPArray, ...]:
         """
         Backward pass for a single timestep of an LSTM.
 
@@ -79,11 +76,11 @@ class LSTMCell(Module):
         - db: Gradient of biases, of shape (4H,)
         """
 
-        def d_sigmoid(x: np.ndarray) -> np.ndarray:
+        def d_sigmoid(x: NPArray) -> NPArray:
             return sigmoid(x) * (1 - sigmoid(x))
 
-        def d_tanh(x: np.ndarray) -> np.ndarray:
-            return 1 - np.tanh(x) ** 2
+        def d_tanh(x: NPArray) -> NPArray:
+            return 1 - np.tanh(x) ** 2  # type: ignore[return-value]
 
         dnext_h, dnext_c = dout
         H = dnext_h.shape[1]

@@ -5,6 +5,8 @@ from typing import Any
 
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from ..nn.module import Module
 from .optimizer import Optimizer
 
@@ -28,7 +30,7 @@ class Adam(Optimizer):
     betas: tuple[float, float] = (0.9, 0.999)
     eps: float = 1e-08
 
-    def init_context(self, w: np.ndarray) -> tuple[Any, ...]:
+    def init_context(self, w: NPArray) -> tuple[Any, ...]:
         """Initialize context using weights."""
         m = np.zeros_like(w)
         v = np.zeros_like(w)
@@ -36,8 +38,8 @@ class Adam(Optimizer):
         return m, v, t
 
     def update(
-        self, context: tuple[Any, ...], w: np.ndarray, dw: np.ndarray
-    ) -> tuple[np.ndarray, tuple[np.ndarray, ...]]:
+        self, context: tuple[Any, ...], w: NPArray, dw: NPArray
+    ) -> tuple[NPArray, tuple[NPArray, ...]]:
         """
         w must have the same shape as params.
 

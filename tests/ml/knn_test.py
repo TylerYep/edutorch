@@ -4,10 +4,11 @@ import numpy as np
 import pytest
 
 from edutorch.ml.knn import KNearestNeighbors
+from edutorch.typing import NPArray
 
 
 @pytest.mark.skip(reason="Takes too long to run")
-def test_knn_compute_distance(fashion_mnist: tuple[np.ndarray, ...]) -> None:
+def test_knn_compute_distance(fashion_mnist: tuple[NPArray, ...]) -> None:
     X_train, y_train, X_test, _ = fashion_mnist
 
     knn = KNearestNeighbors(X_train, y_train)

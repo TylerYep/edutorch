@@ -5,6 +5,7 @@ from typing import Callable
 import numpy as np
 
 from edutorch.nn import LSTMCell, Module
+from edutorch.typing import NPArray
 from tests.gradient_check import eval_numerical_gradient_array, rel_error
 
 
@@ -42,25 +43,25 @@ def test_lstm_cell_forward() -> None:
 
 def estimate_gradients(
     model: Module,
-    dnext_h: np.ndarray,
-    dnext_c: np.ndarray,
-    x: np.ndarray,
-    kwparams: dict[str, np.ndarray],
-) -> list[np.ndarray]:
+    dnext_h: NPArray,
+    dnext_c: NPArray,
+    x: NPArray,
+    kwparams: dict[str, NPArray],
+) -> list[NPArray]:
     """
     Gets the gradient estimate for all parameters of the model. Overrides each
     parameter of the model using the values in kwparams.
     """
 
     def grad_fn(
-        model: Module, x: np.ndarray | None, h_or_c: str, **kwargs: np.ndarray | None
-    ) -> Callable[[np.ndarray], np.ndarray]:
+        model: Module, x: NPArray | None, h_or_c: str, **kwargs: NPArray | None
+    ) -> Callable[[NPArray], NPArray]:
         """
         Returns a grad function that takes in an input z and sets all attributes
         of the model to the kwargs, except for the target value z.
         """
 
-        def dx_or_other_fn(z: np.ndarray) -> np.ndarray:
+        def dx_or_other_fn(z: NPArray) -> NPArray:
             """Function used as input to eval_numerical_gradient."""
             for key, val in kwargs.items():
                 setattr(model, key, z if val is None else val)
@@ -77,7 +78,7 @@ def estimate_gradients(
     ]
     for name, param in kwparams.items():
         # Shallow copy works here because we replace the target element with None.
-        new_kwargs: dict[str, np.ndarray | None] = dict(kwparams)
+        new_kwargs: dict[str, NPArray | None] = dict(kwparams)
         new_kwargs[name] = None
         approx_derivatives.append(
             eval_numerical_gradient_array(

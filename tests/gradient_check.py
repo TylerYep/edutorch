@@ -6,30 +6,31 @@ from typing import Callable
 import numpy as np
 
 from edutorch.nn import Module
+from edutorch.typing import NPArray
 
 
-def rel_error(x: np.ndarray, y: np.ndarray) -> np.ndarray:
+def rel_error(x: NPArray, y: NPArray) -> NPArray:
     """Returns relative error"""
     return np.max(np.abs(x - y) / (np.maximum(1e-8, np.abs(x) + np.abs(y))))
 
 
 def estimate_gradients(
-    model: Module, dout: np.ndarray, x: np.ndarray, kwparams: dict[str, np.ndarray]
-) -> list[np.ndarray]:
+    model: Module, dout: NPArray, x: NPArray, kwparams: dict[str, NPArray]
+) -> list[NPArray]:
     """
     Gets the gradient estimate for all parameters of the model. Overrides each
     parameter of the model using the values in kwparams.
     """
 
     def grad_fn(
-        model: Module, x: np.ndarray | None, **kwargs: np.ndarray | None
-    ) -> Callable[[np.ndarray], np.ndarray]:
+        model: Module, x: NPArray | None, **kwargs: NPArray | None
+    ) -> Callable[[NPArray], NPArray]:
         """
         Returns a grad function that takes in an input z and sets all attributes
         of the model to the kwargs, except for the target value z.
         """
 
-        def dx_or_other_fn(z: np.ndarray) -> np.ndarray:
+        def dx_or_other_fn(z: NPArray) -> NPArray:
             """Function used as input to eval_numerical_gradient."""
             for key, val in kwargs.items():
                 setattr(model, key, z if val is None else val)
@@ -42,7 +43,7 @@ def estimate_gradients(
     approx_derivatives = [eval_numerical_gradient_array(fx, x, dout)]
     for name, param in kwparams.items():
         # Shallow copy works here because we replace the target element with None.
-        new_kwargs: dict[str, np.ndarray | None] = dict(kwparams)
+        new_kwargs: dict[str, NPArray | None] = dict(kwparams)
         new_kwargs[name] = None
 
         # the numerical gradient function with respect to variable _name_
@@ -54,11 +55,11 @@ def estimate_gradients(
 
 
 def eval_numerical_gradient(
-    f: Callable[[np.ndarray], np.ndarray | float],
-    x: np.ndarray,
+    f: Callable[[NPArray], NPArray | float],
+    x: NPArray,
     verbose: bool = False,
     h: float = 1e-5,
-) -> np.ndarray:
+) -> NPArray:
     """
     A naive implementation of numerical gradient of f at x
     - f should be a function that takes a single argument
@@ -89,11 +90,8 @@ def eval_numerical_gradient(
 
 
 def eval_numerical_gradient_array(
-    f: Callable[[np.ndarray], np.ndarray],
-    x: np.ndarray,
-    df: np.ndarray,
-    h: float = 1e-5,
-) -> np.ndarray:
+    f: Callable[[NPArray], NPArray], x: NPArray, df: NPArray, h: float = 1e-5
+) -> NPArray:
     """
     Evaluate a numeric gradient for a function that accepts a numpy
     array and returns a numpy array.
@@ -119,11 +117,11 @@ def eval_numerical_gradient_array(
 
 
 def eval_numerical_gradient_blobs(
-    # f: Callable[[np.ndarray], np.ndarray],
-    inputs: np.ndarray,
-    # output: np.ndarray,
+    # f: Callable[[NPArray], NPArray],
+    inputs: NPArray,
+    # output: NPArray,
     h: float = 1e-5,
-) -> list[np.ndarray]:
+) -> list[NPArray]:
     """
     Compute numeric gradients for a function that operates on input
     and output blobs.
@@ -165,9 +163,9 @@ def eval_numerical_gradient_blobs(
 
 
 def grad_check_sparse(
-    f: Callable[[np.ndarray], np.ndarray],
-    x: np.ndarray,
-    analytic_grad: np.ndarray,
+    f: Callable[[NPArray], NPArray],
+    x: NPArray,
+    analytic_grad: NPArray,
     num_checks: int = 10,
     h: float = 1e-5,
 ) -> None:

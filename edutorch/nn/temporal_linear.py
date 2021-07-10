@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from .module import Module
 
 
@@ -12,7 +14,7 @@ class TemporalLinear(Module):
         self.b = np.zeros(output_dim)
         self.set_parameters("w", "b")
 
-    def forward(self, x: np.ndarray) -> np.ndarray:
+    def forward(self, x: NPArray) -> NPArray:
         """
         Forward pass for a temporal affine layer. The input is a set of D-dimensional
         vectors arranged into a minibatch of N timeseries, each of length T. We use
@@ -33,7 +35,7 @@ class TemporalLinear(Module):
         self.cache = (x,)
         return x.reshape(N * T, D).dot(self.w).reshape(N, T, M) + self.b
 
-    def backward(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
+    def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         Backward pass for temporal affine layer.
 

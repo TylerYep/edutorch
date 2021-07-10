@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-import numpy as np
+from edutorch.typing import NPArray
 
 from ..nn.module import Module
 
@@ -28,13 +28,13 @@ class Optimizer:
             )
         return context
 
-    def init_context(self, w: np.ndarray) -> tuple[Any, ...]:
+    def init_context(self, w: NPArray) -> tuple[Any, ...]:
         """This function initializes any context variables, running averages, etc."""
         raise NotImplementedError
 
     def update(
-        self, context: tuple[Any, ...], w: np.ndarray, dw: np.ndarray
-    ) -> tuple[np.ndarray, tuple[np.ndarray, ...]]:
+        self, context: tuple[Any, ...], w: NPArray, dw: NPArray
+    ) -> tuple[NPArray, tuple[NPArray, ...]]:
         """
         This function updates a single weight using the context and values of w and dw.
         """
@@ -65,7 +65,7 @@ class Optimizer:
                 # On a branch, recurse on that branch
                 if isinstance(param, dict):
                     submodel = getattr(model, param_name)
-                    subgradients: dict[str, np.ndarray] = gradients[param_name]
+                    subgradients: dict[str, NPArray] = gradients[param_name]
                     _step(submodel, subgradients, step_context)
 
                 # On a leaf, update the weight in that leaf

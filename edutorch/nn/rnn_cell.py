@@ -2,22 +2,22 @@ from __future__ import annotations
 
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from .module import Module
 
 
 class RNNCell(Module):
-    def __init__(
-        self, prev_h: np.ndarray, Wx: np.ndarray, Wh: np.ndarray, b: np.ndarray
-    ) -> None:
+    def __init__(self, prev_h: NPArray, Wx: NPArray, Wh: NPArray, b: NPArray) -> None:
         super().__init__()
         self.prev_h = prev_h
         self.Wx = Wx
         self.Wh = Wh
         self.b = b
-        self.next_h: np.ndarray
+        self.next_h: NPArray
         self.set_parameters("prev_h", "Wx", "Wh", "b")
 
-    def forward(self, x: np.ndarray) -> np.ndarray:
+    def forward(self, x: NPArray) -> NPArray:
         """
         Run the forward pass for a single timestep of a vanilla RNN that uses a tanh
         activation function.
@@ -40,7 +40,7 @@ class RNNCell(Module):
         self.cache = (x,)
         return self.next_h
 
-    def backward(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
+    def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         Backward pass for a single timestep of a vanilla RNN.
 

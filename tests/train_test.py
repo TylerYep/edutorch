@@ -5,6 +5,7 @@ import numpy as np
 from edutorch.losses import softmax_loss
 from edutorch.nn import Linear, Module, ReLU
 from edutorch.optim import Adam
+from edutorch.typing import NPArray
 
 
 class Example(Module):
@@ -15,13 +16,13 @@ class Example(Module):
         self.fc2 = Linear(30, 10)
         self.set_parameters("fc1", "fc2")
 
-    def forward(self, x: np.ndarray) -> np.ndarray:
+    def forward(self, x: NPArray) -> NPArray:
         x = self.fc1(x)
         x = self.relu(x)
         x = self.fc2(x)
         return x
 
-    def backward(self, dout: np.ndarray) -> dict[str, dict[str, np.ndarray]]:
+    def backward(self, dout: NPArray) -> dict[str, dict[str, NPArray]]:
         grads = {}
         dx2, dw2, db2 = self.fc2.backward(dout)
         grads["fc2"] = {"w": dw2, "b": db2}
@@ -31,7 +32,7 @@ class Example(Module):
         return grads
 
 
-def test_training(fashion_mnist: tuple[np.ndarray, ...]) -> None:
+def test_training(fashion_mnist: tuple[NPArray, ...]) -> None:
     X_train, y_train, _, _ = fashion_mnist
 
     model = Example()

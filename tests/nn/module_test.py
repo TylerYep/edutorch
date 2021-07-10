@@ -4,6 +4,7 @@ import numpy as np
 import pytest
 
 from edutorch.nn import Linear, Module
+from edutorch.typing import NPArray
 
 
 class ExtraParameters(Module):
@@ -13,12 +14,12 @@ class ExtraParameters(Module):
         self.fc2 = Linear(30, 10)
         self.set_parameters("fc1", "fc3")
 
-    def forward(self, x: np.ndarray) -> np.ndarray:
+    def forward(self, x: NPArray) -> NPArray:
         x = self.fc1(x)
         x = self.fc2(x)
         return x
 
-    def backward(self, dout: np.ndarray) -> dict[str, dict[str, np.ndarray]]:
+    def backward(self, dout: NPArray) -> dict[str, dict[str, NPArray]]:
         grads = {}
         dx2, dw2, db2 = self.fc2.backward(dout)
         grads["fc2"] = {"w": dw2, "b": db2}

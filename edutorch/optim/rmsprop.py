@@ -5,6 +5,8 @@ from typing import Any
 
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from ..nn.module import Module
 from .optimizer import Optimizer
 
@@ -28,14 +30,14 @@ class RMSProp(Optimizer):
     decay_rate: float = 0.99
     eps: float = 1e-8
 
-    def init_context(self, w: np.ndarray) -> tuple[Any, ...]:
+    def init_context(self, w: NPArray) -> tuple[Any, ...]:
         """Initialize context using weights."""
         v = np.zeros_like(w)
         return (v,)
 
     def update(
-        self, context: tuple[Any, ...], w: np.ndarray, dw: np.ndarray
-    ) -> tuple[np.ndarray, tuple[np.ndarray, ...]]:
+        self, context: tuple[Any, ...], w: NPArray, dw: NPArray
+    ) -> tuple[NPArray, tuple[NPArray, ...]]:
         (v,) = context
 
         v = self.decay_rate * v + (1 - self.decay_rate) * dw ** 2

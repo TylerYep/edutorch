@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from .module import Module
 
 
@@ -15,7 +17,7 @@ class SpatialGroupNorm(Module):
         self.beta = np.zeros(num_features)
         self.set_parameters("gamma", "beta")
 
-    def forward(self, x: np.ndarray) -> np.ndarray:
+    def forward(self, x: NPArray) -> NPArray:
         """
         Computes the forward pass for spatial group normalization.
         In contrast to layer normalization, group normalization splits each entry
@@ -51,7 +53,7 @@ class SpatialGroupNorm(Module):
 
         return out
 
-    def backward(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
+    def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         Computes the backward pass for spatial group normalization.
 

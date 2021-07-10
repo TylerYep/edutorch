@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from .module import Module
 
 
@@ -14,7 +16,7 @@ class Dropout(Module):
         self.train_mode = train_mode
         self.seed = seed
 
-    def forward(self, x: np.ndarray) -> np.ndarray:
+    def forward(self, x: NPArray) -> NPArray:
         """
         Performs the forward pass for (inverted) dropout.
 
@@ -43,18 +45,17 @@ class Dropout(Module):
         if self.seed is not None:
             np.random.seed(self.seed)
 
+        mask = None
+        out = x
         if self.train_mode:
             mask = (np.random.rand(*x.shape) < self.p) / self.p
             out = x * mask
-        else:
-            mask = None
-            out = x
 
         self.cache = (mask,)
         out = out.astype(x.dtype, copy=False)
         return out
 
-    def backward(self, dout: np.ndarray) -> np.ndarray:
+    def backward(self, dout: NPArray) -> NPArray:
         """
         Perform the backward pass for (inverted) dropout.
 

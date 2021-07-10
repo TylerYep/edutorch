@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import numpy as np
 
+from edutorch.typing import NPArray
 
-def svm_loss(x: np.ndarray, y: np.ndarray) -> tuple[float, np.ndarray]:
+
+def svm_loss(x: NPArray, y: NPArray) -> tuple[float, NPArray]:
     """
     Computes the loss and gradient using for multiclass SVM classification.
 

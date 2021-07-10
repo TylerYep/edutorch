@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from .module import Module
 from .rnn_cell import RNNCell
 
@@ -19,7 +21,7 @@ class RNN(Module):
         self.b = np.random.normal(scale=1e-3, size=H)
         self.set_parameters("h0", "Wx", "Wh", "b")
 
-    def forward(self, x: np.ndarray) -> np.ndarray:
+    def forward(self, x: NPArray) -> NPArray:
         """
         Run a vanilla RNN forward on an entire sequence of data. We assume an input
         sequence composed of T vectors, each of dimension D. The RNN uses a hidden
@@ -52,7 +54,7 @@ class RNN(Module):
             self.cache += (cell,)
         return h
 
-    def backward(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
+    def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         Compute the backward pass for a vanilla RNN over an entire sequence of data.
 

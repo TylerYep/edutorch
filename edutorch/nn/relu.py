@@ -1,10 +1,12 @@
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from .module import Module
 
 
 class ReLU(Module):
-    def forward(self, x: np.ndarray) -> np.ndarray:
+    def forward(self, x: NPArray) -> NPArray:
         """
         Computes the forward pass for a layer of rectified linear units (ReLUs).
 
@@ -18,7 +20,7 @@ class ReLU(Module):
         self.cache = (x,)
         return np.maximum(0, x)
 
-    def backward(self, dout: np.ndarray) -> np.ndarray:
+    def backward(self, dout: NPArray) -> NPArray:
         """
         Computes the backward pass for a layer of rectified linear units (ReLUs).
 

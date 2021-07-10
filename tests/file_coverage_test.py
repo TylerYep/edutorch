@@ -2,7 +2,7 @@ import pprint
 from pathlib import Path
 
 IGNORED_FOLDERS = {"__pycache__", "ml"}
-IGNORED_FILES = {"__init__.py"}
+IGNORED_FILES = {"__init__.py", "typing.py"}
 SRC_FOLDER = Path("edutorch")
 TEST_FOLDER = Path("tests")
 

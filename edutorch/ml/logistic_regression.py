@@ -1,6 +1,6 @@
 import torch
-import torch.nn as nn
 import torch.nn.functional as F
+from torch import nn
 from torch.optim import Adam
 
 
@@ -74,7 +74,7 @@ def optimize(
         curr_loss = loss.item()
         counter += 1
         if curr_loss < min_loss:
-            best_params = (model.theta1.item(), model.theta0.item())
+            best_params = (model.theta1.item(), model.theta0.item())  # type: ignore
             min_loss = curr_loss
 
         if verbose:
@@ -92,5 +92,4 @@ def make_tensor(data: torch.Tensor, is_input: bool) -> torch.Tensor:
     to make it a n x 1 "tensor".
     """
     dim = 0 if is_input else 1
-    # pylint: disable=not-callable
     return torch.tensor(data[:, dim]).unsqueeze(1).float()  # type: ignore

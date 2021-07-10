@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from .module import Module
 
 
@@ -13,7 +15,7 @@ class LayerNorm(Module):
         self.beta = np.zeros(num_features)
         self.set_parameters("gamma", "beta")
 
-    def forward(self, x: np.ndarray) -> np.ndarray:
+    def forward(self, x: NPArray) -> NPArray:
         """
         Forward pass for layer normalization.
 
@@ -48,7 +50,7 @@ class LayerNorm(Module):
         self.cache = (x_hat, v)
         return out
 
-    def backward(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
+    def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         Backward pass for layer normalization.
 

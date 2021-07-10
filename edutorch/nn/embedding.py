@@ -1,5 +1,7 @@
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from .module import Module
 
 
@@ -9,7 +11,7 @@ class Embedding(Module):
         self.W = np.random.normal(scale=1e-3, size=(input_dim, output_dim))
         self.set_parameters("W")
 
-    def forward(self, x: np.ndarray) -> np.ndarray:
+    def forward(self, x: NPArray) -> NPArray:
         """
         Forward pass for word embeddings. We operate on minibatches of size N where
         each sequence has length T. We assume a vocabulary of V words, assigning each
@@ -27,7 +29,7 @@ class Embedding(Module):
         self.cache = (x,)
         return self.W[x]
 
-    def backward(self, dout: np.ndarray) -> np.ndarray:
+    def backward(self, dout: NPArray) -> NPArray:
         """
         Backward pass for word embeddings. We cannot back-propagate into the words
         since they are integers, so we only return gradient for the word embedding

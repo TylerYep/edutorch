@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import numpy as np
 
+from edutorch.typing import NPArray
+
 from .lstm_cell import LSTMCell
 from .module import Module
 
@@ -19,7 +21,7 @@ class LSTM(Module):
         self.b = np.random.normal(scale=1e-3, size=H)
         self.set_parameters("h0", "Wx", "Wh", "b")
 
-    def forward(self, x: np.ndarray) -> np.ndarray:
+    def forward(self, x: NPArray) -> NPArray:
         """
         Forward pass for an LSTM over an entire sequence of data. We assume an input
         sequence composed of T vectors, each of dimension D. The LSTM uses a hidden
@@ -58,7 +60,7 @@ class LSTM(Module):
 
         return h
 
-    def backward(self, dout: np.ndarray) -> tuple[np.ndarray, ...]:
+    def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         Backward pass for an LSTM over an entire sequence of data.]
 
