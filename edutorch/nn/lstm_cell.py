@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import numpy as np
+import numpy.typing as npt
 
 from edutorch.typing import NPArray
 
@@ -79,8 +80,8 @@ class LSTMCell(Module):
         def d_sigmoid(x: NPArray) -> NPArray:
             return sigmoid(x) * (1 - sigmoid(x))
 
-        def d_tanh(x: NPArray) -> NPArray:
-            return 1 - np.tanh(x) ** 2  # type: ignore[return-value]
+        def d_tanh(x: NPArray) -> npt.NDArray[np.int64]:
+            return 1 - np.tanh(x) ** 2
 
         dnext_h, dnext_c = dout
         H = dnext_h.shape[1]
