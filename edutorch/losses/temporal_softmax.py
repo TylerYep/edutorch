@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import numpy as np
 
-from edutorch.typing import NPArray
+from edutorch.typing import NPArray, NPBoolArray, NPIntArray
 
 
 def temporal_softmax_loss(
-    x: NPArray, y: NPArray, mask: NPArray
+    x: NPArray, y: NPIntArray, mask: NPBoolArray
 ) -> tuple[float, NPArray]:
     """
     A temporal version of softmax loss for use in RNNs. We assume that we are

@@ -6,7 +6,7 @@ import pytest
 from edutorch.losses import softmax_loss
 from edutorch.nn import Linear, Module
 from edutorch.optim import Adam
-from edutorch.typing import NPArray
+from edutorch.typing import NPArray, NPIntArray
 
 
 class MissingGradients(Module):
@@ -47,7 +47,9 @@ class MissingParameters(Module):
         return grads
 
 
-def test_missing_params(fashion_mnist: tuple[NPArray, ...]) -> None:
+def test_missing_params(
+    fashion_mnist: tuple[NPArray, NPIntArray, NPArray, NPIntArray]
+) -> None:
     X_train, y_train, _, _ = fashion_mnist
 
     model = MissingParameters()
@@ -65,7 +67,9 @@ def test_missing_params(fashion_mnist: tuple[NPArray, ...]) -> None:
     assert (model.fc2.w == save2).all()
 
 
-def test_missing_gradients(fashion_mnist: tuple[NPArray, ...]) -> None:
+def test_missing_gradients(
+    fashion_mnist: tuple[NPArray, NPIntArray, NPArray, NPIntArray]
+) -> None:
     X_train, y_train, _, _ = fashion_mnist
 
     model = MissingGradients()

@@ -1,6 +1,6 @@
 import numpy as np
 
-from edutorch.typing import NPArray
+from edutorch.typing import NPArray, NPIntArray
 
 from .module import Module
 
@@ -11,7 +11,7 @@ class Embedding(Module):
         self.W = np.random.normal(scale=1e-3, size=(input_dim, output_dim))
         self.set_parameters("W")
 
-    def forward(self, x: NPArray) -> NPArray:
+    def forward(self, x: NPIntArray) -> NPArray:
         """
         Forward pass for word embeddings. We operate on minibatches of size N where
         each sequence has length T. We assume a vocabulary of V words, assigning each

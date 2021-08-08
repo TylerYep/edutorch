@@ -1,12 +1,12 @@
 import numpy as np
 
-from edutorch.typing import NPArray
+from edutorch.typing import NPArray, NPIntArray
 
 
 class KNearestNeighbors:
     """A k-NN classifier with L2 distance"""
 
-    def __init__(self, X_train: NPArray, y_train: NPArray, k: int = 3) -> None:
+    def __init__(self, X_train: NPArray, y_train: NPIntArray, k: int = 3) -> None:
         """
         Train the classifier. For k-nearest neighbors this is just
         memorizing the training data.

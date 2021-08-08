@@ -10,10 +10,10 @@ class Module:
         self.cache: tuple[Any, ...] = ()
         self._params: dict[str, dict[str, Any]] = {}
 
-    def __call__(self, x: NPArray) -> NPArray:
+    def __call__(self, x: Any) -> NPArray:
         return self.forward(x)
 
-    def forward(self, x: NPArray) -> Any:
+    def forward(self, x: Any) -> Any:
         raise NotImplementedError("Modules must implement the forward pass.")
 
     def backward(self, dout: Any) -> Any:

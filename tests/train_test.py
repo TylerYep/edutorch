@@ -5,7 +5,7 @@ import numpy as np
 from edutorch.losses import softmax_loss
 from edutorch.nn import Linear, Module, ReLU
 from edutorch.optim import Adam
-from edutorch.typing import NPArray
+from edutorch.typing import NPArray, NPIntArray
 
 
 class Example(Module):
@@ -32,7 +32,9 @@ class Example(Module):
         return grads
 
 
-def test_training(fashion_mnist: tuple[NPArray, ...]) -> None:
+def test_training(
+    fashion_mnist: tuple[NPArray, NPIntArray, NPArray, NPIntArray]
+) -> None:
     X_train, y_train, _, _ = fashion_mnist
 
     model = Example()

@@ -5,7 +5,7 @@ from typing import Callable
 import numpy as np
 
 from edutorch.nn import LSTMCell, Module
-from edutorch.typing import NPArray
+from edutorch.typing import NPAnyArray, NPArray
 from tests.gradient_check import eval_numerical_gradient_array, rel_error
 
 
@@ -47,7 +47,7 @@ def estimate_gradients(
     dnext_c: NPArray,
     x: NPArray,
     kwparams: dict[str, NPArray],
-) -> list[NPArray]:
+) -> list[NPAnyArray]:
     """
     Gets the gradient estimate for all parameters of the model. Overrides each
     parameter of the model using the values in kwparams.
