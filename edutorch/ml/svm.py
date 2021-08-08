@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from edutorch.typing import NPArray
+from edutorch.typing import NPArray, NPIntArray
 
 from .linear_classifier import LinearClassifier
 
@@ -10,7 +10,7 @@ from .linear_classifier import LinearClassifier
 class SVMClassifier(LinearClassifier):
     """A subclass that uses the Multiclass SVM loss function"""
 
-    def loss(self, X: NPArray, y: NPArray) -> tuple[float, NPArray]:
+    def loss(self, X: NPArray, y: NPIntArray) -> tuple[float, NPArray]:
         """
         Structured SVM loss function, vectorized implementation.
         Inputs have dimension D, there are C classes, and we operate on minibatches
@@ -40,7 +40,7 @@ class SVMClassifier(LinearClassifier):
 
         return loss, dW
 
-    def svm_loss_naive(self, X: NPArray, y: NPArray) -> tuple[float, NPArray]:
+    def svm_loss_naive(self, X: NPArray, y: NPIntArray) -> tuple[float, NPArray]:
         """
         Structured SVM loss function, naive implementation (with loops).
         Inputs and outputs are the same as svm_loss_vectorized.

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from edutorch.typing import NPArray
+from edutorch.typing import NPAnyArray, NPArray
 
 
 class Module:
@@ -10,10 +10,10 @@ class Module:
         self.cache: tuple[Any, ...] = ()
         self._params: dict[str, dict[str, Any]] = {}
 
-    def __call__(self, x: Any) -> NPArray:
+    def __call__(self, x: NPAnyArray) -> NPArray:
         return self.forward(x)
 
-    def forward(self, x: Any) -> Any:
+    def forward(self, x: NPAnyArray) -> Any:
         raise NotImplementedError("Modules must implement the forward pass.")
 
     def backward(self, dout: Any) -> Any:

@@ -4,14 +4,14 @@ from abc import ABC, abstractmethod
 
 import numpy as np
 
-from edutorch.typing import NPArray
+from edutorch.typing import NPArray, NPIntArray
 
 
 class LinearClassifier(ABC):
     """A simple linear classifier abstract class."""
 
     def __init__(
-        self, X: NPArray, y: NPArray, learning_rate: float = 1e-3, reg: float = 1e-5
+        self, X: NPArray, y: NPIntArray, learning_rate: float = 1e-3, reg: float = 1e-5
     ) -> None:
         """
         Train this linear classifier using stochastic gradient descent.
@@ -74,7 +74,7 @@ class LinearClassifier(ABC):
         return y_pred
 
     @abstractmethod
-    def loss(self, X: NPArray, y: NPArray) -> tuple[float, NPArray]:
+    def loss(self, X: NPArray, y: NPIntArray) -> tuple[float, NPArray]:
         """
         Compute the loss function and its derivative.
         Subclasses will override this.
