@@ -41,7 +41,12 @@ def temporal_softmax_loss(
 
     probs = np.exp(x_flat - np.max(x_flat, axis=1, keepdims=True))
     probs /= np.sum(probs, axis=1, keepdims=True)
-    loss = -np.sum(mask_flat * np.log(probs[np.arange(N * T), y_flat])) / N
+    loss = (
+        -np.sum(  # pylint: disable=invalid-unary-operand-type
+            mask_flat * np.log(probs[np.arange(N * T), y_flat])
+        )
+        / N
+    )
     dx_flat = probs.copy()
     dx_flat[np.arange(N * T), y_flat] -= 1
     dx_flat /= N

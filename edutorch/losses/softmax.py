@@ -22,7 +22,12 @@ def softmax_loss(x: NPArray, y: NPIntArray) -> tuple[float, NPArray]:
     probs = np.exp(x - np.max(x, axis=1, keepdims=True))
     probs /= np.sum(probs, axis=1, keepdims=True)
     N = x.shape[0]
-    loss = -np.sum(np.log(probs[np.arange(N), y])) / N
+    loss = (
+        -np.sum(  # pylint: disable=invalid-unary-operand-type
+            np.log(probs[np.arange(N), y])
+        )
+        / N
+    )
     dx = probs.copy()
     dx[np.arange(N), y] -= 1
     dx /= N

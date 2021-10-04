@@ -54,7 +54,7 @@ class LinearClassifier(ABC):
             self.W -= learning_rate * grad
 
             if it % 100 == 0:
-                print("iteration %d / %d: loss %f" % (it, num_iters, loss))
+                print(f"iteration {it} / {num_iters}: loss {loss}")
 
     def predict(self, X: NPArray) -> NPArray:
         """
