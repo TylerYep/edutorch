@@ -4,7 +4,7 @@ import random
 
 import numpy as np
 import pytest
-from torchvision import datasets  # type: ignore[import]
+from mnist import fashion_mnist as FashionMNIST  # type: ignore[import]
 
 from edutorch.typing import NPArray, NPIntArray
 
@@ -19,11 +19,7 @@ def _set_random_seed() -> None:
 def fashion_mnist(
     num_train: int = 100, num_test: int = 10
 ) -> tuple[NPArray, NPIntArray, NPArray, NPIntArray]:
-    train_set = datasets.FashionMNIST("data/", train=True, download=True)
-    test_set = datasets.FashionMNIST("data/", train=False, download=True)
-
-    X_train, y_train = train_set.data.numpy().astype(float), train_set.targets.numpy()
-    X_test, y_test = test_set.data.numpy().astype(float), test_set.targets.numpy()
+    X_train, y_train, X_test, y_test = FashionMNIST(cache="data/FashionMNIST")
 
     mask = list(range(num_train))
     X_train = X_train[mask]

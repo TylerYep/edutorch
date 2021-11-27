@@ -1,4 +1,3 @@
+get-mnist
 numpy
-torch  # Only for Logistic Regression
-torchvision
-pytest
+torch
