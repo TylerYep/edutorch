@@ -35,9 +35,7 @@ class SVMClassifier(LinearClassifier):
 
         margin[margin > 0] = 1
         num_y = np.sum(margin, axis=1)
-        margin[
-            np.arange(num_train), y
-        ] = -num_y  # pylint: disable=invalid-unary-operand-type
+        margin[np.arange(num_train), y] = -num_y
         dW = X.T.dot(margin)
 
         return loss, dW

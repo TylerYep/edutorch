@@ -153,9 +153,7 @@ class BatchNorm(Module):
             dgamma = np.sum(xn * dout, axis=0)
             dxn = self.gamma * dout
             dxc = dxn / std
-            dstd = -np.sum(  # pylint: disable=invalid-unary-operand-type
-                (dxn * xn) / std, axis=0
-            )
+            dstd = -np.sum((dxn * xn) / std, axis=0)
             dvar = 0.5 * dstd / std
             dxc += (2 / N) * (xn * std) * dvar
             dmu = np.sum(dxc, axis=0)
