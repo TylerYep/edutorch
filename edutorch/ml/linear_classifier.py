@@ -103,6 +103,6 @@ class LinearClassifier(ABC):
         loss /= num_train
         dW /= num_train
 
-        loss += self.reg * np.sum(self.W ** 2)
+        loss += self.reg * np.sum(self.W**2)
         dW += self.reg * 2 * self.W
         return loss, dW

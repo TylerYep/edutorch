@@ -40,7 +40,7 @@ class RMSProp(Optimizer):
     ) -> tuple[NPArray, tuple[NPArray, ...]]:
         (v,) = context
 
-        v = self.decay_rate * v + (1 - self.decay_rate) * dw ** 2
+        v = self.decay_rate * v + (1 - self.decay_rate) * dw**2
         w -= self.lr * dw / (np.sqrt(v) + self.eps)
 
         return w, (v,)

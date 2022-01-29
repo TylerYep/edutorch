@@ -59,7 +59,7 @@ class RNNCell(Module):
             raise RuntimeError("self.next_h should not be None.")
 
         (x,) = self.cache
-        dh = dout * (1 - self.next_h ** 2)
+        dh = dout * (1 - self.next_h**2)
         dx = dh @ self.Wx.T
         dprev_h = dh @ self.Wh.T
         dWx = x.T @ dh

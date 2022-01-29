@@ -53,9 +53,9 @@ class KNearestNeighbors:
         """
         if num_loops == 0:
             return np.sqrt(
-                np.sum(X ** 2, axis=1).reshape(-1, 1)
+                np.sum(X**2, axis=1).reshape(-1, 1)
                 - 2 * np.dot(X, self.X_train.T)
-                + np.sum(self.X_train ** 2, axis=1)
+                + np.sum(self.X_train**2, axis=1)
             )
 
         num_test = X.shape[0]

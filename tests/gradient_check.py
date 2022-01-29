@@ -68,7 +68,7 @@ def eval_numerical_gradient(
     # fx = f(x) # evaluate function value at original point
     grad = np.zeros_like(x)
     # iterate over all indexes in x
-    it = np.nditer(x, flags=["multi_index"], op_flags=["readwrite"])
+    it = np.nditer(x, flags=["multi_index"], op_flags=[["readwrite"]])
     while not it.finished:
 
         # evaluate function at x+h
@@ -97,7 +97,7 @@ def eval_numerical_gradient_array(
     array and returns a numpy array.
     """
     grad = np.zeros_like(x)
-    it = np.nditer(x, flags=["multi_index"], op_flags=["readwrite"])
+    it = np.nditer(x, flags=["multi_index"], op_flags=[["readwrite"]])
     while not it.finished:
         ix = it.multi_index
 
@@ -142,7 +142,7 @@ def eval_numerical_gradient_blobs(
     numeric_diffs = []
     for input_blob in inputs:
         diff = np.zeros_like(input_blob.diffs)
-        it = np.nditer(input_blob.vals, flags=["multi_index"], op_flags=["readwrite"])
+        it = np.nditer(input_blob.vals, flags=["multi_index"], op_flags=[["readwrite"]])
         while not it.finished:
             idx = it.multi_index
             orig = input_blob.vals[idx]

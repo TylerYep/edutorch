@@ -53,7 +53,7 @@ class Adam(Optimizer):
         v = beta2 * v + (1 - beta2) * (dw * dw)
         t += 1
 
-        alpha = self.lr * np.sqrt(1 - beta2 ** t) / (1 - beta1 ** t)
+        alpha = self.lr * np.sqrt(1 - beta2**t) / (1 - beta1**t)
         w -= alpha * (m / (np.sqrt(v) + self.eps))
 
         return w, (m, v, t)

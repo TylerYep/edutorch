@@ -77,7 +77,7 @@ class BatchNorm(Module):
             # Compute output
             mu = x.mean(axis=0)
             xc = x - mu
-            var = np.mean(xc ** 2, axis=0)
+            var = np.mean(xc**2, axis=0)
             std = np.sqrt(var + self.eps)
             xn = xc / std
             out = self.gamma * xn + self.beta
