@@ -34,7 +34,7 @@ class LinearClassifier(ABC):
         batch_size = 200
         num_train, dim = X.shape
         # assume y takes values 0...K-1 where K is number of classes
-        num_classes = np.max(y) + 1
+        num_classes = int(np.max(y) + 1)
         self.W = 0.001 * np.random.randn(dim, num_classes)
         self.reg = reg
 
