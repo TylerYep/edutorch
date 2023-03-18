@@ -70,7 +70,6 @@ def eval_numerical_gradient(
     # iterate over all indexes in x
     it = np.nditer(x, flags=["multi_index"], op_flags=[["readwrite"]])
     while not it.finished:
-
         # evaluate function at x+h
         ix = it.multi_index
         oldval = x[ix]

@@ -7,7 +7,7 @@ from tests.gradient_check import estimate_gradients
 def test_dropout_forward() -> None:
     x = np.random.randn(500, 500) + 10
 
-    for p in [0.25, 0.4, 0.7]:
+    for p in (0.25, 0.4, 0.7):
         model = Dropout(p)
         out = model(x)
         model.train_mode = False
