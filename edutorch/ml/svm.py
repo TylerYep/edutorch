@@ -2,9 +2,8 @@ from __future__ import annotations
 
 import numpy as np
 
+from edutorch.ml.linear_classifier import LinearClassifier
 from edutorch.typing import NPArray, NPIntArray
-
-from .linear_classifier import LinearClassifier
 
 
 class SVMClassifier(LinearClassifier):

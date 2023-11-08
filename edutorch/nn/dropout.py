@@ -52,8 +52,7 @@ class Dropout(Module):
             out = x * mask
 
         self.cache = (mask,)
-        out = out.astype(x.dtype, copy=False)
-        return out
+        return out.astype(x.dtype, copy=False)
 
     def backward(self, dout: NPArray) -> NPArray:
         """

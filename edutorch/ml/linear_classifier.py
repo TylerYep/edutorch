@@ -70,8 +70,7 @@ class LinearClassifier(ABC):
             1-dimensional array of length N, and each element is
             an integer giving the predicted class.
         """
-        y_pred = np.argmax(np.dot(X, self.W), axis=1)
-        return y_pred
+        return np.argmax(np.dot(X, self.W), axis=1)
 
     @abstractmethod
     def loss(self, X: NPArray, y: NPIntArray) -> tuple[float, NPArray]:

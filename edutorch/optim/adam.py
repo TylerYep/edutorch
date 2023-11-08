@@ -5,9 +5,9 @@ from typing import Any
 
 import numpy as np
 
+from edutorch.nn.module import Module
 from edutorch.typing import NPArray
 
-from ..nn.module import Module
 from .optimizer import Optimizer
 
 

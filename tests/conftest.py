@@ -4,7 +4,7 @@ import random
 
 import numpy as np
 import pytest
-from mnist import fashion_mnist as FashionMNIST  # type: ignore[import]
+from mnist import fashion_mnist as FashionMNIST  # type: ignore[import]  # noqa: N812
 
 from edutorch.typing import NPArray, NPIntArray
 

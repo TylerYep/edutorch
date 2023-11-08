@@ -8,7 +8,7 @@ from .module import Module
 
 
 class LayerNorm(Module):
-    def __init__(self, num_features: int, eps: float = 1e-5):
+    def __init__(self, num_features: int, eps: float = 1e-5) -> None:
         super().__init__()
         self.eps = eps
         self.gamma = np.ones(num_features)

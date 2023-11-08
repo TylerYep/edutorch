@@ -97,7 +97,7 @@ class LSTMCell(Module):
         dprev_c = dc * f
 
         di = dc * g
-        df = dc * self.prev_c
+        df = dc * self.prev_c  # noqa: PD901
         do = dnext_h * np.tanh(self.next_c)
         dg = dc * i
 

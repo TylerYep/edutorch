@@ -3,10 +3,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
+from edutorch.nn.module import Module
+from edutorch.optim.optimizer import Optimizer
 from edutorch.typing import NPArray
-
-from ..nn.module import Module
-from .optimizer import Optimizer
 
 
 @dataclass

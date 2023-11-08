@@ -32,5 +32,4 @@ class ReLU(Module):
         - dx: Gradient with respect to x
         """
         (x,) = self.cache
-        dx = np.where(x > 0, dout, 0)
-        return dx
+        return np.where(x > 0, dout, 0)

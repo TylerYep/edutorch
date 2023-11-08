@@ -31,8 +31,7 @@ class SpatialBatchNorm(BatchNorm):
         N, C, H, W = x.shape
         x_flat = x.transpose(0, 2, 3, 1).reshape(-1, C)
         out_flat = super().forward(x_flat)
-        out = out_flat.reshape(N, H, W, C).transpose(0, 3, 1, 2)
-        return out
+        return out_flat.reshape(N, H, W, C).transpose(0, 3, 1, 2)
 
     def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """

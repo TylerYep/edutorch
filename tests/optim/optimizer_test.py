@@ -18,8 +18,7 @@ class MissingGradients(Module):
 
     def forward(self, x: NPArray) -> NPArray:
         x = self.fc1(x)
-        x = self.fc2(x)
-        return x
+        return self.fc2(x)
 
     def backward(self, dout: NPArray) -> dict[str, NPArray]:
         dx2, _, _ = self.fc2.backward(dout)
@@ -35,8 +34,7 @@ class MissingParameters(Module):
 
     def forward(self, x: NPArray) -> NPArray:
         x = self.fc1(x)
-        x = self.fc2(x)
-        return x
+        return self.fc2(x)
 
     def backward(self, dout: NPArray) -> dict[str, dict[str, NPArray]]:
         grads = {}

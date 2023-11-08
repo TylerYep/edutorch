@@ -8,4 +8,4 @@ import numpy.typing as npt
 NPAnyArray = npt.NDArray[Any]
 NPArray = npt.NDArray[np.float64]
 NPIntArray = npt.NDArray[np.int64]
-NPBoolArray = npt.NDArray[np.bool8]
+NPBoolArray = npt.NDArray[np.bool_]

@@ -16,8 +16,7 @@ class ExtraParameters(Module):
 
     def forward(self, x: NPArray) -> NPArray:
         x = self.fc1(x)
-        x = self.fc2(x)
-        return x
+        return self.fc2(x)
 
     def backward(self, dout: NPArray) -> dict[str, dict[str, NPArray]]:
         grads = {}
