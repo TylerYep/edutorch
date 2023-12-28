@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import override
+
 import numpy as np
 
 from edutorch.losses import softmax_loss
@@ -16,11 +18,13 @@ class Example(Module):
         self.fc2 = Linear(30, 10)
         self.set_parameters("fc1", "fc2")
 
+    @override
     def forward(self, x: NPArray) -> NPArray:
         x = self.fc1(x)
         x = self.relu(x)
         return self.fc2(x)
 
+    @override
     def backward(self, dout: NPArray) -> dict[str, dict[str, NPArray]]:
         grads = {}
         dx2, dw2, db2 = self.fc2.backward(dout)

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import override
+
 import numpy as np
 
 from edutorch.typing import NPArray
@@ -26,6 +28,7 @@ class BatchNorm(Module):
         self.beta = np.zeros(num_features)
         self.set_parameters("running_mean", "running_var", "gamma", "beta")
 
+    @override
     def forward(self, x: NPArray) -> NPArray:
         """
         Forward pass for batch normalization.
@@ -100,6 +103,7 @@ class BatchNorm(Module):
 
         return out
 
+    @override
     def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         Alternative backward pass for batch normalization.

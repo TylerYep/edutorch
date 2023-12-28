@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import override
+
 import numpy as np
 import pytest
 
@@ -14,10 +16,12 @@ class ExtraParameters(Module):
         self.fc2 = Linear(30, 10)
         self.set_parameters("fc1", "fc3")
 
+    @override
     def forward(self, x: NPArray) -> NPArray:
         x = self.fc1(x)
         return self.fc2(x)
 
+    @override
     def backward(self, dout: NPArray) -> dict[str, dict[str, NPArray]]:
         grads = {}
         dx2, dw2, db2 = self.fc2.backward(dout)

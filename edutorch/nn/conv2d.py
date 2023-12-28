@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import override
+
 import numpy as np
 
 from edutorch.typing import NPArray
@@ -25,6 +27,7 @@ class Conv2d(Module):
         self.pad = pad
         self.set_parameters("w", "b")
 
+    @override
     def forward(self, x: NPArray) -> NPArray:
         """
         A naive implementation of the forward pass for a convolutional layer.
@@ -74,6 +77,7 @@ class Conv2d(Module):
         self.cache = (x,)
         return out
 
+    @override
     def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         A naive implementation of the backward pass for a convolutional layer.

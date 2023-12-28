@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import override
+
 import numpy as np
 
 from edutorch.typing import NPArray
@@ -16,6 +18,7 @@ class MaxPool2d(Module):
         self.stride = stride
         self.pad = pad
 
+    @override
     def forward(self, x: NPArray) -> NPArray:
         """
         A naive implementation of the forward pass for a max-pooling layer.
@@ -53,6 +56,7 @@ class MaxPool2d(Module):
         self.cache = (x,)
         return out
 
+    @override
     def backward(self, dout: NPArray) -> NPArray:
         """
         A naive implementation of the backward pass for a max-pooling layer.

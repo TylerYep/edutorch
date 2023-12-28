@@ -1,3 +1,5 @@
+from typing import override
+
 import numpy as np
 
 from edutorch.typing import NPArray, NPIntArray
@@ -11,6 +13,7 @@ class Embedding(Module):
         self.W = np.random.normal(scale=1e-3, size=(input_dim, output_dim))
         self.set_parameters("W")
 
+    @override
     def forward(self, x: NPIntArray) -> NPArray:
         """
         Forward pass for word embeddings. We operate on minibatches of size N where
@@ -29,6 +32,7 @@ class Embedding(Module):
         self.cache = (x,)
         return self.W[x]
 
+    @override
     def backward(self, dout: NPArray) -> NPArray:
         """
         Backward pass for word embeddings. We cannot back-propagate into the words

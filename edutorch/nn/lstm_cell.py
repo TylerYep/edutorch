@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import override
+
 import numpy as np
 
 from edutorch.typing import NPArray, NPIntArray
@@ -22,6 +24,7 @@ class LSTMCell(Module):
         self.next_c: NPArray
         self.set_parameters("prev_h", "prev_c", "Wx", "Wh", "b")
 
+    @override
     def forward(self, x: NPArray) -> tuple[NPArray, ...]:
         """
         Forward pass for a single timestep of an LSTM.
@@ -58,6 +61,7 @@ class LSTMCell(Module):
 
         return self.next_h, self.next_c
 
+    @override
     def backward(self, dout: tuple[NPArray, ...]) -> tuple[NPArray, ...]:
         """
         Backward pass for a single timestep of an LSTM.

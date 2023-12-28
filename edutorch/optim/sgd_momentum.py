@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, override
 
 import numpy as np
 
@@ -28,12 +28,14 @@ class SGDMomentum(Optimizer):
     lr: float = 1e-2
     momentum: float = 0.9
 
+    @override
     def init_context(self, w: NPArray) -> tuple[Any, ...]:
         """Initialize context using weights."""
         b = self.momentum
         v = np.zeros_like(w)
         return b, v
 
+    @override
     def update(
         self, context: tuple[Any, ...], w: NPArray, dw: NPArray
     ) -> tuple[NPArray, tuple[NPArray, ...]]:

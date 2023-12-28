@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import override
+
 import numpy as np
 import pytest
 
@@ -16,10 +18,12 @@ class MissingGradients(Module):
         self.fc2 = Linear(30, 10)
         self.set_parameters("fc1", "fc2")
 
+    @override
     def forward(self, x: NPArray) -> NPArray:
         x = self.fc1(x)
         return self.fc2(x)
 
+    @override
     def backward(self, dout: NPArray) -> dict[str, NPArray]:
         dx2, _, _ = self.fc2.backward(dout)
         _, _, _ = self.fc1.backward(dx2)
@@ -32,10 +36,12 @@ class MissingParameters(Module):
         self.fc1 = Linear(784, 30)
         self.fc2 = Linear(30, 10)
 
+    @override
     def forward(self, x: NPArray) -> NPArray:
         x = self.fc1(x)
         return self.fc2(x)
 
+    @override
     def backward(self, dout: NPArray) -> dict[str, dict[str, NPArray]]:
         grads = {}
         dx2, dw2, db2 = self.fc2.backward(dout)

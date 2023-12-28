@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import override
+
 import numpy as np
 
 from edutorch.ml.linear_classifier import LinearClassifier
@@ -9,6 +11,7 @@ from edutorch.typing import NPArray, NPIntArray
 class SVMClassifier(LinearClassifier):
     """A subclass that uses the Multiclass SVM loss function"""
 
+    @override
     def loss(self, X: NPArray, y: NPIntArray) -> tuple[float, NPArray]:
         """
         Structured SVM loss function, vectorized implementation.

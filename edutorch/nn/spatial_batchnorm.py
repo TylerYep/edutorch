@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+from typing import override
+
 from edutorch.typing import NPArray
 
 from .batchnorm import BatchNorm
 
 
 class SpatialBatchNorm(BatchNorm):
+    @override
     def forward(self, x: NPArray) -> NPArray:
         """
         Computes the forward pass for spatial batch normalization.
@@ -33,6 +36,7 @@ class SpatialBatchNorm(BatchNorm):
         out_flat = super().forward(x_flat)
         return out_flat.reshape(N, H, W, C).transpose(0, 3, 1, 2)
 
+    @override
     def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         Computes the backward pass for spatial batch normalization.

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import override
+
 import numpy as np
 
 from edutorch.typing import NPArray
@@ -17,6 +19,7 @@ class RNNCell(Module):
         self.next_h: NPArray
         self.set_parameters("prev_h", "Wx", "Wh", "b")
 
+    @override
     def forward(self, x: NPArray) -> NPArray:
         """
         Run the forward pass for a single timestep of a vanilla RNN that uses a tanh
@@ -40,6 +43,7 @@ class RNNCell(Module):
         self.cache = (x,)
         return self.next_h
 
+    @override
     def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         Backward pass for a single timestep of a vanilla RNN.

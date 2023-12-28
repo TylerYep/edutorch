@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import override
+
 import numpy as np
 
 from edutorch.typing import NPArray
@@ -21,6 +23,7 @@ class RNN(Module):
         self.b = np.random.normal(scale=1e-3, size=H)
         self.set_parameters("h0", "Wx", "Wh", "b")
 
+    @override
     def forward(self, x: NPArray) -> NPArray:
         """
         Run a vanilla RNN forward on an entire sequence of data. We assume an input
@@ -54,6 +57,7 @@ class RNN(Module):
             self.cache += (cell,)
         return h
 
+    @override
     def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         Compute the backward pass for a vanilla RNN over an entire sequence of data.

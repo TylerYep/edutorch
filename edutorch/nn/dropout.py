@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import override
+
 import numpy as np
 
 from edutorch.typing import NPArray
@@ -16,6 +18,7 @@ class Dropout(Module):
         self.train_mode = train_mode
         self.seed = seed
 
+    @override
     def forward(self, x: NPArray) -> NPArray:
         """
         Performs the forward pass for (inverted) dropout.
@@ -54,6 +57,7 @@ class Dropout(Module):
         self.cache = (mask,)
         return out.astype(x.dtype, copy=False)
 
+    @override
     def backward(self, dout: NPArray) -> NPArray:
         """
         Perform the backward pass for (inverted) dropout.

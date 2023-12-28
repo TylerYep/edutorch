@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import override
+
 import numpy as np
 
 from edutorch.typing import NPArray
@@ -17,6 +19,7 @@ class SpatialGroupNorm(Module):
         self.beta = np.zeros(num_features)
         self.set_parameters("gamma", "beta")
 
+    @override
     def forward(self, x: NPArray) -> NPArray:
         """
         Computes the forward pass for spatial group normalization.
@@ -53,6 +56,7 @@ class SpatialGroupNorm(Module):
 
         return out
 
+    @override
     def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         Computes the backward pass for spatial group normalization.

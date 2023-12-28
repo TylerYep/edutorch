@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import override
+
 import numpy as np
 
 from edutorch.ml.linear_classifier import LinearClassifier
@@ -18,6 +20,7 @@ def softmax(f: NPArray) -> NPArray:
 class SoftmaxClassifier(LinearClassifier):
     """A subclass that uses the Softmax + Cross-entropy loss function."""
 
+    @override
     def loss(self, X: NPArray, y: NPIntArray) -> tuple[float, NPArray]:
         """
         Softmax loss function, vectorized version.

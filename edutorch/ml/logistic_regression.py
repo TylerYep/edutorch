@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, override
 
 import numpy as np
 
@@ -17,6 +17,7 @@ class LogisticRegression(Module):
         # define parameters to be part of the model
         self.theta = np.zeros(2)  # ("bias", "weight") of linear model
 
+    @override
     def forward(self, x: NPArray) -> NPArray:
         """
         This function is called to apply your function to input. In this case:
@@ -27,6 +28,7 @@ class LogisticRegression(Module):
         theta0, theta1 = self.theta[0], self.theta[1]
         return sigmoid(theta1 * x + theta0)
 
+    @override
     def backward(self, dout: NPArray) -> Any:
         return dout
 

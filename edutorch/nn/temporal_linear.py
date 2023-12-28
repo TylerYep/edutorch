@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import override
+
 import numpy as np
 
 from edutorch.typing import NPArray
@@ -14,6 +16,7 @@ class TemporalLinear(Module):
         self.b = np.zeros(output_dim)
         self.set_parameters("w", "b")
 
+    @override
     def forward(self, x: NPArray) -> NPArray:
         """
         Forward pass for a temporal affine layer. The input is a set of D-dimensional
@@ -35,6 +38,7 @@ class TemporalLinear(Module):
         self.cache = (x,)
         return x.reshape(N * T, D).dot(self.w).reshape(N, T, M) + self.b
 
+    @override
     def backward(self, dout: NPArray) -> tuple[NPArray, ...]:
         """
         Backward pass for temporal affine layer.
