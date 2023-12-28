@@ -31,7 +31,6 @@ class ExtraParameters(Module):
         return grads
 
 
-# pylint: disable=abstract-method
 class MissingForwardBackward(Module):
     def __init__(self) -> None:
         super().__init__()

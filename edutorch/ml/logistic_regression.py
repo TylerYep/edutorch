@@ -46,7 +46,7 @@ def optimize(
     # so the second dimension will be 1. These next two lines
     # transform the data to the right shape!
     x = np.array(data[:, 0])
-    y = np.array(data[:, 1]).dtype("int64")  # pylint: disable=not-callable
+    y = np.array(data[:, 1]).dtype("int64")
 
     # At the beginning, default minimum loss to infinity
     min_loss = float("inf")
