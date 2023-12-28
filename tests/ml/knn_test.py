@@ -9,7 +9,7 @@ from edutorch.typing import NPArray, NPIntArray
 
 @pytest.mark.skip(reason="Takes too long to run")
 def test_knn_compute_distance(
-    fashion_mnist: tuple[NPArray, NPIntArray, NPArray, NPIntArray]
+    fashion_mnist: tuple[NPArray, NPIntArray, NPArray, NPIntArray],
 ) -> None:
     X_train, y_train, X_test, _ = fashion_mnist
 

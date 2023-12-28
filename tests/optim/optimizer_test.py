@@ -46,7 +46,7 @@ class MissingParameters(Module):
 
 
 def test_missing_params(
-    fashion_mnist: tuple[NPArray, NPIntArray, NPArray, NPIntArray]
+    fashion_mnist: tuple[NPArray, NPIntArray, NPArray, NPIntArray],
 ) -> None:
     X_train, y_train, _, _ = fashion_mnist
 
@@ -66,7 +66,7 @@ def test_missing_params(
 
 
 def test_missing_gradients(
-    fashion_mnist: tuple[NPArray, NPIntArray, NPArray, NPIntArray]
+    fashion_mnist: tuple[NPArray, NPIntArray, NPArray, NPIntArray],
 ) -> None:
     X_train, y_train, _, _ = fashion_mnist
 

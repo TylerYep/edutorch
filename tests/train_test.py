@@ -32,7 +32,7 @@ class Example(Module):
 
 
 def test_training(
-    fashion_mnist: tuple[NPArray, NPIntArray, NPArray, NPIntArray]
+    fashion_mnist: tuple[NPArray, NPIntArray, NPArray, NPIntArray],
 ) -> None:
     X_train, y_train, _, _ = fashion_mnist
 

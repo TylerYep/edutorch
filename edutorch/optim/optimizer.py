@@ -69,7 +69,7 @@ class Optimizer:
 
                 # On a leaf, update the weight in that leaf
                 else:
-                    w, dw = getattr(model, param_name), gradients[param_name]
+                    w, dw = getattr(model, param_name), gradients[param_name]  # type: ignore[unreachable]
                     if w.shape != dw.shape:
                         raise ValueError(
                             f"Shapes of w and dw do not match: {w.shape} {dw.shape}"
