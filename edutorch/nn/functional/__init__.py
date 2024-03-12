@@ -6,6 +6,7 @@ no backwards() methods are provided for these functions!
 To use these functions as layers, please use the implementation in
 layers/ or losses/ instead.
 """
+
 import numpy as np
 
 from edutorch.typing import NPArray

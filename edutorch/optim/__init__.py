@@ -26,6 +26,7 @@ for a variety of different problems.
 For efficiency, update rules may perform in-place updates, mutating w and
 setting next_w equal to w.
 """
+
 from .adam import Adam
 from .rmsprop import RMSProp
 from .sgd import SGD
