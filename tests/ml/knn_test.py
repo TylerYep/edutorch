@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 import numpy as np
 import pytest
 
 from edutorch.ml.knn import KNearestNeighbors
-from edutorch.typing import NPArray, NPIntArray
+
+if TYPE_CHECKING:
+    from edutorch.typing import NPArray, NPIntArray
 
 
 @pytest.mark.skip(reason="Takes too long to run")

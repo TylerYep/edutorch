@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from edutorch.typing import NPAnyArray, NPArray
+if TYPE_CHECKING:
+    from edutorch.typing import NPAnyArray, NPArray
 
 
 class Module:

@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from typing import override
-
-from edutorch.typing import NPArray
+from typing import TYPE_CHECKING, override
 
 from .batchnorm import BatchNorm
+
+if TYPE_CHECKING:
+    from edutorch.typing import NPArray
 
 
 class SpatialBatchNorm(BatchNorm):

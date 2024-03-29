@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import random
-from collections.abc import Callable
+from typing import TYPE_CHECKING
 
 import numpy as np
 
-from edutorch.nn import Module
-from edutorch.typing import NPAnyArray, NPArray
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
+    from edutorch.nn import Module
+    from edutorch.typing import NPAnyArray, NPArray
 
 
 def rel_error(x: NPAnyArray, y: NPAnyArray) -> NPAnyArray:

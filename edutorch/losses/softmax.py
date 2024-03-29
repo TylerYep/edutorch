@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 import numpy as np
 
-from edutorch.typing import NPArray, NPIntArray
+if TYPE_CHECKING:
+    from edutorch.typing import NPArray, NPIntArray
 
 
 def softmax_loss(x: NPArray, y: NPIntArray) -> tuple[float, NPArray]:

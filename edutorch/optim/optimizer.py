@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from edutorch.nn.module import Module
-from edutorch.typing import NPArray
+if TYPE_CHECKING:
+    from edutorch.nn.module import Module
+    from edutorch.typing import NPArray
 
 
 @dataclass

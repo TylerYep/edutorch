@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, override
+from typing import TYPE_CHECKING, Any, override
 
-from edutorch.nn.module import Module
 from edutorch.optim.optimizer import Optimizer
-from edutorch.typing import NPArray
+
+if TYPE_CHECKING:
+    from edutorch.nn.module import Module
+    from edutorch.typing import NPArray
 
 
 @dataclass

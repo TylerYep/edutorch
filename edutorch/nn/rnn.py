@@ -1,13 +1,14 @@
 from __future__ import annotations
 
-from typing import override
+from typing import TYPE_CHECKING, override
 
 import numpy as np
 
-from edutorch.typing import NPArray
-
 from .module import Module
 from .rnn_cell import RNNCell
+
+if TYPE_CHECKING:
+    from edutorch.typing import NPArray
 
 
 class RNN(Module):

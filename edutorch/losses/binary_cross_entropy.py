@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 import numpy as np
 
-from edutorch.typing import NPArray, NPIntArray
+if TYPE_CHECKING:
+    from edutorch.typing import NPArray, NPIntArray
 
 
 def binary_cross_entropy(x: NPArray, y: NPIntArray) -> tuple[float, NPArray]:

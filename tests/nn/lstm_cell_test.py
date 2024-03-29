@@ -1,12 +1,16 @@
 from __future__ import annotations
 
-from collections.abc import Callable
+from typing import TYPE_CHECKING
 
 import numpy as np
 
 from edutorch.nn import LSTMCell, Module
-from edutorch.typing import NPAnyArray, NPArray
 from tests.gradient_check import eval_numerical_gradient_array, rel_error
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
+    from edutorch.typing import NPAnyArray, NPArray
 
 
 def test_lstm_cell_forward() -> None:

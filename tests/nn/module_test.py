@@ -1,12 +1,14 @@
 from __future__ import annotations
 
-from typing import override
+from typing import TYPE_CHECKING, override
 
 import numpy as np
 import pytest
 
 from edutorch.nn import Linear, Module
-from edutorch.typing import NPArray
+
+if TYPE_CHECKING:
+    from edutorch.typing import NPArray
 
 
 class ExtraParameters(Module):

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import random
+from typing import TYPE_CHECKING
 
 import numpy as np
 import pytest
@@ -8,7 +9,8 @@ from mnist import (  # type: ignore[import-untyped]
     fashion_mnist as FashionMNIST,  # noqa: N812
 )
 
-from edutorch.typing import NPArray, NPIntArray
+if TYPE_CHECKING:
+    from edutorch.typing import NPArray, NPIntArray
 
 
 @pytest.fixture(autouse=True)

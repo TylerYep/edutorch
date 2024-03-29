@@ -1,11 +1,13 @@
 from __future__ import annotations
 
-from typing import override
+from typing import TYPE_CHECKING, override
 
 import numpy as np
 
 from edutorch.ml.linear_classifier import LinearClassifier
-from edutorch.typing import NPArray, NPIntArray
+
+if TYPE_CHECKING:
+    from edutorch.typing import NPArray, NPIntArray
 
 
 def softmax(f: NPArray) -> NPArray:
