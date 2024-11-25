@@ -8,6 +8,6 @@ __all__ = (
     "KNearestNeighbors",
     "LinearClassifier",
     "LogisticRegression",
-    "SoftmaxClassifier",
     "SVMClassifier",
+    "SoftmaxClassifier",
 )

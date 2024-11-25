@@ -32,4 +32,4 @@ from .rmsprop import RMSProp
 from .sgd import SGD
 from .sgd_momentum import SGDMomentum
 
-__all__ = ("Adam", "RMSProp", "SGD", "SGDMomentum")
+__all__ = ("SGD", "Adam", "RMSProp", "SGDMomentum")
