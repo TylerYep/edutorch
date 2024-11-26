@@ -16,19 +16,19 @@ from .spatial_groupnorm import SpatialGroupNorm
 from .temporal_linear import TemporalLinear
 
 __all__ = (
+    "LSTM",
+    "RNN",
     "BatchNorm",
     "Conv2d",
     "Dropout",
     "Embedding",
+    "LSTMCell",
     "LayerNorm",
     "Linear",
-    "LSTM",
-    "LSTMCell",
     "MaxPool2d",
     "Module",
-    "ReLU",
-    "RNN",
     "RNNCell",
+    "ReLU",
     "SpatialBatchNorm",
     "SpatialGroupNorm",
     "TemporalLinear",

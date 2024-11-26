@@ -33,4 +33,4 @@ def sigmoid(x: NPArray) -> NPArray:
     return top / (1 + z)
 
 
-__all__ = ("softmax", "sigmoid")
+__all__ = ("sigmoid", "softmax")
