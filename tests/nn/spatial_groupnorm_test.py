@@ -14,12 +14,12 @@ def test_spatial_groupnorm_forward() -> None:
     out = model(x)
     out_g = out.reshape((N * G, -1))
 
-    assert np.allclose(
-        out_g.mean(axis=1), np.zeros(4)
-    ), "After batch norm (gamma=1, beta=0), means should be close to 0."
-    assert np.allclose(
-        out_g.std(axis=1), np.ones(4)
-    ), "After batch norm (gamma=1, beta=0), stds should be close to 1."
+    assert np.allclose(out_g.mean(axis=1), np.zeros(4)), (
+        "After batch norm (gamma=1, beta=0), means should be close to 0."
+    )
+    assert np.allclose(out_g.std(axis=1), np.ones(4)), (
+        "After batch norm (gamma=1, beta=0), stds should be close to 1."
+    )
 
 
 def test_spatial_groupnorm_backward() -> None:
