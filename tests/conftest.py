@@ -10,7 +10,7 @@ from mnist import (  # type: ignore[import-untyped]
 )
 
 if TYPE_CHECKING:
-    from edutorch.typing import NPArray, NPIntArray
+    from edutorch.nptypes import NPArray, NPIntArray
 
 
 @pytest.fixture(autouse=True)

@@ -9,7 +9,7 @@ layers/ or losses/ instead.
 
 import numpy as np
 
-from edutorch.typing import NPArray
+from edutorch.nptypes import NPArray
 
 
 def softmax(f: NPArray) -> NPArray:

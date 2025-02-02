@@ -7,7 +7,7 @@ import numpy as np
 from edutorch.ml.linear_classifier import LinearClassifier
 
 if TYPE_CHECKING:
-    from edutorch.typing import NPArray, NPIntArray
+    from edutorch.nptypes import NPArray, NPIntArray
 
 
 class SVMClassifier(LinearClassifier):

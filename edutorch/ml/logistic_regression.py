@@ -5,8 +5,8 @@ import numpy as np
 from edutorch.losses import binary_cross_entropy
 from edutorch.nn import Module
 from edutorch.nn.functional import sigmoid
+from edutorch.nptypes import NPArray
 from edutorch.optim import Adam
-from edutorch.typing import NPArray
 
 
 class LogisticRegression(Module):

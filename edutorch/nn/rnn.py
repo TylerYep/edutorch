@@ -8,7 +8,7 @@ from .module import Module
 from .rnn_cell import RNNCell
 
 if TYPE_CHECKING:
-    from edutorch.typing import NPArray
+    from edutorch.nptypes import NPArray
 
 
 class RNN(Module):

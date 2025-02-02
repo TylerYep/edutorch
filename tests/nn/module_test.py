@@ -8,7 +8,7 @@ import pytest
 from edutorch.nn import Linear, Module
 
 if TYPE_CHECKING:
-    from edutorch.typing import NPArray
+    from edutorch.nptypes import NPArray
 
 
 class ExtraParameters(Module):

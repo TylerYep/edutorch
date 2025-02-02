@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from edutorch.nn.module import Module
-    from edutorch.typing import NPArray
+    from edutorch.nptypes import NPArray
 
 
 @dataclass

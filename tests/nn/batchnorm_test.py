@@ -11,12 +11,12 @@ def test_batchnorm_forward() -> None:
 
     a_norm = model(a)
 
-    assert np.allclose(
-        a_norm.mean(axis=0), np.zeros(3)
-    ), "After batch norm (gamma=1, beta=0), means should be close to 0."
-    assert np.allclose(
-        a_norm.std(axis=0), np.ones(3)
-    ), "After batch norm (gamma=1, beta=0), stds should be close to 1."
+    assert np.allclose(a_norm.mean(axis=0), np.zeros(3)), (
+        "After batch norm (gamma=1, beta=0), means should be close to 0."
+    )
+    assert np.allclose(a_norm.std(axis=0), np.ones(3)), (
+        "After batch norm (gamma=1, beta=0), stds should be close to 1."
+    )
 
 
 def test_batchnorm_forward_preset_gamma_beta() -> None:

@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, override
 from .batchnorm import BatchNorm
 
 if TYPE_CHECKING:
-    from edutorch.typing import NPArray
+    from edutorch.nptypes import NPArray
 
 
 class SpatialBatchNorm(BatchNorm):

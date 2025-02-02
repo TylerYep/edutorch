@@ -1,6 +1,6 @@
 import numpy as np
 
-from edutorch.typing import NPArray, NPIntArray
+from edutorch.nptypes import NPArray, NPIntArray
 
 
 class KNearestNeighbors:

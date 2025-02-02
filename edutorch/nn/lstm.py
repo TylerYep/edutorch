@@ -8,7 +8,7 @@ from .lstm_cell import LSTMCell
 from .module import Module
 
 if TYPE_CHECKING:
-    from edutorch.typing import NPArray
+    from edutorch.nptypes import NPArray
 
 
 class LSTM(Module):

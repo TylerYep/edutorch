@@ -10,7 +10,7 @@ from tests.gradient_check import eval_numerical_gradient_array, rel_error
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from edutorch.typing import NPAnyArray, NPArray
+    from edutorch.nptypes import NPAnyArray, NPArray
 
 
 def test_lstm_cell_forward() -> None:

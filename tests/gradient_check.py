@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from collections.abc import Callable
 
     from edutorch.nn import Module
-    from edutorch.typing import NPAnyArray, NPArray
+    from edutorch.nptypes import NPAnyArray, NPArray
 
 
 def rel_error(x: NPAnyArray, y: NPAnyArray) -> NPAnyArray:

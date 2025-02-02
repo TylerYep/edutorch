@@ -7,7 +7,7 @@ import numpy as np
 from .module import Module
 
 if TYPE_CHECKING:
-    from edutorch.typing import NPArray
+    from edutorch.nptypes import NPArray
 
 
 class Dropout(Module):

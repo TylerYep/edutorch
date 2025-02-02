@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    from edutorch.typing import NPAnyArray, NPArray
+    from edutorch.nptypes import NPAnyArray, NPArray
 
 
 class Module:

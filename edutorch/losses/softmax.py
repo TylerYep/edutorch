@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 import numpy as np
 
 if TYPE_CHECKING:
-    from edutorch.typing import NPArray, NPIntArray
+    from edutorch.nptypes import NPArray, NPIntArray
 
 
 def softmax_loss(x: NPArray, y: NPIntArray) -> tuple[float, NPArray]:

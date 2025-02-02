@@ -2,7 +2,7 @@ from typing import override
 
 import numpy as np
 
-from edutorch.typing import NPArray, NPIntArray
+from edutorch.nptypes import NPArray, NPIntArray
 
 from .module import Module
 

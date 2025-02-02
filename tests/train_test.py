@@ -9,7 +9,7 @@ from edutorch.nn import Linear, Module, ReLU
 from edutorch.optim import Adam
 
 if TYPE_CHECKING:
-    from edutorch.typing import NPArray, NPIntArray
+    from edutorch.nptypes import NPArray, NPIntArray
 
 
 class Example(Module):
