@@ -1,2 +1,2 @@
 get-mnist
-numpy
+numpy<2.2
