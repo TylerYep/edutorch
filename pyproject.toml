@@ -1,4 +1,65 @@
-target-version = "py312"
+[project]
+name = "edutorch"
+version = "0.0.3"
+description = "Rewritten PyTorch framework designed to help you learn AI/ML"
+authors = [
+    { name = "Tyler Yep", email = "tyep@cs.stanford.edu" },
+]
+classifiers = [
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.13",
+]
+requires-python = ">=3.13"
+dependencies = [
+    "get-mnist",
+    "numpy<2.2",
+]
+
+[dependency-groups]
+dev = [
+    "mypy",
+    "pre-commit",
+    "pytest",
+    "pytest-cov",
+    "ruff",
+    "types-setuptools",
+]
+
+[project.urls]
+Homepage = "https://github.com/tyleryep/edutorch"
+
+[build-system]
+requires = [
+    "setuptools>=61.2",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+include-package-data = true
+license-files = [
+    "LICENSE",
+]
+
+[tool.setuptools.packages.find]
+namespaces = false
+
+[tool.setuptools.package-data]
+edutorch = [
+    "py.typed",
+]
+
+[tool.mypy]
+strict = true
+warn_unreachable = true
+disallow_any_unimported = true
+extra_checks = true
+enable_error_code = "explicit-override,ignore-without-code"
+warn_return_any = false
+
+[tool.ruff]
+target-version = "py313"
 lint.select = ["ALL"]
 lint.ignore = [
 	"ANN401",  # Dynamically typed expressions (typing.Any) are disallowed
@@ -12,7 +73,6 @@ lint.ignore = [
 	"FBT002",  # Boolean default value in function definition
 	"FBT003",  # Boolean positional value in function call
 	"FIX002",  # Line contains TODO
-	"ISC001",  # Isort
 	"PLR0911", # Too many return statements (11 > 6)
 	"PLR2004", # Magic value used in comparison, consider replacing 2 with a constant variable
 	"PLR0912", # Too many branches
@@ -34,6 +94,3 @@ lint.ignore = [
 	"N806",   # Variable in function should be lowercase
 	"NPY002", # Replace legacy `np.random.randn` call with `np.random.Generator`
 ]
-
-[lint.flake8-pytest-style]
-fixture-parentheses = false
