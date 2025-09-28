@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from typing import TYPE_CHECKING, override
 
 import numpy as np
@@ -87,7 +88,7 @@ def test_missing_gradients(
 
     with pytest.raises(
         ValueError,
-        match=(
+        match=re.escape(
             "MissingGradients has no gradient for fc1. "
             "Please ensure fc1 was assigned a gradient in model.backward()."
         ),
